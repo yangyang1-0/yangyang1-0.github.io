@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/resizeApi32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/resizeApi16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="echarts中xAxis---直角坐标系 grid 中的 x 轴的相关设置项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="demo">
+<meta property="og:url" content="http://example.com/2020/12/16/demo/index.html">
+<meta property="og:site_name" content="洋群满满">
+<meta property="og:description" content="echarts中xAxis---直角坐标系 grid 中的 x 轴的相关设置项">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.echartsjs.com/zh/documents/asset/img/axis-align-with-label.png">
+<meta property="article:published_time" content="2020-12-16T08:29:02.000Z">
+<meta property="article:modified_time" content="2020-12-17T09:13:50.052Z">
+<meta property="article:author" content="洋群满满">
+<meta property="article:tag" content="echarts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.echartsjs.com/zh/documents/asset/img/axis-align-with-label.png">
+
+<link rel="canonical" href="http://example.com/2020/12/16/demo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>demo | 洋群满满</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="洋群满满" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/yangyang1-0" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">洋群满满</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/title.jpg">
+      <meta itemprop="name" content="洋群满满">
+      <meta itemprop="description" content="这里是属于羊群满满的乐园！ 		   欢迎你们的到来~~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="洋群满满">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          demo
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-16 16:29:02" itemprop="dateCreated datePublished" datetime="2020-12-16T16:29:02+08:00">2020-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-17 17:13:50" itemprop="dateModified" datetime="2020-12-17T17:13:50+08:00">2020-12-17</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/16/demo/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/16/demo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+            <div class="post-description">echarts中xAxis---直角坐标系 grid 中的 x 轴的相关设置项</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a> 
+
+<h1 id="xAxis—直角坐标系-grid-中的-x-轴"><a href="#xAxis—直角坐标系-grid-中的-x-轴" class="headerlink" title="xAxis—直角坐标系 grid 中的 x 轴"></a>xAxis—直角坐标系 grid 中的 x 轴</h1><h4 id="xAxis-id"><a href="#xAxis-id" class="headerlink" title="xAxis. id"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.id">id</a></h4><p>string</p>
+<p>组件 ID。默认不指定。指定则可用于在 option 或者 API 中引用组件。</p>
+<h4 id="xAxis-show-true"><a href="#xAxis-show-true" class="headerlink" title="xAxis. show = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.show">show</a> = true</h4><p>boolean</p>
+<p>是否显示 x 轴。</p>
+<h4 id="xAxis-gridIndex"><a href="#xAxis-gridIndex" class="headerlink" title="xAxis. gridIndex"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.gridIndex">gridIndex</a></h4><p>number</p>
+<p>x 轴所在的 grid 的索引，默认位于第一个 grid。</p>
+<h4 id="xAxis-position"><a href="#xAxis-position" class="headerlink" title="xAxis. position"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.position">position</a></h4><p>string</p>
+<p>x 轴的位置。</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;top&#39;</code></li>
+<li><code>&#39;bottom&#39;</code></li>
+</ul>
+<p>默认 grid 中的第一个 x 轴在 grid 的下方（<code>&#39;bottom&#39;</code>），第二个 x 轴视第一个 x 轴的位置放在另一侧。</p>
+<h4 id="xAxis-offset"><a href="#xAxis-offset" class="headerlink" title="xAxis. offset"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.offset">offset</a></h4><p>number</p>
+<p>X 轴相对于默认位置的偏移，在相同的 <code>position</code> 上有多个 X 轴的时候有用。</p>
+<h4 id="xAxis-type-‘category’"><a href="#xAxis-type-‘category’" class="headerlink" title="xAxis. type = ‘category’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a> = ‘category’</h4><p>string</p>
+<p>坐标轴类型。</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;value&#39;</code> 数值轴，适用于连续数据。</li>
+<li><code>&#39;category&#39;</code> 类目轴，适用于离散的类目数据，为该类型时必须通过 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data">data</a> 设置类目数据。</li>
+<li><code>&#39;time&#39;</code> 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。</li>
+<li><code>&#39;log&#39;</code> 对数轴。适用于对数数据。</li>
+</ul>
+<h4 id="xAxis-name"><a href="#xAxis-name" class="headerlink" title="xAxis. name"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.name">name</a></h4><p>string</p>
+<p>坐标轴名称。</p>
+<h4 id="xAxis-nameLocation-‘end’"><a href="#xAxis-nameLocation-‘end’" class="headerlink" title="xAxis. nameLocation = ‘end’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameLocation">nameLocation</a> = ‘end’</h4><p>string</p>
+<p>坐标轴名称显示位置。</p>
+<p><strong>可选：</strong></p>
+<ul>
+<li><code>&#39;start&#39;</code></li>
+<li><code>&#39;middle&#39;</code> 或者 <code>&#39;center&#39;</code></li>
+<li><code>&#39;end&#39;</code></li>
+</ul>
+<h4 id="xAxis-nameTextStyle"><a href="#xAxis-nameTextStyle" class="headerlink" title="xAxis. nameTextStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle</a></h4><p>Object</p>
+<p>坐标轴名称的文字样式。</p>
+<h4 id="xAxis-nameTextStyle-color"><a href="#xAxis-nameTextStyle-color" class="headerlink" title="xAxis.nameTextStyle. color"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.color">color</a></h4><p>Color</p>
+<p>坐标轴名称的颜色，默认取 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.color">axisLine.lineStyle.color</a>。</p>
+<h4 id="xAxis-nameTextStyle-fontStyle-‘normal’"><a href="#xAxis-nameTextStyle-fontStyle-‘normal’" class="headerlink" title="xAxis.nameTextStyle. fontStyle = ‘normal’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.fontStyle">fontStyle</a> = ‘normal’</h4><p>string</p>
+<p>坐标轴名称文字字体的风格</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;normal&#39;</code></li>
+<li><code>&#39;italic&#39;</code></li>
+<li><code>&#39;oblique&#39;</code></li>
+</ul>
+<h4 id="xAxis-nameTextStyle-fontWeight-normal"><a href="#xAxis-nameTextStyle-fontWeight-normal" class="headerlink" title="xAxis.nameTextStyle. fontWeight = normal"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.fontWeight">fontWeight</a> = normal</h4><p>stringnumber</p>
+<p>坐标轴名称文字字体的粗细</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;normal&#39;</code></li>
+<li><code>&#39;bold&#39;</code></li>
+<li><code>&#39;bolder&#39;</code></li>
+<li><code>&#39;lighter&#39;</code></li>
+<li>100 | 200 | 300 | 400…</li>
+</ul>
+<h4 id="xAxis-nameTextStyle-fontFamily-‘sans-serif’"><a href="#xAxis-nameTextStyle-fontFamily-‘sans-serif’" class="headerlink" title="xAxis.nameTextStyle. fontFamily = ‘sans-serif’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.fontFamily">fontFamily</a> = ‘sans-serif’</h4><p>string</p>
+<p>坐标轴名称文字的字体系列</p>
+<p>还可以是 ‘serif’ , ‘monospace’, ‘Arial’, ‘Courier New’, ‘Microsoft YaHei’, …</p>
+<h4 id="xAxis-nameTextStyle-fontSize-12"><a href="#xAxis-nameTextStyle-fontSize-12" class="headerlink" title="xAxis.nameTextStyle. fontSize = 12"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.fontSize">fontSize</a> = 12</h4><p>number</p>
+<p>坐标轴名称文字的字体大小</p>
+<h4 id="xAxis-nameTextStyle-align"><a href="#xAxis-nameTextStyle-align" class="headerlink" title="xAxis.nameTextStyle. align"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.align">align</a></h4><p>string</p>
+<p>文字水平对齐方式，默认自动。</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;left&#39;</code></li>
+<li><code>&#39;center&#39;</code></li>
+<li><code>&#39;right&#39;</code></li>
+</ul>
+<p><code>rich</code> 中如果没有设置 <code>align</code>，则会取父层级的 <code>align</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    align: right,</span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            <span class="comment">// 没有设置 `align`，则 `align` 为 right</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-nameTextStyle-verticalAlign"><a href="#xAxis-nameTextStyle-verticalAlign" class="headerlink" title="xAxis.nameTextStyle. verticalAlign"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.verticalAlign">verticalAlign</a></h4><p>string</p>
+<p>文字垂直对齐方式，默认自动。</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;top&#39;</code></li>
+<li><code>&#39;middle&#39;</code></li>
+<li><code>&#39;bottom&#39;</code></li>
+</ul>
+<p><code>rich</code> 中如果没有设置 <code>verticalAlign</code>，则会取父层级的 <code>verticalAlign</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    verticalAlign: bottom,</span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            <span class="comment">// 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-nameTextStyle-lineHeight"><a href="#xAxis-nameTextStyle-lineHeight" class="headerlink" title="xAxis.nameTextStyle. lineHeight"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.lineHeight">lineHeight</a></h4><p>number</p>
+<p>行高。</p>
+<p><code>rich</code> 中如果没有设置 <code>lineHeight</code>，则会取父层级的 <code>lineHeight</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    lineHeight: <span class="number">56</span>,</span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            <span class="comment">// 没有设置 `lineHeight`，则 `lineHeight` 为 56</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-nameTextStyle-backgroundColor-‘transparent’"><a href="#xAxis-nameTextStyle-backgroundColor-‘transparent’" class="headerlink" title="xAxis.nameTextStyle. backgroundColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.backgroundColor">backgroundColor</a> = ‘transparent’</h4><p>stringObject</p>
+<p>文字块背景色。</p>
+<p>可以是直接的颜色值，例如：<code>&#39;#123234&#39;</code>, <code>&#39;red&#39;</code>, <code>&#39;rgba(0,23,11,0.3)&#39;</code>。</p>
+<p>可以支持使用图片，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">backgroundColor: &#123;</span><br><span class="line">    image: <span class="string">&#x27;xxx/xxx.png&#x27;</span></span><br><span class="line">    <span class="comment">// 这里可以是图片的 URL，</span></span><br><span class="line">    <span class="comment">// 或者图片的 dataURI，</span></span><br><span class="line">    <span class="comment">// 或者 HTMLImageElement 对象，</span></span><br><span class="line">    <span class="comment">// 或者 HTMLCanvasElement 对象。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当使用图片的时候，可以使用 <code>width</code> 或 <code>height</code> 指定高宽，也可以不指定自适应。</p>
+<h4 id="xAxis-nameTextStyle-borderColor-‘transparent’"><a href="#xAxis-nameTextStyle-borderColor-‘transparent’" class="headerlink" title="xAxis.nameTextStyle. borderColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.borderColor">borderColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字块边框颜色。</p>
+<h4 id="xAxis-nameTextStyle-borderWidth"><a href="#xAxis-nameTextStyle-borderWidth" class="headerlink" title="xAxis.nameTextStyle. borderWidth"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.borderWidth">borderWidth</a></h4><p>number</p>
+<p>文字块边框宽度。</p>
+<h4 id="xAxis-nameTextStyle-borderRadius"><a href="#xAxis-nameTextStyle-borderRadius" class="headerlink" title="xAxis.nameTextStyle. borderRadius"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.borderRadius">borderRadius</a></h4><p>numberArray</p>
+<p>文字块的圆角。</p>
+<h4 id="xAxis-nameTextStyle-padding"><a href="#xAxis-nameTextStyle-padding" class="headerlink" title="xAxis.nameTextStyle. padding"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.padding">padding</a></h4><p>numberArray</p>
+<p>文字块的内边距。例如：</p>
+<ul>
+<li><code>padding: [3, 4, 5, 6]</code>：表示 <code>[上, 右, 下, 左]</code> 的边距。</li>
+<li><code>padding: 4</code>：表示 <code>padding: [4, 4, 4, 4]</code>。</li>
+<li><code>padding: [3, 4]</code>：表示 <code>padding: [3, 4, 3, 4]</code>。</li>
+</ul>
+<p>注意，文字块的 <code>width</code> 和 <code>height</code> 指定的是内容高宽，不包含 <code>padding</code>。</p>
+<h4 id="xAxis-nameTextStyle-shadowColor-‘transparent’"><a href="#xAxis-nameTextStyle-shadowColor-‘transparent’" class="headerlink" title="xAxis.nameTextStyle. shadowColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.shadowColor">shadowColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字块的背景阴影颜色。</p>
+<h4 id="xAxis-nameTextStyle-shadowBlur"><a href="#xAxis-nameTextStyle-shadowBlur" class="headerlink" title="xAxis.nameTextStyle. shadowBlur"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.shadowBlur">shadowBlur</a></h4><p>number</p>
+<p>文字块的背景阴影长度。</p>
+<h4 id="xAxis-nameTextStyle-shadowOffsetX"><a href="#xAxis-nameTextStyle-shadowOffsetX" class="headerlink" title="xAxis.nameTextStyle. shadowOffsetX"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.shadowOffsetX">shadowOffsetX</a></h4><p>number</p>
+<p>文字块的背景阴影 X 偏移。</p>
+<h4 id="xAxis-nameTextStyle-shadowOffsetY"><a href="#xAxis-nameTextStyle-shadowOffsetY" class="headerlink" title="xAxis.nameTextStyle. shadowOffsetY"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.shadowOffsetY">shadowOffsetY</a></h4><p>number</p>
+<p>文字块的背景阴影 Y 偏移。</p>
+<h4 id="xAxis-nameTextStyle-width"><a href="#xAxis-nameTextStyle-width" class="headerlink" title="xAxis.nameTextStyle. width"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.width">width</a></h4><p>numberstring</p>
+<p>文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 <code>backgroundColor</code>）时，可能会使用它。</p>
+<p>注意，文字块的 <code>width</code> 和 <code>height</code> 指定的是内容高宽，不包含 <code>padding</code>。</p>
+<p><code>width</code> 也可以是百分比字符串，如 <code>&#39;100%&#39;</code>。表示的是所在文本块的 <code>contentWidth</code>（即不包含文本块的 <code>padding</code>）的百分之多少。之所以以 <code>contentWidth</code> 做基数，因为每个文本片段只能基于 <code>content box</code> 布局。如果以 <code>outerWidth</code> 做基数，则百分比的计算在实用中不具有意义，可能会超出。</p>
+<p>注意，如果不定义 <code>rich</code> 属性，则不能指定 <code>width</code> 和 <code>height</code>。</p>
+<h4 id="xAxis-nameTextStyle-height"><a href="#xAxis-nameTextStyle-height" class="headerlink" title="xAxis.nameTextStyle. height"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.height">height</a></h4><p>numberstring</p>
+<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code>backgroundColor</code>）时，可能会使用它。</p>
+<p>注意，文字块的 <code>width</code> 和 <code>height</code> 指定的是内容高宽，不包含 <code>padding</code>。</p>
+<p>注意，如果不定义 <code>rich</code> 属性，则不能指定 <code>width</code> 和 <code>height</code>。</p>
+<h4 id="xAxis-nameTextStyle-textBorderColor-‘transparent’"><a href="#xAxis-nameTextStyle-textBorderColor-‘transparent’" class="headerlink" title="xAxis.nameTextStyle. textBorderColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.textBorderColor">textBorderColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字本身的描边颜色。</p>
+<h4 id="xAxis-nameTextStyle-textBorderWidth"><a href="#xAxis-nameTextStyle-textBorderWidth" class="headerlink" title="xAxis.nameTextStyle. textBorderWidth"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.textBorderWidth">textBorderWidth</a></h4><p>number</p>
+<p>文字本身的描边宽度。</p>
+<h4 id="xAxis-nameTextStyle-textShadowColor-‘transparent’"><a href="#xAxis-nameTextStyle-textShadowColor-‘transparent’" class="headerlink" title="xAxis.nameTextStyle. textShadowColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.textShadowColor">textShadowColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字本身的阴影颜色。</p>
+<h4 id="xAxis-nameTextStyle-textShadowBlur"><a href="#xAxis-nameTextStyle-textShadowBlur" class="headerlink" title="xAxis.nameTextStyle. textShadowBlur"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.textShadowBlur">textShadowBlur</a></h4><p>number</p>
+<p>文字本身的阴影长度。</p>
+<h4 id="xAxis-nameTextStyle-textShadowOffsetX"><a href="#xAxis-nameTextStyle-textShadowOffsetX" class="headerlink" title="xAxis.nameTextStyle. textShadowOffsetX"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.textShadowOffsetX">textShadowOffsetX</a></h4><p>number</p>
+<p>文字本身的阴影 X 偏移。</p>
+<h4 id="xAxis-nameTextStyle-textShadowOffsetY"><a href="#xAxis-nameTextStyle-textShadowOffsetY" class="headerlink" title="xAxis.nameTextStyle. textShadowOffsetY"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.textShadowOffsetY">textShadowOffsetY</a></h4><p>number</p>
+<p>文字本身的阴影 Y 偏移。</p>
+<h4 id="xAxis-nameTextStyle-rich"><a href="#xAxis-nameTextStyle-rich" class="headerlink" title="xAxis.nameTextStyle. rich"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle">nameTextStyle.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.rich">rich</a></h4><p>Object</p>
+<p>在 <code>rich</code> 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。</p>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">label: &#123;</span><br><span class="line">    <span class="comment">// 在文本中，可以对部分文本采用 rich 中定义样式。</span></span><br><span class="line">    <span class="comment">// 这里需要在文本中使用标记符号：</span></span><br><span class="line">    <span class="comment">// `&#123;styleName|text content text content&#125;` 标记样式名。</span></span><br><span class="line">    <span class="comment">// 注意，换行仍是使用 &#x27;\n&#x27;。</span></span><br><span class="line">    formatter: [</span><br><span class="line">        <span class="string">&#x27;&#123;a|这段文本采用样式a&#125;&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;&#123;b|这段文本采用样式b&#125;这段用默认样式&#123;x|这段用样式x&#125;&#x27;</span></span><br><span class="line">    ].join(<span class="string">&#x27;\n&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            color: <span class="string">&#x27;red&#x27;</span>,</span><br><span class="line">            lineHeight: <span class="number">10</span></span><br><span class="line">        &#125;,</span><br><span class="line">        b: &#123;</span><br><span class="line">            backgroundColor: &#123;</span><br><span class="line">                image: <span class="string">&#x27;xxx/xxx.jpg&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            height: <span class="number">40</span></span><br><span class="line">        &#125;,</span><br><span class="line">        x: &#123;</span><br><span class="line">            fontSize: <span class="number">18</span>,</span><br><span class="line">            fontFamily: <span class="string">&#x27;Microsoft YaHei&#x27;</span>,</span><br><span class="line">            borderColor: <span class="string">&#x27;#449933&#x27;</span>,</span><br><span class="line">            borderRadius: <span class="number">4</span></span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>详情参见教程：<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE">富文本标签</a></p>
+<h5 id="所有属性"><a href="#所有属性" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameTextStyle.rich."></a> }</p>
+<h4 id="xAxis-nameGap-15"><a href="#xAxis-nameGap-15" class="headerlink" title="xAxis. nameGap = 15"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameGap">nameGap</a> = 15</h4><p>number</p>
+<p>坐标轴名称与轴线之间的距离。</p>
+<h4 id="xAxis-nameRotate"><a href="#xAxis-nameRotate" class="headerlink" title="xAxis. nameRotate"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.nameRotate">nameRotate</a></h4><p>number</p>
+<p>坐标轴名字旋转，角度值。</p>
+<h4 id="xAxis-inverse"><a href="#xAxis-inverse" class="headerlink" title="xAxis. inverse"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.inverse">inverse</a></h4><p>boolean</p>
+<p>是否是反向坐标轴。ECharts 3 中新加。</p>
+<h4 id="xAxis-boundaryGap"><a href="#xAxis-boundaryGap" class="headerlink" title="xAxis. boundaryGap"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.boundaryGap">boundaryGap</a></h4><p>booleanArray</p>
+<p>坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。</p>
+<p>类目轴中 <code>boundaryGap</code> 可以配置为 <code>true</code> 和 <code>false</code>。默认为 <code>true</code>，这时候<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">刻度</a>只是作为分隔线，标签和数据点都会在两个<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">刻度</a>之间的带(band)中间。</p>
+<p>非类目轴，包括时间，数值，对数轴，<code>boundaryGap</code>是一个两个值的数组，分别表示数据最小值和最大值的延伸范围，可以直接设置数值或者相对的百分比，在设置 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.min">min</a> 和 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.max">max</a> 后无效。 <strong>示例：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boundaryGap: [<span class="string">&#x27;20%&#x27;</span>, <span class="string">&#x27;20%&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-min"><a href="#xAxis-min" class="headerlink" title="xAxis. min"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.min">min</a></h4><p>numberstringFunction</p>
+<p>坐标轴刻度最小值。</p>
+<p>可以设置成特殊值 <code>&#39;dataMin&#39;</code>，此时取数据在该轴上的最小值作为最小刻度。</p>
+<p>不设置时会自动计算最小值保证坐标轴刻度的均匀分布。</p>
+<p>在类目轴中，也可以设置为类目的序数（如类目轴 <code>data: [&#39;类A&#39;, &#39;类B&#39;, &#39;类C&#39;]</code> 中，序数 <code>2</code> 表示 <code>&#39;类C&#39;</code>。也可以设置为负数，如 <code>-3</code>）。</p>
+<p>当设置成 <code>function</code> 形式时，可以根据计算得出的数据最大最小值设定坐标轴的最小值。如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">min: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value.min - <span class="number">20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>value</code> 是一个包含 <code>min</code> 和 <code>max</code> 的对象，分别表示数据的最大最小值，这个函数应该返回坐标轴的最小值。</p>
+<h4 id="xAxis-max"><a href="#xAxis-max" class="headerlink" title="xAxis. max"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.max">max</a></h4><p>numberstringFunction</p>
+<p>坐标轴刻度最大值。</p>
+<p>可以设置成特殊值 <code>&#39;dataMax&#39;</code>，此时取数据在该轴上的最大值作为最大刻度。</p>
+<p>不设置时会自动计算最大值保证坐标轴刻度的均匀分布。</p>
+<p>在类目轴中，也可以设置为类目的序数（如类目轴 <code>data: [&#39;类A&#39;, &#39;类B&#39;, &#39;类C&#39;]</code> 中，序数 <code>2</code> 表示 <code>&#39;类C&#39;</code>。也可以设置为负数，如 <code>-3</code>）。</p>
+<p>当设置成 <code>function</code> 形式时，可以根据计算得出的数据最大最小值设定坐标轴的最小值。如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">max: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value.max - <span class="number">20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>value</code> 是一个包含 <code>min</code> 和 <code>max</code> 的对象，分别表示数据的最大最小值，这个函数应该返回坐标轴的最大值。</p>
+<h4 id="xAxis-scale"><a href="#xAxis-scale" class="headerlink" title="xAxis. scale"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.scale">scale</a></h4><p>boolean</p>
+<p>只在数值轴中（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘value’）有效。</p>
+<p>是否是脱离 0 值比例。设置成 <code>true</code> 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。</p>
+<p>在设置 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.min">min</a> 和 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.max">max</a> 之后该配置项无效。</p>
+<h4 id="xAxis-splitNumber-5"><a href="#xAxis-splitNumber-5" class="headerlink" title="xAxis. splitNumber = 5"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitNumber">splitNumber</a> = 5</h4><p>number</p>
+<p>坐标轴的分割段数，需要注意的是这个分割段数只是个预估值，最后实际显示的段数会在这个基础上根据分割后坐标轴刻度显示的易读程度作调整。</p>
+<p>在类目轴中无效。</p>
+<h4 id="xAxis-minInterval"><a href="#xAxis-minInterval" class="headerlink" title="xAxis. minInterval"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minInterval">minInterval</a></h4><p>number</p>
+<p>自动计算的坐标轴最小间隔大小。</p>
+<p>例如可以设置成<code>1</code>保证坐标轴分割刻度显示成整数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    minInterval: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>只在数值轴或时间轴中（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘value’ 或 ‘time’）有效。</p>
+<h4 id="xAxis-maxInterval"><a href="#xAxis-maxInterval" class="headerlink" title="xAxis. maxInterval"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.maxInterval">maxInterval</a></h4><p>number</p>
+<p>自动计算的坐标轴最大间隔大小。</p>
+<p>例如，在时间轴（（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘time’））可以设置成 <code>3600 * 24 * 1000</code> 保证坐标轴分割刻度最大为一天。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    maxInterval: <span class="number">3600</span> * <span class="number">24</span> * <span class="number">1000</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>只在数值轴或时间轴中（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘value’ 或 ‘time’）有效。</p>
+<h4 id="xAxis-interval"><a href="#xAxis-interval" class="headerlink" title="xAxis. interval"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.interval">interval</a></h4><p>number</p>
+<p>强制设置坐标轴分割间隔。</p>
+<p>因为 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitNumber">splitNumber</a> 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.min">min</a>、<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.max">max</a> 强制设定刻度划分，一般不建议使用。</p>
+<p>无法在类目轴中使用。在时间轴（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘time’）中需要传时间戳，在对数轴（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘log’）中需要传指数值。</p>
+<h4 id="xAxis-logBase-10"><a href="#xAxis-logBase-10" class="headerlink" title="xAxis. logBase = 10"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.logBase">logBase</a> = 10</h4><p>number</p>
+<p>对数轴的底数，只在对数轴中（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: ‘log’）有效。</p>
+<h4 id="xAxis-silent"><a href="#xAxis-silent" class="headerlink" title="xAxis. silent"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.silent">silent</a></h4><p>boolean</p>
+<p>坐标轴是否是静态无法交互。</p>
+<h4 id="xAxis-triggerEvent"><a href="#xAxis-triggerEvent" class="headerlink" title="xAxis. triggerEvent"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.triggerEvent">triggerEvent</a></h4><p>boolean</p>
+<p>坐标轴的标签是否响应和触发鼠标事件，默认不响应。</p>
+<p>事件参数如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 组件类型，xAxis, yAxis, radiusAxis, angleAxis</span></span><br><span class="line">    <span class="comment">// 对应组件类型都会有一个属性表示组件的 index，例如 xAxis 就是 xAxisIndex</span></span><br><span class="line">    componentType: string,</span><br><span class="line">    <span class="comment">// 未格式化过的刻度值, 点击刻度标签有效</span></span><br><span class="line">    value: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="comment">// 坐标轴名称, 点击坐标轴名称有效</span></span><br><span class="line">    name: <span class="string">&#x27;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-axisLine"><a href="#xAxis-axisLine" class="headerlink" title="xAxis. axisLine"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine</a></h4><p>Object</p>
+<p>坐标轴轴线相关设置。</p>
+<h4 id="xAxis-axisLine-show-true"><a href="#xAxis-axisLine-show-true" class="headerlink" title="xAxis.axisLine. show = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.show">show</a> = true</h4><p>boolean</p>
+<p>是否显示坐标轴轴线。</p>
+<h4 id="xAxis-axisLine-onZero-true"><a href="#xAxis-axisLine-onZero-true" class="headerlink" title="xAxis.axisLine. onZero = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.onZero">onZero</a> = true</h4><p>boolean</p>
+<p>X 轴或者 Y 轴的轴线是否在另一个轴的 0 刻度上，只有在另一个轴为数值轴且包含 0 刻度时有效。</p>
+<h4 id="xAxis-axisLine-onZeroAxisIndex"><a href="#xAxis-axisLine-onZeroAxisIndex" class="headerlink" title="xAxis.axisLine. onZeroAxisIndex"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.onZeroAxisIndex">onZeroAxisIndex</a></h4><p>number</p>
+<p>当有双轴时，可以用这个属性手动指定，在哪个轴的 0 刻度上。</p>
+<h4 id="xAxis-axisLine-symbol-‘none’"><a href="#xAxis-axisLine-symbol-‘none’" class="headerlink" title="xAxis.axisLine. symbol = ‘none’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.symbol">symbol</a> = ‘none’</h4><p>stringArray</p>
+<p>轴线两边的箭头。可以是字符串，表示两端使用同样的箭头；或者长度为 2 的字符串数组，分别表示两端的箭头。默认不显示箭头，即 <code>&#39;none&#39;</code>。两端都显示箭头可以设置为 <code>&#39;arrow&#39;</code>，只在末端显示箭头可以设置为 <code>[&#39;none&#39;, &#39;arrow&#39;]</code>。</p>
+<h4 id="xAxis-axisLine-symbolSize-10-15"><a href="#xAxis-axisLine-symbolSize-10-15" class="headerlink" title="xAxis.axisLine. symbolSize = [10, 15]"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.symbolSize">symbolSize</a> = [10, 15]</h4><p>Array</p>
+<p>轴线两边的箭头的大小，第一个数字表示宽度（垂直坐标轴方向），第二个数字表示高度（平行坐标轴方向）。</p>
+<h4 id="xAxis-axisLine-symbolOffset-0-0"><a href="#xAxis-axisLine-symbolOffset-0-0" class="headerlink" title="xAxis.axisLine. symbolOffset = [0, 0]"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.symbolOffset">symbolOffset</a> = [0, 0]</h4><p>Arraynumber</p>
+<p>轴线两边的箭头的偏移，如果是数组，第一个数字表示起始箭头的偏移，第二个数字表示末端箭头的偏移；如果是数字，表示这两个箭头使用同样的偏移。</p>
+<h4 id="xAxis-axisLine-lineStyle"><a href="#xAxis-axisLine-lineStyle" class="headerlink" title="xAxis.axisLine. lineStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine">axisLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle">lineStyle</a></h4><p>Object</p>
+<h5 id="所有属性-1"><a href="#所有属性-1" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.type">type</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-axisTick"><a href="#xAxis-axisTick" class="headerlink" title="xAxis. axisTick"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick</a></h4><p>Object</p>
+<p>坐标轴刻度相关设置。</p>
+<h4 id="xAxis-axisTick-show-true"><a href="#xAxis-axisTick-show-true" class="headerlink" title="xAxis.axisTick. show = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.show">show</a> = true</h4><p>boolean</p>
+<p>是否显示坐标轴刻度。</p>
+<h4 id="xAxis-axisTick-alignWithLabel"><a href="#xAxis-axisTick-alignWithLabel" class="headerlink" title="xAxis.axisTick. alignWithLabel"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.alignWithLabel">alignWithLabel</a></h4><p>boolean</p>
+<p>类目轴中在 <code>boundaryGap</code> 为 <code>true</code> 的时候有效，可以保证刻度线和标签对齐。如下图：</p>
+<p><img src="https://www.echartsjs.com/zh/documents/asset/img/axis-align-with-label.png" alt="img"></p>
+<h4 id="xAxis-axisTick-interval-‘auto’"><a href="#xAxis-axisTick-interval-‘auto’" class="headerlink" title="xAxis.axisTick. interval = ‘auto’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.interval">interval</a> = ‘auto’</h4><p>numberFunction</p>
+<p>坐标轴刻度的显示间隔，在类目轴中有效。默认同 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.interval">axisLabel.interval</a> 一样。</p>
+<p>默认会采用标签不重叠的策略间隔显示标签。</p>
+<p>可以设置成 0 强制显示所有标签。</p>
+<p>如果设置为 <code>1</code>，表示『隔一个标签显示一个标签』，如果值为 <code>2</code>，表示隔两个标签显示一个标签，以此类推。</p>
+<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(index:number, <span class="attr">value</span>: string) =&gt; boolean</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code>false</code>。</p>
+<h4 id="xAxis-axisTick-inside"><a href="#xAxis-axisTick-inside" class="headerlink" title="xAxis.axisTick. inside"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.inside">inside</a></h4><p>boolean</p>
+<p>坐标轴刻度是否朝内，默认朝外。</p>
+<h4 id="xAxis-axisTick-length-5"><a href="#xAxis-axisTick-length-5" class="headerlink" title="xAxis.axisTick. length = 5"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.length">length</a> = 5</h4><p>number</p>
+<p>坐标轴刻度的长度。</p>
+<h4 id="xAxis-axisTick-lineStyle"><a href="#xAxis-axisTick-lineStyle" class="headerlink" title="xAxis.axisTick. lineStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick">axisTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle">lineStyle</a></h4><p>Object</p>
+<p>刻度线的样式设置。</p>
+<h5 id="所有属性-2"><a href="#所有属性-2" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.type">type</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisTick.lineStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-minorTick"><a href="#xAxis-minorTick" class="headerlink" title="xAxis. minorTick"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick">minorTick</a></h4><p>Object</p>
+<p>坐标轴次刻度线相关设置。</p>
+<p>注意：次刻度线无法在类目轴（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: <code>&#39;category&#39;</code>）中使用。</p>
+<p>示例：</p>
+<ol>
+<li>函数绘图中使用次刻度线</li>
+</ol>
+<iframe data-src="https://www.echartsjs.com/examples/en/view.html?c=line-function&amp;edit=1&amp;reset=1" width="600" height="350" __idm_frm__="1225" style="box-sizing: border-box; border: 1px solid rgb(204, 204, 204); display: block; margin-top: 5px; max-width: 100%;"></iframe>
+2) 在对数轴中使用次刻度线
+
+<iframe data-src="https://www.echartsjs.com/examples/en/view.html?c=line-log&amp;edit=1&amp;reset=1" width="600" height="350" __idm_frm__="1226" style="box-sizing: border-box; border: 1px solid rgb(204, 204, 204); display: block; margin-top: 5px; max-width: 100%;"></iframe>
+####  [xAxis.](https://www.echartsjs.com/zh/option.html#xAxis)[minorTick.](https://www.echartsjs.com/zh/option.html#xAxis.minorTick) [show](https://www.echartsjs.com/zh/option.html#xAxis.minorTick.show)
+
+<p>boolean</p>
+<p>是否显示次刻度线。</p>
+<h4 id="xAxis-minorTick-splitNumber-5"><a href="#xAxis-minorTick-splitNumber-5" class="headerlink" title="xAxis.minorTick. splitNumber = 5"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick">minorTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.splitNumber">splitNumber</a> = 5</h4><p>number</p>
+<p>次刻度线分割数，默认会分割成 5 段</p>
+<h4 id="xAxis-minorTick-length-3"><a href="#xAxis-minorTick-length-3" class="headerlink" title="xAxis.minorTick. length = 3"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick">minorTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.length">length</a> = 3</h4><p>number</p>
+<p>次刻度线的长度。</p>
+<h4 id="xAxis-minorTick-lineStyle"><a href="#xAxis-minorTick-lineStyle" class="headerlink" title="xAxis.minorTick. lineStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick">minorTick.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle">lineStyle</a></h4><p>Object</p>
+<h5 id="所有属性-3"><a href="#所有属性-3" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.type">type</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick.lineStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-axisLabel"><a href="#xAxis-axisLabel" class="headerlink" title="xAxis. axisLabel"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel</a></h4><p>Object</p>
+<p>坐标轴刻度标签的相关设置。</p>
+<h4 id="xAxis-axisLabel-show-true"><a href="#xAxis-axisLabel-show-true" class="headerlink" title="xAxis.axisLabel. show = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.show">show</a> = true</h4><p>boolean</p>
+<p>是否显示刻度标签。</p>
+<h4 id="xAxis-axisLabel-interval-‘auto’"><a href="#xAxis-axisLabel-interval-‘auto’" class="headerlink" title="xAxis.axisLabel. interval = ‘auto’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.interval">interval</a> = ‘auto’</h4><p>numberFunction</p>
+<p>坐标轴刻度标签的显示间隔，在类目轴中有效。</p>
+<p>默认会采用标签不重叠的策略间隔显示标签。</p>
+<p>可以设置成 0 强制显示所有标签。</p>
+<p>如果设置为 <code>1</code>，表示『隔一个标签显示一个标签』，如果值为 <code>2</code>，表示隔两个标签显示一个标签，以此类推。</p>
+<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(index:number, <span class="attr">value</span>: string) =&gt; boolean</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code>false</code>。</p>
+<h4 id="xAxis-axisLabel-inside"><a href="#xAxis-axisLabel-inside" class="headerlink" title="xAxis.axisLabel. inside"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.inside">inside</a></h4><p>boolean</p>
+<p>刻度标签是否朝内，默认朝外。</p>
+<h4 id="xAxis-axisLabel-rotate"><a href="#xAxis-axisLabel-rotate" class="headerlink" title="xAxis.axisLabel. rotate"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.rotate">rotate</a></h4><p>number</p>
+<p>刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。</p>
+<p>旋转的角度从 -90 度到 90 度。</p>
+<h4 id="xAxis-axisLabel-margin-8"><a href="#xAxis-axisLabel-margin-8" class="headerlink" title="xAxis.axisLabel. margin = 8"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.margin">margin</a> = 8</h4><p>number</p>
+<p>刻度标签与轴线之间的距离。</p>
+<h4 id="xAxis-axisLabel-formatter"><a href="#xAxis-axisLabel-formatter" class="headerlink" title="xAxis.axisLabel. formatter"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.formatter">formatter</a></h4><p>stringFunction</p>
+<p>刻度标签的内容格式器，支持字符串模板和回调函数两种形式。</p>
+<p>示例:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用字符串模板，模板变量为刻度默认标签 &#123;value&#125;</span></span><br><span class="line">formatter: <span class="string">&#x27;&#123;value&#125; kg&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用函数模板，函数参数分别为刻度数值（类目），刻度的索引</span></span><br><span class="line">formatter: <span class="function"><span class="keyword">function</span> (<span class="params">value, index</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 格式化成月/日，只在第一个刻度显示年份</span></span><br><span class="line">    <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(value);</span><br><span class="line">    <span class="keyword">var</span> texts = [(date.getMonth() + <span class="number">1</span>), date.getDate()];</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">        texts.unshift(date.getYear());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> texts.join(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-axisLabel-showMinLabel"><a href="#xAxis-axisLabel-showMinLabel" class="headerlink" title="xAxis.axisLabel. showMinLabel"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.showMinLabel">showMinLabel</a></h4><p>boolean</p>
+<p>是否显示最小 tick 的 label。可取值 <code>true</code>, <code>false</code>, <code>null</code>。默认自动判定（即如果标签重叠，不会显示最小 tick 的 label）。</p>
+<h4 id="xAxis-axisLabel-showMaxLabel"><a href="#xAxis-axisLabel-showMaxLabel" class="headerlink" title="xAxis.axisLabel. showMaxLabel"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.showMaxLabel">showMaxLabel</a></h4><p>boolean</p>
+<p>是否显示最大 tick 的 label。可取值 <code>true</code>, <code>false</code>, <code>null</code>。默认自动判定（即如果标签重叠，不会显示最大 tick 的 label）。</p>
+<h4 id="xAxis-axisLabel-color"><a href="#xAxis-axisLabel-color" class="headerlink" title="xAxis.axisLabel. color"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.color">color</a></h4><p>ColorFunction</p>
+<p>刻度标签文字的颜色，默认取 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLine.lineStyle.color">axisLine.lineStyle.color</a>。支持回调函数，格式如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(val: string) =&gt; Color</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参数是标签的文本，返回颜色值，如下示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">textStyle: &#123;</span><br><span class="line">    color: <span class="function"><span class="keyword">function</span> (<span class="params">value, index</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value &gt;= <span class="number">0</span> ? <span class="string">&#x27;green&#x27;</span> : <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-axisLabel-fontStyle-‘normal’"><a href="#xAxis-axisLabel-fontStyle-‘normal’" class="headerlink" title="xAxis.axisLabel. fontStyle = ‘normal’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.fontStyle">fontStyle</a> = ‘normal’</h4><p>string</p>
+<p>文字字体的风格</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;normal&#39;</code></li>
+<li><code>&#39;italic&#39;</code></li>
+<li><code>&#39;oblique&#39;</code></li>
+</ul>
+<h4 id="xAxis-axisLabel-fontWeight-normal"><a href="#xAxis-axisLabel-fontWeight-normal" class="headerlink" title="xAxis.axisLabel. fontWeight = normal"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.fontWeight">fontWeight</a> = normal</h4><p>stringnumber</p>
+<p>文字字体的粗细</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;normal&#39;</code></li>
+<li><code>&#39;bold&#39;</code></li>
+<li><code>&#39;bolder&#39;</code></li>
+<li><code>&#39;lighter&#39;</code></li>
+<li>100 | 200 | 300 | 400…</li>
+</ul>
+<h4 id="xAxis-axisLabel-fontFamily-‘sans-serif’"><a href="#xAxis-axisLabel-fontFamily-‘sans-serif’" class="headerlink" title="xAxis.axisLabel. fontFamily = ‘sans-serif’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.fontFamily">fontFamily</a> = ‘sans-serif’</h4><p>string</p>
+<p>文字的字体系列</p>
+<p>还可以是 ‘serif’ , ‘monospace’, ‘Arial’, ‘Courier New’, ‘Microsoft YaHei’, …</p>
+<h4 id="xAxis-axisLabel-fontSize-12"><a href="#xAxis-axisLabel-fontSize-12" class="headerlink" title="xAxis.axisLabel. fontSize = 12"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.fontSize">fontSize</a> = 12</h4><p>number</p>
+<p>文字的字体大小</p>
+<h4 id="xAxis-axisLabel-align"><a href="#xAxis-axisLabel-align" class="headerlink" title="xAxis.axisLabel. align"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.align">align</a></h4><p>string</p>
+<p>文字水平对齐方式，默认自动。</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;left&#39;</code></li>
+<li><code>&#39;center&#39;</code></li>
+<li><code>&#39;right&#39;</code></li>
+</ul>
+<p><code>rich</code> 中如果没有设置 <code>align</code>，则会取父层级的 <code>align</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    align: right,</span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            <span class="comment">// 没有设置 `align`，则 `align` 为 right</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-axisLabel-verticalAlign"><a href="#xAxis-axisLabel-verticalAlign" class="headerlink" title="xAxis.axisLabel. verticalAlign"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.verticalAlign">verticalAlign</a></h4><p>string</p>
+<p>文字垂直对齐方式，默认自动。</p>
+<p>可选：</p>
+<ul>
+<li><code>&#39;top&#39;</code></li>
+<li><code>&#39;middle&#39;</code></li>
+<li><code>&#39;bottom&#39;</code></li>
+</ul>
+<p><code>rich</code> 中如果没有设置 <code>verticalAlign</code>，则会取父层级的 <code>verticalAlign</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    verticalAlign: bottom,</span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            <span class="comment">// 没有设置 `verticalAlign`，则 `verticalAlign` 为 bottom</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-axisLabel-lineHeight"><a href="#xAxis-axisLabel-lineHeight" class="headerlink" title="xAxis.axisLabel. lineHeight"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.lineHeight">lineHeight</a></h4><p>number</p>
+<p>行高。</p>
+<p><code>rich</code> 中如果没有设置 <code>lineHeight</code>，则会取父层级的 <code>lineHeight</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    lineHeight: <span class="number">56</span>,</span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            <span class="comment">// 没有设置 `lineHeight`，则 `lineHeight` 为 56</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-axisLabel-backgroundColor-‘transparent’"><a href="#xAxis-axisLabel-backgroundColor-‘transparent’" class="headerlink" title="xAxis.axisLabel. backgroundColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.backgroundColor">backgroundColor</a> = ‘transparent’</h4><p>stringObject</p>
+<p>文字块背景色。</p>
+<p>可以是直接的颜色值，例如：<code>&#39;#123234&#39;</code>, <code>&#39;red&#39;</code>, <code>&#39;rgba(0,23,11,0.3)&#39;</code>。</p>
+<p>可以支持使用图片，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">backgroundColor: &#123;</span><br><span class="line">    image: <span class="string">&#x27;xxx/xxx.png&#x27;</span></span><br><span class="line">    <span class="comment">// 这里可以是图片的 URL，</span></span><br><span class="line">    <span class="comment">// 或者图片的 dataURI，</span></span><br><span class="line">    <span class="comment">// 或者 HTMLImageElement 对象，</span></span><br><span class="line">    <span class="comment">// 或者 HTMLCanvasElement 对象。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当使用图片的时候，可以使用 <code>width</code> 或 <code>height</code> 指定高宽，也可以不指定自适应。</p>
+<h4 id="xAxis-axisLabel-borderColor-‘transparent’"><a href="#xAxis-axisLabel-borderColor-‘transparent’" class="headerlink" title="xAxis.axisLabel. borderColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.borderColor">borderColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字块边框颜色。</p>
+<h4 id="xAxis-axisLabel-borderWidth"><a href="#xAxis-axisLabel-borderWidth" class="headerlink" title="xAxis.axisLabel. borderWidth"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.borderWidth">borderWidth</a></h4><p>number</p>
+<p>文字块边框宽度。</p>
+<h4 id="xAxis-axisLabel-borderRadius"><a href="#xAxis-axisLabel-borderRadius" class="headerlink" title="xAxis.axisLabel. borderRadius"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.borderRadius">borderRadius</a></h4><p>numberArray</p>
+<p>文字块的圆角。</p>
+<h4 id="xAxis-axisLabel-padding"><a href="#xAxis-axisLabel-padding" class="headerlink" title="xAxis.axisLabel. padding"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.padding">padding</a></h4><p>numberArray</p>
+<p>文字块的内边距。例如：</p>
+<ul>
+<li><code>padding: [3, 4, 5, 6]</code>：表示 <code>[上, 右, 下, 左]</code> 的边距。</li>
+<li><code>padding: 4</code>：表示 <code>padding: [4, 4, 4, 4]</code>。</li>
+<li><code>padding: [3, 4]</code>：表示 <code>padding: [3, 4, 3, 4]</code>。</li>
+</ul>
+<p>注意，文字块的 <code>width</code> 和 <code>height</code> 指定的是内容高宽，不包含 <code>padding</code>。</p>
+<h4 id="xAxis-axisLabel-shadowColor-‘transparent’"><a href="#xAxis-axisLabel-shadowColor-‘transparent’" class="headerlink" title="xAxis.axisLabel. shadowColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.shadowColor">shadowColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字块的背景阴影颜色。</p>
+<h4 id="xAxis-axisLabel-shadowBlur"><a href="#xAxis-axisLabel-shadowBlur" class="headerlink" title="xAxis.axisLabel. shadowBlur"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.shadowBlur">shadowBlur</a></h4><p>number</p>
+<p>文字块的背景阴影长度。</p>
+<h4 id="xAxis-axisLabel-shadowOffsetX"><a href="#xAxis-axisLabel-shadowOffsetX" class="headerlink" title="xAxis.axisLabel. shadowOffsetX"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.shadowOffsetX">shadowOffsetX</a></h4><p>number</p>
+<p>文字块的背景阴影 X 偏移。</p>
+<h4 id="xAxis-axisLabel-shadowOffsetY"><a href="#xAxis-axisLabel-shadowOffsetY" class="headerlink" title="xAxis.axisLabel. shadowOffsetY"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.shadowOffsetY">shadowOffsetY</a></h4><p>number</p>
+<p>文字块的背景阴影 Y 偏移。</p>
+<h4 id="xAxis-axisLabel-width"><a href="#xAxis-axisLabel-width" class="headerlink" title="xAxis.axisLabel. width"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.width">width</a></h4><p>numberstring</p>
+<p>文字块的宽度。一般不用指定，不指定则自动是文字的宽度。在想做表格项或者使用图片（参见 <code>backgroundColor</code>）时，可能会使用它。</p>
+<p>注意，文字块的 <code>width</code> 和 <code>height</code> 指定的是内容高宽，不包含 <code>padding</code>。</p>
+<p><code>width</code> 也可以是百分比字符串，如 <code>&#39;100%&#39;</code>。表示的是所在文本块的 <code>contentWidth</code>（即不包含文本块的 <code>padding</code>）的百分之多少。之所以以 <code>contentWidth</code> 做基数，因为每个文本片段只能基于 <code>content box</code> 布局。如果以 <code>outerWidth</code> 做基数，则百分比的计算在实用中不具有意义，可能会超出。</p>
+<p>注意，如果不定义 <code>rich</code> 属性，则不能指定 <code>width</code> 和 <code>height</code>。</p>
+<h4 id="xAxis-axisLabel-height"><a href="#xAxis-axisLabel-height" class="headerlink" title="xAxis.axisLabel. height"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.height">height</a></h4><p>numberstring</p>
+<p>文字块的高度。一般不用指定，不指定则自动是文字的高度。在使用图片（参见 <code>backgroundColor</code>）时，可能会使用它。</p>
+<p>注意，文字块的 <code>width</code> 和 <code>height</code> 指定的是内容高宽，不包含 <code>padding</code>。</p>
+<p>注意，如果不定义 <code>rich</code> 属性，则不能指定 <code>width</code> 和 <code>height</code>。</p>
+<h4 id="xAxis-axisLabel-textBorderColor-‘transparent’"><a href="#xAxis-axisLabel-textBorderColor-‘transparent’" class="headerlink" title="xAxis.axisLabel. textBorderColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.textBorderColor">textBorderColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字本身的描边颜色。</p>
+<h4 id="xAxis-axisLabel-textBorderWidth"><a href="#xAxis-axisLabel-textBorderWidth" class="headerlink" title="xAxis.axisLabel. textBorderWidth"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.textBorderWidth">textBorderWidth</a></h4><p>number</p>
+<p>文字本身的描边宽度。</p>
+<h4 id="xAxis-axisLabel-textShadowColor-‘transparent’"><a href="#xAxis-axisLabel-textShadowColor-‘transparent’" class="headerlink" title="xAxis.axisLabel. textShadowColor = ‘transparent’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.textShadowColor">textShadowColor</a> = ‘transparent’</h4><p>Color</p>
+<p>文字本身的阴影颜色。</p>
+<h4 id="xAxis-axisLabel-textShadowBlur"><a href="#xAxis-axisLabel-textShadowBlur" class="headerlink" title="xAxis.axisLabel. textShadowBlur"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.textShadowBlur">textShadowBlur</a></h4><p>number</p>
+<p>文字本身的阴影长度。</p>
+<h4 id="xAxis-axisLabel-textShadowOffsetX"><a href="#xAxis-axisLabel-textShadowOffsetX" class="headerlink" title="xAxis.axisLabel. textShadowOffsetX"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.textShadowOffsetX">textShadowOffsetX</a></h4><p>number</p>
+<p>文字本身的阴影 X 偏移。</p>
+<h4 id="xAxis-axisLabel-textShadowOffsetY"><a href="#xAxis-axisLabel-textShadowOffsetY" class="headerlink" title="xAxis.axisLabel. textShadowOffsetY"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.textShadowOffsetY">textShadowOffsetY</a></h4><p>number</p>
+<p>文字本身的阴影 Y 偏移。</p>
+<h4 id="xAxis-axisLabel-rich"><a href="#xAxis-axisLabel-rich" class="headerlink" title="xAxis.axisLabel. rich"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel">axisLabel.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.rich">rich</a></h4><p>Object</p>
+<p>在 <code>rich</code> 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。</p>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">label: &#123;</span><br><span class="line">    <span class="comment">// 在文本中，可以对部分文本采用 rich 中定义样式。</span></span><br><span class="line">    <span class="comment">// 这里需要在文本中使用标记符号：</span></span><br><span class="line">    <span class="comment">// `&#123;styleName|text content text content&#125;` 标记样式名。</span></span><br><span class="line">    <span class="comment">// 注意，换行仍是使用 &#x27;\n&#x27;。</span></span><br><span class="line">    formatter: [</span><br><span class="line">        <span class="string">&#x27;&#123;a|这段文本采用样式a&#125;&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;&#123;b|这段文本采用样式b&#125;这段用默认样式&#123;x|这段用样式x&#125;&#x27;</span></span><br><span class="line">    ].join(<span class="string">&#x27;\n&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    rich: &#123;</span><br><span class="line">        a: &#123;</span><br><span class="line">            color: <span class="string">&#x27;red&#x27;</span>,</span><br><span class="line">            lineHeight: <span class="number">10</span></span><br><span class="line">        &#125;,</span><br><span class="line">        b: &#123;</span><br><span class="line">            backgroundColor: &#123;</span><br><span class="line">                image: <span class="string">&#x27;xxx/xxx.jpg&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            height: <span class="number">40</span></span><br><span class="line">        &#125;,</span><br><span class="line">        x: &#123;</span><br><span class="line">            fontSize: <span class="number">18</span>,</span><br><span class="line">            fontFamily: <span class="string">&#x27;Microsoft YaHei&#x27;</span>,</span><br><span class="line">            borderColor: <span class="string">&#x27;#449933&#x27;</span>,</span><br><span class="line">            borderRadius: <span class="number">4</span></span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>详情参见教程：<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE">富文本标签</a></p>
+<h5 id="所有属性-4"><a href="#所有属性-4" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.rich."></a> }</p>
+<h4 id="xAxis-splitLine"><a href="#xAxis-splitLine" class="headerlink" title="xAxis. splitLine"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine">splitLine</a></h4><p>Object</p>
+<p>坐标轴在 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#grid">grid</a> 区域中的分隔线。</p>
+<h4 id="xAxis-splitLine-show-true"><a href="#xAxis-splitLine-show-true" class="headerlink" title="xAxis.splitLine. show = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine">splitLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.show">show</a> = true</h4><p>boolean</p>
+<p>是否显示分隔线。默认数值轴显示，类目轴不显示。</p>
+<h4 id="xAxis-splitLine-interval-‘auto’"><a href="#xAxis-splitLine-interval-‘auto’" class="headerlink" title="xAxis.splitLine. interval = ‘auto’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine">splitLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.interval">interval</a> = ‘auto’</h4><p>numberFunction</p>
+<p>坐标轴分隔线的显示间隔，在类目轴中有效。默认同 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.interval">axisLabel.interval</a> 一样。</p>
+<p>默认会采用标签不重叠的策略间隔显示标签。</p>
+<p>可以设置成 0 强制显示所有标签。</p>
+<p>如果设置为 <code>1</code>，表示『隔一个标签显示一个标签』，如果值为 <code>2</code>，表示隔两个标签显示一个标签，以此类推。</p>
+<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(index:number, <span class="attr">value</span>: string) =&gt; boolean</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code>false</code>。</p>
+<h4 id="xAxis-splitLine-lineStyle"><a href="#xAxis-splitLine-lineStyle" class="headerlink" title="xAxis.splitLine. lineStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine">splitLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle">lineStyle</a></h4><p>Object</p>
+<h5 id="所有属性-5"><a href="#所有属性-5" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.type">type</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitLine.lineStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-minorSplitLine"><a href="#xAxis-minorSplitLine" class="headerlink" title="xAxis. minorSplitLine"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine">minorSplitLine</a></h4><p>Object</p>
+<p>坐标轴在 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#grid">grid</a> 区域中的次分隔线。次分割线会对齐次刻度线 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorTick">minorTick</a></p>
+<h4 id="xAxis-minorSplitLine-show"><a href="#xAxis-minorSplitLine-show" class="headerlink" title="xAxis.minorSplitLine. show"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine">minorSplitLine.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show">show</a></h4><p>boolean</p>
+<p>是否显示次分隔线。默认不显示。</p>
+<h5 id="所有属性-6"><a href="#所有属性-6" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.type">type</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.minorSplitLine.show.opacity">opacity</a> }</p>
+<h4 id="xAxis-splitArea"><a href="#xAxis-splitArea" class="headerlink" title="xAxis. splitArea"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea">splitArea</a></h4><p>Object</p>
+<p>坐标轴在 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#grid">grid</a> 区域中的分隔区域，默认不显示。</p>
+<h4 id="xAxis-splitArea-interval-‘auto’"><a href="#xAxis-splitArea-interval-‘auto’" class="headerlink" title="xAxis.splitArea. interval = ‘auto’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea">splitArea.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.interval">interval</a> = ‘auto’</h4><p>numberFunction</p>
+<p>坐标轴分隔区域的显示间隔，在类目轴中有效。默认同 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisLabel.interval">axisLabel.interval</a> 一样。</p>
+<p>默认会采用标签不重叠的策略间隔显示标签。</p>
+<p>可以设置成 0 强制显示所有标签。</p>
+<p>如果设置为 <code>1</code>，表示『隔一个标签显示一个标签』，如果值为 <code>2</code>，表示隔两个标签显示一个标签，以此类推。</p>
+<p>可以用数值表示间隔的数据，也可以通过回调函数控制。回调函数格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(index:number, <span class="attr">value</span>: string) =&gt; boolean</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是类目的 index，第二个值是类目名称，如果跳过则返回 <code>false</code>。</p>
+<h4 id="xAxis-splitArea-show"><a href="#xAxis-splitArea-show" class="headerlink" title="xAxis.splitArea. show"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea">splitArea.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.show">show</a></h4><p>boolean</p>
+<p>是否显示分隔区域。</p>
+<h4 id="xAxis-splitArea-areaStyle"><a href="#xAxis-splitArea-areaStyle" class="headerlink" title="xAxis.splitArea. areaStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea">splitArea.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle">areaStyle</a></h4><p>Object</p>
+<p>分隔区域的样式设置。</p>
+<h5 id="所有属性-7"><a href="#所有属性-7" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.splitArea.areaStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-data"><a href="#xAxis-data" class="headerlink" title="xAxis. data"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data">data</a></h4><p>Array</p>
+<p>类目数据，在类目轴（<a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>: <code>&#39;category&#39;</code>）中有效。</p>
+<p>如果没有设置 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a>，但是设置了 <code>axis.data</code>，则认为 <code>type</code> 是 <code>&#39;category&#39;</code>。</p>
+<p>如果设置了 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.type">type</a> 是 <code>&#39;category&#39;</code>，但没有设置 <code>axis.data</code>，则 <code>axis.data</code> 的内容会自动从 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#series.data">series.data</a> 中获取，这会比较方便。不过注意，<code>axis.data</code> 指明的是 <code>&#39;category&#39;</code> 轴的取值范围。如果不指定而是从 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#series.data">series.data</a> 中获取，那么只能获取到 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#series.data">series.data</a> 中出现的值。比如说，假如 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#series.data">series.data</a> 为空时，就什么也获取不到。</p>
+<p>示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 所有类目名称列表</span></span><br><span class="line">data: [<span class="string">&#x27;周一&#x27;</span>, <span class="string">&#x27;周二&#x27;</span>, <span class="string">&#x27;周三&#x27;</span>, <span class="string">&#x27;周四&#x27;</span>, <span class="string">&#x27;周五&#x27;</span>, <span class="string">&#x27;周六&#x27;</span>, <span class="string">&#x27;周日&#x27;</span>]</span><br><span class="line"><span class="comment">// 每一项也可以是具体的配置项，此时取配置项中的 `value` 为类目名</span></span><br><span class="line">data: [&#123;</span><br><span class="line">    value: <span class="string">&#x27;周一&#x27;</span>,</span><br><span class="line">    <span class="comment">// 突出周一</span></span><br><span class="line">    textStyle: &#123;</span><br><span class="line">        fontSize: <span class="number">20</span>,</span><br><span class="line">        color: <span class="string">&#x27;red&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="string">&#x27;周二&#x27;</span>, <span class="string">&#x27;周三&#x27;</span>, <span class="string">&#x27;周四&#x27;</span>, <span class="string">&#x27;周五&#x27;</span>, <span class="string">&#x27;周六&#x27;</span>, <span class="string">&#x27;周日&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xAxis-data-value"><a href="#xAxis-data-value" class="headerlink" title="xAxis.data. value"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data">data.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.value">value</a></h4><p>string</p>
+<p>单个类目名称。</p>
+<h4 id="xAxis-data-textStyle"><a href="#xAxis-data-textStyle" class="headerlink" title="xAxis.data. textStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data">data.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle">textStyle</a></h4><p>Object</p>
+<p>类目标签的文字样式。</p>
+<h5 id="所有属性-8"><a href="#所有属性-8" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.fontStyle">fontStyle</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.fontWeight">fontWeight</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.fontFamily">fontFamily</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.fontSize">fontSize</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.align">align</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.verticalAlign">verticalAlign</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.lineHeight">lineHeight</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.backgroundColor">backgroundColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.borderColor">borderColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.borderWidth">borderWidth</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.borderRadius">borderRadius</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.padding">padding</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.height">height</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.textBorderColor">textBorderColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.textBorderWidth">textBorderWidth</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.textShadowColor">textShadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.textShadowBlur">textShadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.textShadowOffsetX">textShadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.textShadowOffsetY">textShadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.data.textStyle.rich">rich</a> }</p>
+<h4 id="xAxis-axisPointer"><a href="#xAxis-axisPointer" class="headerlink" title="xAxis. axisPointer"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer</a></h4><p>Object</p>
+<p>axisPointer settings on axis.</p>
+<h4 id="xAxis-axisPointer-show"><a href="#xAxis-axisPointer-show" class="headerlink" title="xAxis.axisPointer. show"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.show">show</a></h4><p>boolean</p>
+<p>默认不显示。但是如果 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#tooltip.trigger">tooltip.trigger</a> 设置为 <code>&#39;axis&#39;</code> 或者 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#tooltip.axisPointer.type">tooltip.axisPointer.type</a> 设置为 <code>&#39;cross&#39;</code>，则自动显示 axisPointer。坐标系会自动选择显示显示哪个轴的 axisPointer，也可以使用 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#tooltip.axisPointer.axis">tooltip.axisPointer.axis</a> 改变这种选择。</p>
+<h4 id="xAxis-axisPointer-type-‘line’"><a href="#xAxis-axisPointer-type-‘line’" class="headerlink" title="xAxis.axisPointer. type = ‘line’"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.type">type</a> = ‘line’</h4><p>string</p>
+<p>指示器类型。</p>
+<p>可选</p>
+<ul>
+<li><code>&#39;line&#39;</code> 直线指示器</li>
+<li><code>&#39;shadow&#39;</code> 阴影指示器</li>
+<li><code>&#39;none&#39;</code> 无指示器</li>
+</ul>
+<h4 id="xAxis-axisPointer-snap"><a href="#xAxis-axisPointer-snap" class="headerlink" title="xAxis.axisPointer. snap"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.snap">snap</a></h4><p>boolean</p>
+<p>坐标轴指示器是否自动吸附到点上。默认自动判断。</p>
+<p>这个功能在数值轴和时间轴上比较有意义，可以自动寻找细小的数值点。</p>
+<h4 id="xAxis-axisPointer-z"><a href="#xAxis-axisPointer-z" class="headerlink" title="xAxis.axisPointer. z"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.z">z</a></h4><p>number</p>
+<p>坐标轴指示器的 z 值。控制图形的前后顺序。<code>z</code>值小的图形会被<code>z</code>值大的图形覆盖。</p>
+<h4 id="xAxis-axisPointer-label"><a href="#xAxis-axisPointer-label" class="headerlink" title="xAxis.axisPointer. label"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label">label</a></h4><p>Object</p>
+<p>坐标轴指示器的文本标签。</p>
+<h5 id="所有属性-9"><a href="#所有属性-9" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.show">show</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.precision">precision</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.formatter">formatter</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.margin">margin</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.fontStyle">fontStyle</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.fontWeight">fontWeight</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.fontFamily">fontFamily</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.fontSize">fontSize</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.lineHeight">lineHeight</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.height">height</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.textBorderColor">textBorderColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.textBorderWidth">textBorderWidth</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.textShadowColor">textShadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.textShadowBlur">textShadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.textShadowOffsetX">textShadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.textShadowOffsetY">textShadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.padding">padding</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.backgroundColor">backgroundColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.borderColor">borderColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.borderWidth">borderWidth</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.label.shadowOffsetY">shadowOffsetY</a> }</p>
+<h4 id="xAxis-axisPointer-lineStyle"><a href="#xAxis-axisPointer-lineStyle" class="headerlink" title="xAxis.axisPointer. lineStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle">lineStyle</a></h4><p>Object</p>
+<p><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#tooltip.axisPointer.type">axisPointer.type</a> 为 <code>&#39;line&#39;</code> 时有效。</p>
+<h5 id="所有属性-10"><a href="#所有属性-10" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.width">width</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.type">type</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.lineStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-axisPointer-shadowStyle"><a href="#xAxis-axisPointer-shadowStyle" class="headerlink" title="xAxis.axisPointer. shadowStyle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle">shadowStyle</a></h4><p>Object</p>
+<p><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#tooltip.axisPointer.type">axisPointer.type</a> 为 <code>&#39;shadow&#39;</code> 时有效。</p>
+<h5 id="所有属性-11"><a href="#所有属性-11" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle.shadowOffsetY">shadowOffsetY</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.shadowStyle.opacity">opacity</a> }</p>
+<h4 id="xAxis-axisPointer-triggerTooltip-true"><a href="#xAxis-axisPointer-triggerTooltip-true" class="headerlink" title="xAxis.axisPointer. triggerTooltip = true"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.triggerTooltip">triggerTooltip</a> = true</h4><p>boolean</p>
+<p>是否触发 tooltip。如果不想触发 tooltip 可以关掉。</p>
+<h4 id="xAxis-axisPointer-value"><a href="#xAxis-axisPointer-value" class="headerlink" title="xAxis.axisPointer. value"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.value">value</a></h4><p>number</p>
+<p>当前的 value。在使用 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/xAxisPointer.handle">axisPointer.handle</a> 时，可以设置此值进行初始值设定，从而决定 axisPointer 的初始位置。</p>
+<h4 id="xAxis-axisPointer-status"><a href="#xAxis-axisPointer-status" class="headerlink" title="xAxis.axisPointer. status"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.status">status</a></h4><p>boolean</p>
+<p>当前的状态，可取值为 <code>&#39;show&#39;</code> 和 <code>&#39;hide&#39;</code>。</p>
+<h4 id="xAxis-axisPointer-handle"><a href="#xAxis-axisPointer-handle" class="headerlink" title="xAxis.axisPointer. handle"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer">axisPointer.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle">handle</a></h4><p>Object</p>
+<p>拖拽手柄，适用于触屏的环境。参见 <a target="_blank" rel="noopener" href="https://www.echartsjs.com/examples/en/editor.html?c=line-tooltip-touch&edit=1&reset=1">例子</a>。</p>
+<h5 id="所有属性-12"><a href="#所有属性-12" class="headerlink" title="所有属性"></a>所有属性</h5><p>{ <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.show">show</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.icon">icon</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.size">size</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.margin">margin</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.color">color</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.throttle">throttle</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.shadowBlur">shadowBlur</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.shadowColor">shadowColor</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.shadowOffsetX">shadowOffsetX</a> , <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.axisPointer.handle.shadowOffsetY">shadowOffsetY</a> }</p>
+<h4 id="xAxis-zlevel"><a href="#xAxis-zlevel" class="headerlink" title="xAxis. zlevel"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.zlevel">zlevel</a></h4><p>number</p>
+<p>X 轴所有图形的 zlevel 值。</p>
+<p><code>zlevel</code>用于 Canvas 分层，不同<code>zlevel</code>值的图形会放置在不同的 Canvas 中，Canvas 分层是一种常见的优化手段。我们可以把一些图形变化频繁（例如有动画）的组件设置成一个单独的<code>zlevel</code>。需要注意的是过多的 Canvas 会引起内存开销的增大，在手机端上需要谨慎使用以防崩溃。</p>
+<p><code>zlevel</code> 大的 Canvas 会放在 <code>zlevel</code> 小的 Canvas 的上面。</p>
+<h4 id="xAxis-z"><a href="#xAxis-z" class="headerlink" title="xAxis. z"></a><a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis">xAxis.</a> <a target="_blank" rel="noopener" href="https://www.echartsjs.com/zh/option.html#xAxis.z">z</a></h4><p>number</p>
+<p>X 轴组件的所有图形的<code>z</code>值。控制图形的前后顺序。<code>z</code>值小的图形会被<code>z</code>值大的图形覆盖。</p>
+<p><code>z</code>相比<code>zlevel</code>优先级更低，而且不会创建新的 Canvas。</p>
+
+    </div>
+
+    
+    
+    
+
+	
+	  <div>
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>洋群满满
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/12/16/demo/" title="demo">http://example.com/2020/12/16/demo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/echarts/" rel="tag"><i class="fa fa-tag"></i># echarts</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/15/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/17/study/" rel="next" title="study">
+      study <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xAxis%E2%80%94%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB-grid-%E4%B8%AD%E7%9A%84-x-%E8%BD%B4"><span class="nav-number">1.</span> <span class="nav-text">xAxis—直角坐标系 grid 中的 x 轴</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-id"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">xAxis. id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-show-true"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">xAxis. show &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-gridIndex"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">xAxis. gridIndex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-position"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">xAxis. position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-offset"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">xAxis. offset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-type-%E2%80%98category%E2%80%99"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">xAxis. type &#x3D; ‘category’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-name"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">xAxis. name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameLocation-%E2%80%98end%E2%80%99"><span class="nav-number">1.0.0.8.</span> <span class="nav-text">xAxis. nameLocation &#x3D; ‘end’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle"><span class="nav-number">1.0.0.9.</span> <span class="nav-text">xAxis. nameTextStyle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-color"><span class="nav-number">1.0.0.10.</span> <span class="nav-text">xAxis.nameTextStyle. color</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-fontStyle-%E2%80%98normal%E2%80%99"><span class="nav-number">1.0.0.11.</span> <span class="nav-text">xAxis.nameTextStyle. fontStyle &#x3D; ‘normal’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-fontWeight-normal"><span class="nav-number">1.0.0.12.</span> <span class="nav-text">xAxis.nameTextStyle. fontWeight &#x3D; normal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-fontFamily-%E2%80%98sans-serif%E2%80%99"><span class="nav-number">1.0.0.13.</span> <span class="nav-text">xAxis.nameTextStyle. fontFamily &#x3D; ‘sans-serif’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-fontSize-12"><span class="nav-number">1.0.0.14.</span> <span class="nav-text">xAxis.nameTextStyle. fontSize &#x3D; 12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-align"><span class="nav-number">1.0.0.15.</span> <span class="nav-text">xAxis.nameTextStyle. align</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-verticalAlign"><span class="nav-number">1.0.0.16.</span> <span class="nav-text">xAxis.nameTextStyle. verticalAlign</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-lineHeight"><span class="nav-number">1.0.0.17.</span> <span class="nav-text">xAxis.nameTextStyle. lineHeight</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-backgroundColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.18.</span> <span class="nav-text">xAxis.nameTextStyle. backgroundColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-borderColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.19.</span> <span class="nav-text">xAxis.nameTextStyle. borderColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-borderWidth"><span class="nav-number">1.0.0.20.</span> <span class="nav-text">xAxis.nameTextStyle. borderWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-borderRadius"><span class="nav-number">1.0.0.21.</span> <span class="nav-text">xAxis.nameTextStyle. borderRadius</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-padding"><span class="nav-number">1.0.0.22.</span> <span class="nav-text">xAxis.nameTextStyle. padding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-shadowColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.23.</span> <span class="nav-text">xAxis.nameTextStyle. shadowColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-shadowBlur"><span class="nav-number">1.0.0.24.</span> <span class="nav-text">xAxis.nameTextStyle. shadowBlur</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-shadowOffsetX"><span class="nav-number">1.0.0.25.</span> <span class="nav-text">xAxis.nameTextStyle. shadowOffsetX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-shadowOffsetY"><span class="nav-number">1.0.0.26.</span> <span class="nav-text">xAxis.nameTextStyle. shadowOffsetY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-width"><span class="nav-number">1.0.0.27.</span> <span class="nav-text">xAxis.nameTextStyle. width</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-height"><span class="nav-number">1.0.0.28.</span> <span class="nav-text">xAxis.nameTextStyle. height</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-textBorderColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.29.</span> <span class="nav-text">xAxis.nameTextStyle. textBorderColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-textBorderWidth"><span class="nav-number">1.0.0.30.</span> <span class="nav-text">xAxis.nameTextStyle. textBorderWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-textShadowColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.31.</span> <span class="nav-text">xAxis.nameTextStyle. textShadowColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-textShadowBlur"><span class="nav-number">1.0.0.32.</span> <span class="nav-text">xAxis.nameTextStyle. textShadowBlur</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-textShadowOffsetX"><span class="nav-number">1.0.0.33.</span> <span class="nav-text">xAxis.nameTextStyle. textShadowOffsetX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-textShadowOffsetY"><span class="nav-number">1.0.0.34.</span> <span class="nav-text">xAxis.nameTextStyle. textShadowOffsetY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameTextStyle-rich"><span class="nav-number">1.0.0.35.</span> <span class="nav-text">xAxis.nameTextStyle. rich</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="nav-number">1.0.0.35.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameGap-15"><span class="nav-number">1.0.0.36.</span> <span class="nav-text">xAxis. nameGap &#x3D; 15</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-nameRotate"><span class="nav-number">1.0.0.37.</span> <span class="nav-text">xAxis. nameRotate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-inverse"><span class="nav-number">1.0.0.38.</span> <span class="nav-text">xAxis. inverse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-boundaryGap"><span class="nav-number">1.0.0.39.</span> <span class="nav-text">xAxis. boundaryGap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-min"><span class="nav-number">1.0.0.40.</span> <span class="nav-text">xAxis. min</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-max"><span class="nav-number">1.0.0.41.</span> <span class="nav-text">xAxis. max</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-scale"><span class="nav-number">1.0.0.42.</span> <span class="nav-text">xAxis. scale</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitNumber-5"><span class="nav-number">1.0.0.43.</span> <span class="nav-text">xAxis. splitNumber &#x3D; 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minInterval"><span class="nav-number">1.0.0.44.</span> <span class="nav-text">xAxis. minInterval</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-maxInterval"><span class="nav-number">1.0.0.45.</span> <span class="nav-text">xAxis. maxInterval</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-interval"><span class="nav-number">1.0.0.46.</span> <span class="nav-text">xAxis. interval</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-logBase-10"><span class="nav-number">1.0.0.47.</span> <span class="nav-text">xAxis. logBase &#x3D; 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-silent"><span class="nav-number">1.0.0.48.</span> <span class="nav-text">xAxis. silent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-triggerEvent"><span class="nav-number">1.0.0.49.</span> <span class="nav-text">xAxis. triggerEvent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine"><span class="nav-number">1.0.0.50.</span> <span class="nav-text">xAxis. axisLine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-show-true"><span class="nav-number">1.0.0.51.</span> <span class="nav-text">xAxis.axisLine. show &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-onZero-true"><span class="nav-number">1.0.0.52.</span> <span class="nav-text">xAxis.axisLine. onZero &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-onZeroAxisIndex"><span class="nav-number">1.0.0.53.</span> <span class="nav-text">xAxis.axisLine. onZeroAxisIndex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-symbol-%E2%80%98none%E2%80%99"><span class="nav-number">1.0.0.54.</span> <span class="nav-text">xAxis.axisLine. symbol &#x3D; ‘none’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-symbolSize-10-15"><span class="nav-number">1.0.0.55.</span> <span class="nav-text">xAxis.axisLine. symbolSize &#x3D; [10, 15]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-symbolOffset-0-0"><span class="nav-number">1.0.0.56.</span> <span class="nav-text">xAxis.axisLine. symbolOffset &#x3D; [0, 0]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLine-lineStyle"><span class="nav-number">1.0.0.57.</span> <span class="nav-text">xAxis.axisLine. lineStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-1"><span class="nav-number">1.0.0.57.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick"><span class="nav-number">1.0.0.58.</span> <span class="nav-text">xAxis. axisTick</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick-show-true"><span class="nav-number">1.0.0.59.</span> <span class="nav-text">xAxis.axisTick. show &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick-alignWithLabel"><span class="nav-number">1.0.0.60.</span> <span class="nav-text">xAxis.axisTick. alignWithLabel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick-interval-%E2%80%98auto%E2%80%99"><span class="nav-number">1.0.0.61.</span> <span class="nav-text">xAxis.axisTick. interval &#x3D; ‘auto’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick-inside"><span class="nav-number">1.0.0.62.</span> <span class="nav-text">xAxis.axisTick. inside</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick-length-5"><span class="nav-number">1.0.0.63.</span> <span class="nav-text">xAxis.axisTick. length &#x3D; 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisTick-lineStyle"><span class="nav-number">1.0.0.64.</span> <span class="nav-text">xAxis.axisTick. lineStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-2"><span class="nav-number">1.0.0.64.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minorTick"><span class="nav-number">1.0.0.65.</span> <span class="nav-text">xAxis. minorTick</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minorTick-splitNumber-5"><span class="nav-number">1.0.0.66.</span> <span class="nav-text">xAxis.minorTick. splitNumber &#x3D; 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minorTick-length-3"><span class="nav-number">1.0.0.67.</span> <span class="nav-text">xAxis.minorTick. length &#x3D; 3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minorTick-lineStyle"><span class="nav-number">1.0.0.68.</span> <span class="nav-text">xAxis.minorTick. lineStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-3"><span class="nav-number">1.0.0.68.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel"><span class="nav-number">1.0.0.69.</span> <span class="nav-text">xAxis. axisLabel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-show-true"><span class="nav-number">1.0.0.70.</span> <span class="nav-text">xAxis.axisLabel. show &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-interval-%E2%80%98auto%E2%80%99"><span class="nav-number">1.0.0.71.</span> <span class="nav-text">xAxis.axisLabel. interval &#x3D; ‘auto’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-inside"><span class="nav-number">1.0.0.72.</span> <span class="nav-text">xAxis.axisLabel. inside</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-rotate"><span class="nav-number">1.0.0.73.</span> <span class="nav-text">xAxis.axisLabel. rotate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-margin-8"><span class="nav-number">1.0.0.74.</span> <span class="nav-text">xAxis.axisLabel. margin &#x3D; 8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-formatter"><span class="nav-number">1.0.0.75.</span> <span class="nav-text">xAxis.axisLabel. formatter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-showMinLabel"><span class="nav-number">1.0.0.76.</span> <span class="nav-text">xAxis.axisLabel. showMinLabel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-showMaxLabel"><span class="nav-number">1.0.0.77.</span> <span class="nav-text">xAxis.axisLabel. showMaxLabel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-color"><span class="nav-number">1.0.0.78.</span> <span class="nav-text">xAxis.axisLabel. color</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-fontStyle-%E2%80%98normal%E2%80%99"><span class="nav-number">1.0.0.79.</span> <span class="nav-text">xAxis.axisLabel. fontStyle &#x3D; ‘normal’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-fontWeight-normal"><span class="nav-number">1.0.0.80.</span> <span class="nav-text">xAxis.axisLabel. fontWeight &#x3D; normal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-fontFamily-%E2%80%98sans-serif%E2%80%99"><span class="nav-number">1.0.0.81.</span> <span class="nav-text">xAxis.axisLabel. fontFamily &#x3D; ‘sans-serif’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-fontSize-12"><span class="nav-number">1.0.0.82.</span> <span class="nav-text">xAxis.axisLabel. fontSize &#x3D; 12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-align"><span class="nav-number">1.0.0.83.</span> <span class="nav-text">xAxis.axisLabel. align</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-verticalAlign"><span class="nav-number">1.0.0.84.</span> <span class="nav-text">xAxis.axisLabel. verticalAlign</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-lineHeight"><span class="nav-number">1.0.0.85.</span> <span class="nav-text">xAxis.axisLabel. lineHeight</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-backgroundColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.86.</span> <span class="nav-text">xAxis.axisLabel. backgroundColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-borderColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.87.</span> <span class="nav-text">xAxis.axisLabel. borderColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-borderWidth"><span class="nav-number">1.0.0.88.</span> <span class="nav-text">xAxis.axisLabel. borderWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-borderRadius"><span class="nav-number">1.0.0.89.</span> <span class="nav-text">xAxis.axisLabel. borderRadius</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-padding"><span class="nav-number">1.0.0.90.</span> <span class="nav-text">xAxis.axisLabel. padding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-shadowColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.91.</span> <span class="nav-text">xAxis.axisLabel. shadowColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-shadowBlur"><span class="nav-number">1.0.0.92.</span> <span class="nav-text">xAxis.axisLabel. shadowBlur</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-shadowOffsetX"><span class="nav-number">1.0.0.93.</span> <span class="nav-text">xAxis.axisLabel. shadowOffsetX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-shadowOffsetY"><span class="nav-number">1.0.0.94.</span> <span class="nav-text">xAxis.axisLabel. shadowOffsetY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-width"><span class="nav-number">1.0.0.95.</span> <span class="nav-text">xAxis.axisLabel. width</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-height"><span class="nav-number">1.0.0.96.</span> <span class="nav-text">xAxis.axisLabel. height</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-textBorderColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.97.</span> <span class="nav-text">xAxis.axisLabel. textBorderColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-textBorderWidth"><span class="nav-number">1.0.0.98.</span> <span class="nav-text">xAxis.axisLabel. textBorderWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-textShadowColor-%E2%80%98transparent%E2%80%99"><span class="nav-number">1.0.0.99.</span> <span class="nav-text">xAxis.axisLabel. textShadowColor &#x3D; ‘transparent’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-textShadowBlur"><span class="nav-number">1.0.0.100.</span> <span class="nav-text">xAxis.axisLabel. textShadowBlur</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-textShadowOffsetX"><span class="nav-number">1.0.0.101.</span> <span class="nav-text">xAxis.axisLabel. textShadowOffsetX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-textShadowOffsetY"><span class="nav-number">1.0.0.102.</span> <span class="nav-text">xAxis.axisLabel. textShadowOffsetY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisLabel-rich"><span class="nav-number">1.0.0.103.</span> <span class="nav-text">xAxis.axisLabel. rich</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-4"><span class="nav-number">1.0.0.103.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitLine"><span class="nav-number">1.0.0.104.</span> <span class="nav-text">xAxis. splitLine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitLine-show-true"><span class="nav-number">1.0.0.105.</span> <span class="nav-text">xAxis.splitLine. show &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitLine-interval-%E2%80%98auto%E2%80%99"><span class="nav-number">1.0.0.106.</span> <span class="nav-text">xAxis.splitLine. interval &#x3D; ‘auto’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitLine-lineStyle"><span class="nav-number">1.0.0.107.</span> <span class="nav-text">xAxis.splitLine. lineStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-5"><span class="nav-number">1.0.0.107.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minorSplitLine"><span class="nav-number">1.0.0.108.</span> <span class="nav-text">xAxis. minorSplitLine</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-minorSplitLine-show"><span class="nav-number">1.0.0.109.</span> <span class="nav-text">xAxis.minorSplitLine. show</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-6"><span class="nav-number">1.0.0.109.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitArea"><span class="nav-number">1.0.0.110.</span> <span class="nav-text">xAxis. splitArea</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitArea-interval-%E2%80%98auto%E2%80%99"><span class="nav-number">1.0.0.111.</span> <span class="nav-text">xAxis.splitArea. interval &#x3D; ‘auto’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitArea-show"><span class="nav-number">1.0.0.112.</span> <span class="nav-text">xAxis.splitArea. show</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-splitArea-areaStyle"><span class="nav-number">1.0.0.113.</span> <span class="nav-text">xAxis.splitArea. areaStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-7"><span class="nav-number">1.0.0.113.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-data"><span class="nav-number">1.0.0.114.</span> <span class="nav-text">xAxis. data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-data-value"><span class="nav-number">1.0.0.115.</span> <span class="nav-text">xAxis.data. value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-data-textStyle"><span class="nav-number">1.0.0.116.</span> <span class="nav-text">xAxis.data. textStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-8"><span class="nav-number">1.0.0.116.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer"><span class="nav-number">1.0.0.117.</span> <span class="nav-text">xAxis. axisPointer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-show"><span class="nav-number">1.0.0.118.</span> <span class="nav-text">xAxis.axisPointer. show</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-type-%E2%80%98line%E2%80%99"><span class="nav-number">1.0.0.119.</span> <span class="nav-text">xAxis.axisPointer. type &#x3D; ‘line’</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-snap"><span class="nav-number">1.0.0.120.</span> <span class="nav-text">xAxis.axisPointer. snap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-z"><span class="nav-number">1.0.0.121.</span> <span class="nav-text">xAxis.axisPointer. z</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-label"><span class="nav-number">1.0.0.122.</span> <span class="nav-text">xAxis.axisPointer. label</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-9"><span class="nav-number">1.0.0.122.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-lineStyle"><span class="nav-number">1.0.0.123.</span> <span class="nav-text">xAxis.axisPointer. lineStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-10"><span class="nav-number">1.0.0.123.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-shadowStyle"><span class="nav-number">1.0.0.124.</span> <span class="nav-text">xAxis.axisPointer. shadowStyle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-11"><span class="nav-number">1.0.0.124.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-triggerTooltip-true"><span class="nav-number">1.0.0.125.</span> <span class="nav-text">xAxis.axisPointer. triggerTooltip &#x3D; true</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-value"><span class="nav-number">1.0.0.126.</span> <span class="nav-text">xAxis.axisPointer. value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-status"><span class="nav-number">1.0.0.127.</span> <span class="nav-text">xAxis.axisPointer. status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-axisPointer-handle"><span class="nav-number">1.0.0.128.</span> <span class="nav-text">xAxis.axisPointer. handle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7-12"><span class="nav-number">1.0.0.128.1.</span> <span class="nav-text">所有属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-zlevel"><span class="nav-number">1.0.0.129.</span> <span class="nav-text">xAxis. zlevel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xAxis-z"><span class="nav-number">1.0.0.130.</span> <span class="nav-text">xAxis. z</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="洋群满满"
+      src="/images/title.jpg">
+  <p class="site-author-name" itemprop="name">洋群满满</p>
+  <div class="site-description" itemprop="description">这里是属于羊群满满的乐园！ 		   欢迎你们的到来~~~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yangyang1-0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yangyang1-0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_45278644" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_45278644" rel="noopener" target="_blank"><i class="fab fa-codiepie fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 2020-12 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洋群满满</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">24k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">22 分钟</span>
+</div>
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '5aRex5dipFu5xw6Ae8R1PYI2-gzGzoHsz',
+      appKey     : 'k42hTn3SntmDkBgtOrJ1NeR4',
+      placeholder: "来啊,快活啊！O(∩_∩)O",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":300,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
