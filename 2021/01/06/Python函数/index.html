@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/resizeApi32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/resizeApi16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yangyangmm.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这是Python函数的基本教程以及时间与日期函数，随机函数的讲解！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python函数">
+<meta property="og:url" content="https://yangyangmm.cn/2021/01/06/Python%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="洋群满满">
+<meta property="og:description" content="这是Python函数的基本教程以及时间与日期函数，随机函数的讲解！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-06T03:22:32.000Z">
+<meta property="article:modified_time" content="2021-01-06T03:25:55.003Z">
+<meta property="article:author" content="洋群满满">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yangyangmm.cn/2021/01/06/Python%E5%87%BD%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python函数 | 洋群满满</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="洋群满满" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/yangyang1-0" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">洋群满满</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yangyangmm.cn/2021/01/06/Python%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/title.jpg">
+      <meta itemprop="name" content="洋群满满">
+      <meta itemprop="description" content="这里是属于羊群满满的乐园！ 		   欢迎你们的到来~~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="洋群满满">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python函数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-06 11:22:32 / 修改时间：11:25:55" itemprop="dateCreated datePublished" datetime="2021-01-06T11:22:32+08:00">2021-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/06/Python%E5%87%BD%E6%95%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/06/Python%E5%87%BD%E6%95%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>23k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>21 分钟</span>
+            </span>
+            <div class="post-description">这是Python函数的基本教程以及时间与日期函数，随机函数的讲解！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a> 
+
+
+
+<h1 id="Python函数"><a href="#Python函数" class="headerlink" title="Python函数"></a>Python函数</h1><h3 id="前言、"><a href="#前言、" class="headerlink" title="前言、"></a>前言、</h3><p>​        在实际开发中，如果有若干段代码的执行逻辑完全相同，那么阔以考虑将这些代码抽取成一个函数，这样不仅阔以提高代码的重要性，而且条理会更加的清晰，可靠性更高。</p>
+<h3 id="1-1、什么是函数"><a href="#1-1、什么是函数" class="headerlink" title="1.1、什么是函数"></a>1.1、什么是函数</h3><p>​        函数是组织好的，可重复使用的，用来实现单一的或者相关联功能的代码段，它能够提高应用的模块化和代码的重复利用率。python提供了很多内建函数，如print()，除此之外，我们还阔以自己创建函数，也就是自定义函数，接下来看一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(&#39;  * &#39;)</span><br><span class="line">print(&#39; *** &#39;)</span><br><span class="line">print(&#39;*****&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>​        上述的代码中，使用了多个print()函数输出了一个三角形。如果需要在一个程序的不同位置输出这个图形，那么每次都是用这个print()函数输出的做法是不可取的。</p>
+<p>​        为了提高编写效率以及代码的重用性，我们阔以把具有独特功能的代码块组织成一个小模块，这就是函数！</p>
+<h3 id="1-2、函数的定义和调用"><a href="#1-2、函数的定义和调用" class="headerlink" title="1.2、函数的定义和调用"></a>1.2、函数的定义和调用</h3><h4 id="1-2-1、定义函数"><a href="#1-2-1、定义函数" class="headerlink" title="1.2.1、定义函数"></a>1.2.1、定义函数</h4><p>​        在python中，你阔以定义一个自己想要功能的函数，自定义函数的语法格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def 函数名(参数列表):</span><br><span class="line">    &quot;函数_文档字符串&quot;</span><br><span class="line">    函数体</span><br><span class="line">    </span><br><span class="line">    return 表达式</span><br></pre></td></tr></table></figure>
+
+<pre><code>     基于上述格式，下面对函数定义的规则进行说明:</code></pre>
+<ul>
+<li><p>函数代码块已def开头，后面紧跟的是函数名和圆括号()、</p>
+</li>
+<li><p>函数名的命名规则跟变量的命名规则是一样的，即只能是字母刚、数字和下划线的任何组合，但不能以数字开头，并且不能和关键字重名、</p>
+</li>
+<li><p>函数的参数必须放在圆括号中、</p>
+</li>
+<li><p>函数的第一行语句阔以选择性的使用文档字符来存放函数说明、</p>
+</li>
+<li><p>函数内容以冒号起始，并且缩进、</p>
+</li>
+<li><p>return表达式结束函数，选择性的返回一个值给调用方，不带表达式的return相当于返回None、</p>
+</li>
+</ul>
+<p>  接下来，定义一个能够完整打印信息的函数，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 接下来，定义一个能够完整打印信息的函数</span><br><span class="line">def print_info():</span><br><span class="line">    print(&#39;-----------------------------&#39;)</span><br><span class="line">    print(&#39;       人生可短，洋群满满       &#39;)</span><br><span class="line">    print(&#39;-----------------------------&#39;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-2、调用函数"><a href="#1-2-2、调用函数" class="headerlink" title="1.2.2、调用函数"></a>1.2.2、调用函数</h4><p>​        定义了函数之后，就相当于有了一段具有特定功能的代码，想要这些代码能够执行，需要调用函数。调用函数的方式很简单，通过“函数名()”即可完成成调用。</p>
+<p>​        例如，调用1.2.1中的函数的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 定义完函数后，函数是不会自动执行的，需要调用它</span><br><span class="line">print_info()</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3、-函数的参数"><a href="#1-3、-函数的参数" class="headerlink" title="1.3、 函数的参数"></a>1.3、 函数的参数</h3><h4 id="1-3-1、-函数参数的传递"><a href="#1-3-1、-函数参数的传递" class="headerlink" title="1.3.1、 函数参数的传递"></a>1.3.1、 函数参数的传递</h4><p>​        在介绍函数的参数之前，我们先来解决一个问题。现在要求定义一个函数，这个函数用于计算两个数的和，并把计算的结果打印出来。把上述的要求转换为代码，示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def add():</span><br><span class="line">    c &#x3D; 11+22</span><br><span class="line">    print(c)</span><br></pre></td></tr></table></figure>
+
+<p>​        以上函数的功能是计算11和22的和。此时，无论调用这个函数多少次，得到的结果永远是一样的，而且只计算固定的两个数字的和，使得这个函数的局限性很大。</p>
+<p>​        为了能让你定义的函数更加通用，即计算任意两个数字的和，阔以在定义函数的时候添加两个参数，让两个参数来接收传给函数的值。接下来，通过一个案例来演示下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 定义接收两个参数的函数</span><br><span class="line">def add(a, b):</span><br><span class="line">    c &#x3D; a+b</span><br><span class="line">    print(c)</span><br></pre></td></tr></table></figure>
+
+<p>​        在上面的例子中，定义了能接收两个参数的函数。其中，a为第一个参数，用于接收函数传递的第一个值；b为第二个参数，接收的是函数传递的第二个数值。这时，如果想调用add函数，则需要给函数的参数传递两个数值，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 调用带有参数的函数时，需要在小括号中传递数据</span><br><span class="line">add(11, 22)</span><br></pre></td></tr></table></figure>
+
+<p>​        需要注意的是，如果函数定义了多个参数，那么在调用函数的时候，传递的数据要和定义的参数一一对应。</p>
+<h4 id="1-3-2、-默认参数"><a href="#1-3-2、-默认参数" class="headerlink" title="1.3.2、 默认参数"></a>1.3.2、 默认参数</h4><p>​        定义函数时，阔以给函数的参数设置默认值，这个参数就被称为默认参数。当调用函数的时候，由于默认参数在定义时已经被赋值，所以阔以直接忽略，而其它参数是必须要传入值的。如果默认参数没有传入值是，则使用默认的值；如果默认参数传入了值，则使用传入的新值替代。</p>
+<p>​        接下来，演示如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 接下来，定义一个能够完整打印信息的函数</span><br><span class="line">def print_info(name, age &#x3D; 25):</span><br><span class="line">    # 打印任何传入的字符串</span><br><span class="line">    print(&quot;Name:&quot;, name)</span><br><span class="line">    print(&quot;Age:&quot;, age)</span><br><span class="line">    print(&#39;*************&#39;)</span><br><span class="line"># 调用函数</span><br><span class="line">print_info(name&#x3D;&#39;洋群满满&#39;)</span><br><span class="line">print_info(name&#x3D;&#39;洋群满满&#39;, age&#x3D;22)</span><br></pre></td></tr></table></figure>
+
+<p>​        在上述的案例中，定义了一个带有两个参数的函数，其中name参数没有设置默认值，age作为默认参数设置了默认值。在后面的调用函数时，第一个由于只传入了name参数的值，所以程序会使用age参数的默认值；在第二个调用时，同时传入了两个参数的值，所以程序会用传给age参数的新值。</p>
+<p>​        运行结果如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">Name: 洋群满满</span><br><span class="line">Age: 25</span><br><span class="line">*************</span><br><span class="line">Name: 洋群满满</span><br><span class="line">Age: 22</span><br><span class="line">*************</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        需要注意的是，带有默认值的参数一定要位于参数列表的最后面，否则程序会报错。例如，给print_info()函数添加一个参数sex，放在参数列表的最后面，则会报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">  File &quot;D:&#x2F;Desktop&#x2F;test&#x2F;demo.py&quot;, line 19</span><br><span class="line">    def print_info(name, age &#x3D; 25, sex):</span><br><span class="line">                  ^</span><br><span class="line">SyntaxError: non-default argument follows default argument</span><br><span class="line"></span><br><span class="line">Process finished with exit code 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-3、-不定长参数"><a href="#1-3-3、-不定长参数" class="headerlink" title="1.3.3、 不定长参数"></a>1.3.3、 不定长参数</h4><p>​        通常在定义一个函数时， 若希望函数能够处理的参数个数能比当初定义的参数个数多，此时可以在函数中使用不定长参数。其基本语法的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def 函数名([formal_args,] *args, **kwargs):</span><br><span class="line">    &quot;函数_文档字符串&quot;</span><br><span class="line">    函数体</span><br><span class="line">    return 表达式</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        在上述格式中，函数共有3个参数。其中formal_args为形参(也就是前面所用的参数，如a，b)，*args和**kwargs为不定长参数。当调用函数的时候，函数传入的参数个数会优先匹配formal_args参数的格个数。如果传入的参数个数和formal_args参数的个数相同，不定长参数会返回控的元祖或字典；如果传入参数的个数比formal_args参数的个数多，阔以分为如下两种情况：</p>
+<ul>
+<li><p>如果传入的参数没有指定名称，那么*args会以元祖的形式存放这些多余的参数；</p>
+</li>
+<li><p>如果传入的参数指定了名称，如m=1，那么**kwargs会以字典的形式存放这些被命名的参数，如{m:1}</p>
+<p>为了让大家更好地理解，简单的示例演示下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def test(a,b,*args):</span><br><span class="line">    print(a)</span><br><span class="line">    print(b)</span><br><span class="line">    print(args)</span><br><span class="line">test(11, 22)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        在上面的示例中，先定义了一个带有多个参数的test函。其中，args为不定长参数。在调用函数是，由于只传入了11和22这两个数，所以这两个数会从左向右依次匹配test函数定义时的参数a和b，此时，args参数没有接收到数据，所以为一个空的元祖。</p>
+<p>​        程序运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">11</span><br><span class="line">22</span><br><span class="line">()</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        如果在调用test函数时，传入了多个参数(这里指的是对于两个参数)，情况下又是怎么样的呢？</p>
+<p>​        下面看一段演示的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def test(a,b,*args):</span><br><span class="line">    print(a)</span><br><span class="line">    print(b)</span><br><span class="line">    print(args)</span><br><span class="line">test(11, 22, 33, 44, 55, 66, 77, 88, 99)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">11</span><br><span class="line">22</span><br><span class="line">(33, 44, 55, 66, 77, 88, 99)</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        如果在参数列表的末尾使用**kwargs参数，演示代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def test(a,b,*args, **kwargs):</span><br><span class="line">    print(a)</span><br><span class="line">    print(b)</span><br><span class="line">    print(args)</span><br><span class="line">    print(kwargs)</span><br><span class="line">test(11, 22, 33, 44, 55, 66, 77, 88, 99)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">11</span><br><span class="line">22</span><br><span class="line">(33, 44, 55, 66, 77, 88, 99)</span><br><span class="line">&#123;&#125;</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        从两次的运行结果阔以看出，如果在调用test函数时传入多个数值，那么这些数会从左向右依次匹配函数test定义时参数。如果跟formal_args参数的个数匹配完，还有多余的参数，则这些多余的参数会组成一个元祖，和不定长参数args进行匹配。此时，kwargs参数没有接收到数据，所以为一个空字典。</p>
+<p>​        那么思考一下，在调用函数时，在什么情况下传入数据会匹配参数kwargs呢？在上述的示例中，将调用函数的代码进行修改，修改后的代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def test(a,b,*args, **kwargs):</span><br><span class="line">    print(a)</span><br><span class="line">    print(b)</span><br><span class="line">    print(args)</span><br><span class="line">    print(kwargs)</span><br><span class="line">test(11, 22, 33, 44, 55, 66, 77, n&#x3D;88, m&#x3D;99)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">11</span><br><span class="line">22</span><br><span class="line">(33, 44, 55, 66, 77)</span><br><span class="line">&#123;&#39;n&#39;: 88, &#39;m&#39;: 99&#125;</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        从上述的运行结果阔以看出，如果参数是以键值对的形式传入的，则使用**kwargs参数来接收。</p>
+<h3 id="1-4、-函数的返回值"><a href="#1-4、-函数的返回值" class="headerlink" title="1.4、 函数的返回值"></a>1.4、 函数的返回值</h3><p>​        所谓的“返回值”，就是程序中的函数完成一件事情后，最后给调用者的结果。比如，定义了一个函数来获取“洋洋”与“群群”年龄的总和，一旦调用了这个函数，函数就会把得到总和的年龄返回给这个调用者，这个年龄总和就是函数的返回值。在python中，函数的返回值使用return语句来完成的。接下来，用一段示例代码演示一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def add(a, b):</span><br><span class="line">    c &#x3D; a+b</span><br><span class="line">    return c</span><br><span class="line"># 或者阔以这样写</span><br><span class="line">def add(a, b):</span><br><span class="line">    return a+b</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        在上述的代码中，函数add中包含的return语句，意味着这个函数有一个返回值，其结果就是a加b的结果。</p>
+<h3 id="1-5、-函数的四种类型"><a href="#1-5、-函数的四种类型" class="headerlink" title="1.5、 函数的四种类型"></a>1.5、 函数的四种类型</h3><p>​        根据有没有参数和返回值，函数大概阔以分为四种类型：</p>
+<ol>
+<li><p>函数无参数，无返回值；</p>
+</li>
+<li><p>函数无参数，有返回值；</p>
+</li>
+<li><p>函数有参数，无返回值；</p>
+</li>
+<li><p>函数有参数，有返回值。</p>
+<p>​    接下来，针对这四种类型的函数进行详细讲解。</p>
+</li>
+</ol>
+<h4 id="1-5-1、-函数无参数，无返回值"><a href="#1-5-1、-函数无参数，无返回值" class="headerlink" title="1.5.1、 函数无参数，无返回值"></a>1.5.1、 函数无参数，无返回值</h4><p>​        无参数，无返回值的函数，既不能接收参数，也没有返回值。</p>
+<p>​        接下来，通过一个打印提示的函数来演示这类函数的使用，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def print_menu():</span><br><span class="line">    print(&#39;---------------------&#39;)</span><br><span class="line">    print(&#39;  洋群满满  火锅菜单   &#39;)</span><br><span class="line">    print(&#39;  1、羊肉火锅&#39;)</span><br><span class="line">    print(&#39;  2、牛肉火锅&#39;)</span><br><span class="line">    print(&#39;  3、猪肉火锅&#39;)</span><br><span class="line">    print(&#39;---------------------&#39;)</span><br><span class="line">print_menu()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">---------------------</span><br><span class="line">  洋群满满  火锅菜单   </span><br><span class="line">  1、羊肉火锅</span><br><span class="line">  2、牛肉火锅</span><br><span class="line">  3、猪肉火锅</span><br><span class="line">---------------------</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-5-2、-函数无参数，有返回值"><a href="#1-5-2、-函数无参数，有返回值" class="headerlink" title="1.5.2、 函数无参数，有返回值"></a>1.5.2、 函数无参数，有返回值</h4><p>​        此类函数不能接受参数，但是阔以返回某个数据，一般情况下，采集数据时会用此类函数。接下来，实例演示下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def get_temperature():</span><br><span class="line">    # 这里获取温度的一些过程</span><br><span class="line">    # 为了简单起见，先模拟返回一个数据即可</span><br><span class="line">    return 24</span><br><span class="line"></span><br><span class="line">temperature &#x3D; get_temperature()</span><br><span class="line">print(&#39;当前的温度为:&#39;, temperature)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">当前的温度为: 24</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-5-3、-函数有参数，无返回值"><a href="#1-5-3、-函数有参数，无返回值" class="headerlink" title="1.5.3、 函数有参数，无返回值"></a>1.5.3、 函数有参数，无返回值</h4><p>​        在实际开发中，有参数，无返回值类型的函数用的极少，这是因为函数作为功能模块，既然传入了参数，绝大多数情况下是希望使用返回值的。这里，大家对有参数，无返回值的函数有所了解即可，示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def test_add(num_one, num_two):</span><br><span class="line">    result &#x3D; num_one + num_two</span><br><span class="line">    print(&#39;计算结果为&#39;, result)</span><br><span class="line">test_add(11,22)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">计算结果为 33</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-5-4、-函数有参数，有返回值"><a href="#1-5-4、-函数有参数，有返回值" class="headerlink" title="1.5.4、 函数有参数，有返回值"></a>1.5.4、 函数有参数，有返回值</h4><p>​        此类函数不仅能接收参数，还阔以返回某个数据，一般情况下，处理数据并需要结果的应用，阔以使用此类函数。接下来，通过一个哪里演示一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 计算1~number的累积和</span><br><span class="line">def calculate(number):</span><br><span class="line">    result &#x3D; 0</span><br><span class="line">    i &#x3D; 1</span><br><span class="line">    while i&lt;&#x3D;number:</span><br><span class="line">        result &#x3D; result + i</span><br><span class="line">        i +&#x3D; 1</span><br><span class="line">    return result</span><br><span class="line">result &#x3D; calculate(100)</span><br><span class="line">print(&#39;1~100的累积和为:&#39;,result)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">1~100的累积和为: 5050</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-6、-函数案例——-名片管理器"><a href="#1-6、-函数案例——-名片管理器" class="headerlink" title="1.6、 函数案例——-名片管理器"></a>1.6、 函数案例——-名片管理器</h3><p>​        名片管理器是一款生活实用类软件，用来协助管理手机中的所有名片。为了帮助大家在实际应用中学会实用四种类型函数，接下来，我们开发一个名片管理器。这个案例要求使用函数完成各种功能，你并且根据键盘的输入来选择对应的函数完成这些功能。</p>
+<p>​        下面是名片管理器的菜单系统，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------</span><br><span class="line">  洋群满满  名片管理系统    v1.0   </span><br><span class="line">  1、添加名片</span><br><span class="line">  2、删除名片</span><br><span class="line">  3、修改名片</span><br><span class="line">  4、名查询片</span><br><span class="line">  5、获取所有名片信息</span><br><span class="line">  6、退出系统</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        如上所示，名片管理系统中共有六种功能，通过接收键盘输入的序号响应用户选择的功能。一旦用户输入了“6”， 就会退出系统。</p>
+<p>​        创建一个工程，新建一个python文件，取名为“名片管理系统”， 具体实现步骤如下：</p>
+<h4 id="1-6-1、-输出名片管理器的菜单"><a href="#1-6-1、-输出名片管理器的菜单" class="headerlink" title="1.6.1、 输出名片管理器的菜单"></a>1.6.1、 输出名片管理器的菜单</h4><p>​        定义输出菜单功能的函数。考虑到该函数只用来输出信息，并且输出的内容是固定不变的，所以定义一个无参数，无返回值的函数display_menu，具体的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def display_menu():</span><br><span class="line">    print(&#39;-&#39;*30)</span><br><span class="line">    print(&#39;  洋群满满  名片管理系统    v1.0   &#39;)</span><br><span class="line">    print(&#39;  1、添加名片&#39;)</span><br><span class="line">    print(&#39;  2、删除名片&#39;)</span><br><span class="line">    print(&#39;  3、修改名片&#39;)</span><br><span class="line">    print(&#39;  4、名查询片&#39;)</span><br><span class="line">    print(&#39;  5、获取所有名片信息&#39;)</span><br><span class="line">    print(&#39;  6、退出系统&#39;)</span><br><span class="line">    print(&#39;-&#39;*30)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        使用while循环不间断的输出菜单功能的信息。为了检测程序的可行性，阔以将while的判断条件改为“i&lt;1”，</p>
+<p>具体的实现代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i &#x3D; 0</span><br><span class="line">while i &lt;1:</span><br><span class="line">    # 打印菜单</span><br><span class="line">    display_menu()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        程序运行后，控制台一直不间断的输出菜单的信息。测试完毕后，使用Ctrl + F2停止程序。</p>
+<h4 id="1-6-2、获取用户输入的信息"><a href="#1-6-2、获取用户输入的信息" class="headerlink" title="1.6.2、获取用户输入的信息"></a>1.6.2、获取用户输入的信息</h4><p>​        菜单显示后， 用户需要根据提示输入要执行的序号。通过input()函数从键盘接收用户的选择，并且把选择的序号进行返回，所以定义一个无参数，有返回值的函数get_choice()，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 获取用户的选择</span><br><span class="line">def get_choice():</span><br><span class="line">    selected_key &#x3D; input(&#39;请输入您选择的序号:&#39;)</span><br><span class="line">    return int(selected_key)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        在while循环打印菜单以后，调用了get_choice()函数来获取用户输入的信息，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 等待用户选择</span><br><span class="line">key &#x3D; get_choice()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;aa.py</span><br><span class="line">------------------------------</span><br><span class="line">  洋群满满  名片管理系统    v1.0   </span><br><span class="line">  1、添加名片</span><br><span class="line">  2、删除名片</span><br><span class="line">  3、修改名片</span><br><span class="line">  4、名查询片</span><br><span class="line">  5、获取所有名片信息</span><br><span class="line">  6、退出系统</span><br><span class="line">------------------------------</span><br><span class="line">请入您选择的序号:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>1.6.3、 通过获取序号，执行不同的功能</p>
+<p>​        获取序号以后，根据序号的不同执行相应的操作。在while语句的末尾，使用if-else语句根据用户的选择的序号完成相应的功能，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">if key &#x3D;&#x3D; 1:</span><br><span class="line">    pass</span><br><span class="line">elif key &#x3D;&#x3D; 2:</span><br><span class="line">    pass</span><br><span class="line">elif key &#x3D;&#x3D; 3:</span><br><span class="line">    pass</span><br><span class="line">elif key &#x3D;&#x3D; 4:</span><br><span class="line">    pass</span><br><span class="line">elif key &#x3D;&#x3D; 5:</span><br><span class="line">    pass</span><br><span class="line">elif key &#x3D;&#x3D; 6:</span><br><span class="line">    pass</span><br><span class="line">else:</span><br><span class="line">    print(&#39;您的输入不符合要求或有误，请重新输入!!!&#39;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        接下来，在每个条件下来处理该序号对应的功能，这里只介绍“添加名片”和“查询名片”的功能。</p>
+<ul>
+<li><p>添加名片</p>
+<p>​    要想报存所有名片的信息，需要用到一个列表。在while语句前定义一个空的列表，具体如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name_list &#x3D; []</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        用户选择了序号1，此时应该提示用户输入姓名，然后添加到上述的列表中，因此我们定义一个无参数，无返回值的函数，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 添加名片</span><br><span class="line">def add_name():</span><br><span class="line">    new_name &#x3D; input(&#39;请输入姓名:&#39;)</span><br><span class="line">    name_list.append(new_name)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        接着在用户选择序号1的时候，调用上述函数实现的添加名片的功能，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---省略其他代码---</span><br><span class="line">if key &#x3D;&#x3D; 1:</span><br><span class="line">	add_name()</span><br><span class="line">elif key &#x3D;&#x3D; 2:</span><br><span class="line">---省略其他代码---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行程序，控制台输出如图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;aa.py</span><br><span class="line">------------------------------</span><br><span class="line">  洋群满满  名片管理系统    v1.0   </span><br><span class="line">  1、添加名片</span><br><span class="line">  2、删除名片</span><br><span class="line">  3、修改名片</span><br><span class="line">  4、名查询片</span><br><span class="line">  5、获取所有名片信息</span><br><span class="line">  6、退出系统</span><br><span class="line">------------------------------</span><br><span class="line">请输入您选择的序号:1</span><br><span class="line">请输入姓名:洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>查询名片</p>
+<p>​    用户选择了序号5，此时应该从列表中获取所有的姓名信息，按照固定的格式打印，因此我们定义了一个有参数，无返回值的函数print_all_info()，具体代码如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def print_all_info(temp_list):</span><br><span class="line">    print(&quot;&#x3D;&quot;*30)</span><br><span class="line">    for info in temp_list:</span><br><span class="line">        print(info)</span><br><span class="line">    print(&quot;&#x3D;&quot;*30)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        紧接着在用户选择序号5的时候，调用上述方法实现产看所有名片的功能，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---省略其他代码---</span><br><span class="line">elif key &#x3D;&#x3D; 5:</span><br><span class="line">	print_all_info(name_list)</span><br><span class="line">elif key &#x3D;&#x3D; 6:</span><br><span class="line">---省略其他代码---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">------------------------------</span><br><span class="line">  洋群满满  名片管理系统    v1.0   </span><br><span class="line">  1、添加名片</span><br><span class="line">  2、删除名片</span><br><span class="line">  3、修改名片</span><br><span class="line">  4、名查询片</span><br><span class="line">  5、获取所有名片信息</span><br><span class="line">  6、退出系统</span><br><span class="line">------------------------------</span><br><span class="line">请输入您选择的序号:5</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">洋群满满</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-7、-函数的嵌套调用"><a href="#1-7、-函数的嵌套调用" class="headerlink" title="1.7、 函数的嵌套调用"></a>1.7、 函数的嵌套调用</h3><p>​        在一个函数的调用另一个函数，这就是所谓的函数嵌套调用。接下来，我们通过一个示例来演示下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def func_one():</span><br><span class="line">    print(&#39;------func one start------&#39;)</span><br><span class="line">    print(&#39;这里是func_one执行的代码&#39;)</span><br><span class="line">    print(&#39;------func one end------&#39;)</span><br><span class="line"></span><br><span class="line">def func_two():</span><br><span class="line">    print(&#39;------func two start------&#39;)</span><br><span class="line">    func_one()</span><br><span class="line">    print(&#39;------func two end------&#39;)</span><br><span class="line"></span><br><span class="line">func_two()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        上述示例中，定义了两个函数func_one和func_two，其中func_two函数的内部调用了func_one函数。</p>
+<p>​        具体运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">------func two start------</span><br><span class="line">------func one start------</span><br><span class="line">这里是func_one执行的代码</span><br><span class="line">------func one end------</span><br><span class="line">------func two end------</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-8、-变量作用域"><a href="#1-8、-变量作用域" class="headerlink" title="1.8、 变量作用域"></a>1.8、 变量作用域</h3><h4 id="1-8-1、-LEGB原则"><a href="#1-8-1、-LEGB原则" class="headerlink" title="1.8.1、 LEGB原则"></a>1.8.1、 LEGB原则</h4><p>​        Python中，程序的变量并不是在那个位置都是阔以访问的，访问的权限决定于这个变量在那里赋值的。我们先来看一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; 10</span><br><span class="line">&gt;&gt;&gt; def test():</span><br><span class="line">...     a &#x3D; 20</span><br><span class="line">...     print(&#39;a的值是%d&#39;%a)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; test()</span><br><span class="line">a的值是20</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        上述的代码中有两个变量a，当在test函数中输出变量a的值时，为什么输出的是20，而不是10呢？其实，这就是因为变量作用域不同导致的。</p>
+<p>​        变量的作用域决定了在那一部分程序阔以访问那个特定的变量名称。Python变量的作用域一共分为四种。分别是：</p>
+<ul>
+<li>L(Local):  函数内的区域，包括局部变量和参数</li>
+<li>E(Enclosing): 外面的嵌套函数区域，常见的是闭包函数的外层函数</li>
+<li>G(Global): 全局作用域</li>
+<li>B(Bulit-in): 内建作用域</li>
+</ul>
+<p>Python中变量是采用 L -&gt; E -&gt; G -&gt; B 的规则查找，即Python检索变量的时候，会优先在局部作用域中查找。如果没找到，便会去局部外的区域找( 例如闭包 )， 在找不到就会去全局变量作用域中找，最后再去内建作用域中找。</p>
+<h4 id="1-8-2、-全局变量与局部变量"><a href="#1-8-2、-全局变量与局部变量" class="headerlink" title="1.8.2、 全局变量与局部变量"></a>1.8.2、 全局变量与局部变量</h4><p>​        变量的作用域始终是Python学习中一个必须理解掌握的环节，下面我们从局部变量和全局变量开始全面解析Python中变量的作用域。</p>
+<p>​        所谓的局部变量，指的是定义在函数内部的变量。即定义在def函数内部的变量，只能在def函数内部使用，它与函数外具有相同名称的其他变量没有任何关系。不同的函数，阔以定义相同的局部名称，并且各个函数内的变量不会产生影响。示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def test_one():</span><br><span class="line">...     number &#x3D; 100</span><br><span class="line">...     print(&#39;test_one函数中的number值为:%d&#39;%number)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; def test_two():</span><br><span class="line">...     number &#x3D; 200</span><br><span class="line">...     print(&#39;test_two函数中的number值为:%d&#39;%number)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; test_one()</span><br><span class="line">test_one函数中的number值为:100</span><br><span class="line">&gt;&gt;&gt; test_two()</span><br><span class="line">test_two函数中的number值为:200</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        局部变量只能在其声明的函数内部访问，而全局变量阔以在整个程序范围内部访问。全局变量是定义在函数外的变量，它拥有全局作用域。</p>
+<p>​        接下来用一个案例来区分全局变量与局部变量，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; 100       # 全局变量</span><br><span class="line">def sum(a, b):</span><br><span class="line">    result &#x3D; a+b   # 局部变量</span><br><span class="line">    print(&#39;函数内部的result的值为：%d&#39; %result)   # 这里的result值为局部变量</span><br><span class="line">    return result</span><br><span class="line"># 调用sum函数</span><br><span class="line">sum(100, 200)</span><br><span class="line">print(&#39;函数外的变量result是全局变量，等于：%d&#39; %result)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">函数内部的result的值为：300</span><br><span class="line">函数外的变量result是全局变量，等于：100</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-8-3、-global-和-nonlocal关键字"><a href="#1-8-3、-global-和-nonlocal关键字" class="headerlink" title="1.8.3、 global 和 nonlocal关键字"></a>1.8.3、 global 和 nonlocal关键字</h4><p>​        当内部作用域想修改外部作用域的变量时， 就要用到 global 和 nonlocal 关键字了。下面分别对 global 和 nonlocal 的作用进行介绍。</p>
+<ul>
+<li>global 关键字</li>
+</ul>
+<p>​       global关键字用来在函数或其他局部作用域中使用全局变量。但是如果不修改全局变量也阔以不使用global关键字。具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; 100</span><br><span class="line">&gt;&gt;&gt; def test():</span><br><span class="line">...     a+&#x3D;100</span><br><span class="line">...     print(a)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; test()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 2, in test</span><br><span class="line">UnboundLocalError: local variable &#39;a&#39; referenced before assignment</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        上述的程序报错，提示“在赋值前引用了局部变量 a ”。但是，前面我们明明是阔以阔以在函数中访问全局变量啊？这里为什么会出错呢？啊哦！</p>
+<p>​        这就是Python与其他语言的不同之处了， 在Python中，如果在函数内部对全局变量a进行修改，Python会把全局变量a当做局部变量， 而在进行“a+=100”之前，我们是没有声明局部变量a的， 因此，会出现上述的错误提示。</p>
+<p>​        为了使全局变量生效，我们阔以在函数内使用global关键字进行声明，下面，我们对程序进行修改，代码入下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; 100</span><br><span class="line">&gt;&gt;&gt; def test():</span><br><span class="line">...     global a</span><br><span class="line">...     a+&#x3D;100</span><br><span class="line">...     print(a)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; test()</span><br><span class="line">200</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        这下，程序不但没有报错，而且成功对全局变量a进行了修改。</p>
+<ul>
+<li><p>nonlocal关键字</p>
+<p>​    nonlocal 是在Python 3.0 中新增的关键字，Python 2.x 不提供支持。使用nonlocal关键字阔以在一个嵌套的函数中修改嵌套作用域中的变量。接下来，看一个例子：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def func():</span><br><span class="line">...     count &#x3D; 1</span><br><span class="line">...     def func_in():</span><br><span class="line">...             count &#x3D; 2</span><br><span class="line">...     func_in()</span><br><span class="line">...     print(count)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; func()</span><br><span class="line">1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        上面的程序中，在嵌套的func_in函数中，对变量count进行了赋值，同样会创建一个新的变量，而非使用count=1 语句中的count，如果要修改嵌套作用域中的count，就要使用nonlocal关键字了，示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def func():</span><br><span class="line">...     count &#x3D; 1</span><br><span class="line">...     def func_in():</span><br><span class="line">...     		nonlocal count</span><br><span class="line">...             count &#x3D; 2</span><br><span class="line">...     func_in()</span><br><span class="line">...     print(count)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; func()</span><br><span class="line">2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        上述的代码中，在func_in()函数中使用了nonlocal关键字，就会告诉Python在func函数中使用嵌套作用域中的变量count，因此对变量count进行修改时，会直接影响到嵌套作用域中的count变量值，程序最后也就输出2了！</p>
+<h4 id="！！！注意！！！"><a href="#！！！注意！！！" class="headerlink" title="！！！注意！！！"></a>！！！注意！！！</h4><p>​        使用global关键字修饰的变量之前是阔以不存在的，而使用nonlocal关键字修饰的变量在嵌套作用域中必须已经存在。</p>
+<h3 id="1-9-、-递归函数与匿名函数"><a href="#1-9-、-递归函数与匿名函数" class="headerlink" title="1.9 、 递归函数与匿名函数"></a>1.9 、 递归函数与匿名函数</h3><h4 id="1-9-1、-递归函数"><a href="#1-9-1、-递归函数" class="headerlink" title="1.9.1、 递归函数"></a>1.9.1、 递归函数</h4><p>​        通过前面的学习阔以知道，一个函数的内部是阔以调用其他函数的。如果在一个函数的内部调用了函数本身，那么这个函数我们就成为递归函数。</p>
+<p>​        接下来，通过一个计算阶乘 <em>n</em>！ = 1*2*…*n的例子来演示递归函数的使用，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 递归函数</span><br><span class="line">def func(count):</span><br><span class="line">    if count &#x3D;&#x3D;1:</span><br><span class="line">        result  &#x3D; 1</span><br><span class="line">    else:</span><br><span class="line">        result &#x3D; func(count-1)*count</span><br><span class="line">    return result</span><br><span class="line">number &#x3D; int(input(&#39;请输入一个正整数:&#39;))</span><br><span class="line">print(&quot;%d! &#x3D;&quot;%number, func(number))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">请输入一个正整数:5</span><br><span class="line">5! &#x3D; 120</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-9-2、-匿名函数"><a href="#1-9-2、-匿名函数" class="headerlink" title="1.9.2、 匿名函数"></a>1.9.2、 匿名函数</h4><p>​        简单的来说，匿名函数就是没有名称的函数，也就是不再使用def语句定义的函数。如果要声明匿名函数，则需要使用lambda关键字，匿名函数的声明格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lambda [arg1[,arg2,...argn]]: experssion</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        上述格式中，”[arg1[,arg2,…argn]]“表示的函数的参数，”expression“表示的是函数的表达式。例如，下面声明的匿名函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">add &#x3D; lambda a, b: a+b</span><br><span class="line"># 调用add函数</span><br><span class="line">print(&quot;运行结果：&quot;, add(11, 22))</span><br><span class="line">print(&quot;运行结果：&quot;, add(22, 22))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">运行结果： 33</span><br><span class="line">运行结果： 44</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        需要注意的是，使用lambda声明的匿名函数能接收任意数量的参数，但只能返回一个表达式的值。匿名函数不能直接调用print()函数，这是因为lambda需要一个表达式。</p>
+<p>​        在某些场景下，匿名函数非常有用。假设之前我们对两个数进行运算，如果希望声明的函数支持所有运算，阔以将匿名函数作为函数的参数进行传递。接下来，我们通过一个示例演示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 匿名函数-1</span><br><span class="line">def func(a,b,c, aa):</span><br><span class="line">    print(&quot;a &#x3D; %d&quot;%a)</span><br><span class="line">    print(&quot;b &#x3D; %d&quot;%b)</span><br><span class="line">    print(&quot;c &#x3D; %d&quot;%c)</span><br><span class="line">    print(&quot;result &#x3D; &quot;, aa(a,b))</span><br><span class="line">func(11,22,33, lambda x, y,i:x+y-i)</span><br><span class="line">print(&#39;-&#39;*20)</span><br><span class="line">func(11,22,33, lambda x, y,i:x-y+i)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">a &#x3D; 11</span><br><span class="line">b &#x3D; 22</span><br><span class="line">c &#x3D; 33</span><br><span class="line">result &#x3D;  0</span><br><span class="line">--------------------</span><br><span class="line">a &#x3D; 11</span><br><span class="line">b &#x3D; 22</span><br><span class="line">c &#x3D; 33</span><br><span class="line">result &#x3D;  22</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        除此之外，匿名函数还通常作为内置函数的参数来使用，接下来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 匿名函数-2</span><br><span class="line">students &#x3D; [</span><br><span class="line">    &#123;&#39;name&#39;:&#39;yangyang&#39;, &#39;age&#39;:&#39;23&#39;&#125;,</span><br><span class="line">    &#123;&#39;name&#39;:&#39;qunqun&#39;, &#39;age&#39;:&#39;24&#39;&#125;,</span><br><span class="line">    &#123;&#39;name&#39;:&#39;yangyangqunqun&#39;, &#39;age&#39;:&#39;47&#39;&#125;</span><br><span class="line">]</span><br><span class="line"># 按name排序</span><br><span class="line">students.sort(key&#x3D;lambda  x:x[&#39;name&#39;])</span><br><span class="line">print(&quot;按name排序后的结果为：&quot;, students)</span><br><span class="line"></span><br><span class="line"># 按age排序</span><br><span class="line">students.sort(key&#x3D;lambda  x:x[&#39;age&#39;])</span><br><span class="line">print(&quot;按name排序后的结果为：&quot;, students)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">按name排序后的结果为： [&#123;&#39;name&#39;: &#39;qunqun&#39;, &#39;age&#39;: &#39;24&#39;&#125;, &#123;&#39;name&#39;: &#39;yangyang&#39;, &#39;age&#39;: &#39;23&#39;&#125;, &#123;&#39;name&#39;: &#39;yangyangqunqun&#39;, &#39;age&#39;: &#39;47&#39;&#125;]</span><br><span class="line">按name排序后的结果为： [&#123;&#39;name&#39;: &#39;yangyang&#39;, &#39;age&#39;: &#39;23&#39;&#125;, &#123;&#39;name&#39;: &#39;qunqun&#39;, &#39;age&#39;: &#39;24&#39;&#125;, &#123;&#39;name&#39;: &#39;yangyangqunqun&#39;, &#39;age&#39;: &#39;47&#39;&#125;]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="！！！注意！！！-1"><a href="#！！！注意！！！-1" class="headerlink" title="！！！注意！！！"></a>！！！注意！！！</h4><p>​        与def定义的函数对比，lambda定义的函数有很多不同的地方。</p>
+<ol>
+<li>def定义的函数是有名称的，而lambda定义的函数没有函数名称，这是最明显的区别之一；</li>
+<li>lambda定义的函数通常会返回一个对象或者一个表达式，它不会将返回的结果赋值给一个变量，而def定义的函数就阔以；</li>
+<li>lambda定义的函数中只有一个表达式，函数体比def定义的函数简单很多，而def定义的函数的函数体是一个语句；</li>
+<li>lambda表达式的冒号后面只能有一个表达式，而def定义的函数则阔以有很多个；</li>
+<li>像if或for等语句不能用于lambda定义的函数中，而def定义的函数阔以；</li>
+<li>lambda一般用来定义简单的函数，而def定义复杂的函数；</li>
+<li>lambda定义的函数不能共享给别的程序调用，而def定义的函数则阔以被调用。</li>
+</ol>
+<h3 id="1-10、-日期时间函数"><a href="#1-10、-日期时间函数" class="headerlink" title="1.10、 日期时间函数"></a>1.10、 日期时间函数</h3><p>​        Python 有很多处理日期和时间的方法，其中转换日期格式是最为常见的，Python提供了time和calendar模块用于格式化日期和时间。</p>
+<h4 id="1-10-1、-日期函数"><a href="#1-10-1、-日期函数" class="headerlink" title="1.10.1、 日期函数"></a>1.10.1、 日期函数</h4><p>​        在Python中，通常有如下几种方式表示时间：</p>
+<ol>
+<li>时间戳</li>
+<li>格式化的时间字符串</li>
+<li>时间元祖（struct_time）</li>
+</ol>
+<h5 id="1-10-1-1、时间戳"><a href="#1-10-1-1、时间戳" class="headerlink" title="1.10.1.1、时间戳"></a>1.10.1.1、时间戳</h5><p>​    通常来讲，时间戳表示的是从1970年1月1日00:00:00 开始按秒计算的偏移量。返回时间戳的函数主要有time()，clock()等。</p>
+<p>​    接下来，通过一个案例来演示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import time   # 引入time模块</span><br><span class="line">ticks &#x3D; time.time()</span><br><span class="line">print(&quot;当前的时间戳为：&quot;, ticks)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行的结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">当前的时间戳为： 1608983774.0507226</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-10-1-2、格式化的时间字符串"><a href="#1-10-1-2、格式化的时间字符串" class="headerlink" title="1.10.1.2、格式化的时间字符串"></a>1.10.1.2、格式化的时间字符串</h5><p>​        我们阔以使用time模块的strftime函数来格式化日期，其定义的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">time.strftime(format[ ,t])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        接下来，通过一个案例来演示strftime函数的使用，示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import time   # 引入time模块</span><br><span class="line">ticks &#x3D; time.time()</span><br><span class="line">print(&quot;当前的时间戳为：&quot;, ticks)</span><br><span class="line"># 格式化成2020-12-26 20:05:49 形式</span><br><span class="line">print(time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime()))</span><br><span class="line"># 格式化成Sat Dec 26 20:07:55 2020 形式</span><br><span class="line">print(time.strftime(&quot;%a %b %d %H:%M:%S %Y&quot;, time.localtime()))</span><br><span class="line"># 将格式字符串转换成时间戳</span><br><span class="line">time_word &#x3D; &quot;Sat Dec 26 20:07:55 2020&quot;</span><br><span class="line">print(time.mktime(time.strptime(time_word, &quot;%a %b %d %H:%M:%S %Y&quot;)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">当前的时间戳为： 1608984646.544159</span><br><span class="line">2020-12-26 20:10:46</span><br><span class="line">Sat Dec 26 20:10:46 2020</span><br><span class="line">1608984475.0</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        为了大家更全面的了解日期格式化，接下来，通过一张表来列举Python中的时间日期格式化符号，表如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">格式化字符串</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%y</td>
+<td align="center">两位数的年份表示（00~99）</td>
+</tr>
+<tr>
+<td align="center">%Y</td>
+<td align="center">四位数的年份表示（000~9999）</td>
+</tr>
+<tr>
+<td align="center">%m</td>
+<td align="center">月份（01~12）</td>
+</tr>
+<tr>
+<td align="center">%d</td>
+<td align="center">月内中的一天</td>
+</tr>
+<tr>
+<td align="center">%H</td>
+<td align="center">24小时制小时数（0~23）</td>
+</tr>
+<tr>
+<td align="center">%I</td>
+<td align="center">12小时制小时数（01~12）</td>
+</tr>
+<tr>
+<td align="center">%M</td>
+<td align="center">分钟数（00~59）</td>
+</tr>
+<tr>
+<td align="center">%S</td>
+<td align="center">秒（00~59）</td>
+</tr>
+<tr>
+<td align="center">%a</td>
+<td align="center">本地简化的星期名称</td>
+</tr>
+<tr>
+<td align="center">%A</td>
+<td align="center">本地完整的星期名称</td>
+</tr>
+<tr>
+<td align="center">%b</td>
+<td align="center">本地简化的月份名称</td>
+</tr>
+<tr>
+<td align="center">%B</td>
+<td align="center">本地完整的月份名称</td>
+</tr>
+<tr>
+<td align="center">%c</td>
+<td align="center">本地相应的日期表示和时间表示</td>
+</tr>
+<tr>
+<td align="center">%j</td>
+<td align="center">年内的一天（001~336）</td>
+</tr>
+<tr>
+<td align="center">%p</td>
+<td align="center">本地的A.M.或者P.M.等价符</td>
+</tr>
+<tr>
+<td align="center">%U</td>
+<td align="center">一年中的星期数（00~53），星期一为星期的开始</td>
+</tr>
+<tr>
+<td align="center">%w</td>
+<td align="center">星期（0~6），星期日为星期的开始</td>
+</tr>
+<tr>
+<td align="center">%x</td>
+<td align="center">本地相应的星期表示</td>
+</tr>
+<tr>
+<td align="center">%X</td>
+<td align="center">本地相应的时间表示</td>
+</tr>
+<tr>
+<td align="center">%Z</td>
+<td align="center">当前的时区的名称</td>
+</tr>
+<tr>
+<td align="center">%%</td>
+<td align="center">%本身</td>
+</tr>
+</tbody></table>
+<h5 id="1-10-1-3、-时间元祖（struct-time）"><a href="#1-10-1-3、-时间元祖（struct-time）" class="headerlink" title="1.10.1.3、 时间元祖（struct_time）"></a>1.10.1.3、 时间元祖（struct_time）</h5><p>​        返回struct_time的函数主要有gmtime()、localtime()和striptime()，struct_time元祖共有九个元素，我们通过一张表来列出元祖中的这些元素，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">字段</th>
+<th align="center">含义</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">tm_year</td>
+<td align="center">4位数的年份</td>
+<td align="center">例如：2020</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">tm_mon</td>
+<td align="center">表示月份</td>
+<td align="center">1~12</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">tm_mday</td>
+<td align="center">表示天数</td>
+<td align="center">1~31</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">tm_hour</td>
+<td align="center">表示小时数</td>
+<td align="center">0~23</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">tm_min</td>
+<td align="center">表示分钟数</td>
+<td align="center">0~59</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">tm_sec</td>
+<td align="center">表示秒数</td>
+<td align="center">0~61（60和61是闰秒）</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">tm_wday</td>
+<td align="center">表示星期数</td>
+<td align="center">0~6（0是周一）</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">tm_yday</td>
+<td align="center">表示一年中的第几天</td>
+<td align="center">1~366（儒略历）</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">tm_isdst</td>
+<td align="center">决定是否为夏令时的标识符</td>
+<td align="center">允许的值为-1/0/1</td>
+</tr>
+</tbody></table>
+<p>​        另外，time模块还提供了很多其他的函数， 例如，sleep（）函数用于推迟调用线程的运行，接下来，通过一张表来列举time模块的其他函数，具体如下表：</p>
+<p>​    </p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>函数名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>time.altzone</td>
+<td>返回格林威治西部的夏令时地区的偏移秒数。如果该地区在格林威治东部会返回负值（如西欧，包括英国）。对夏令时启用地区才能使用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>time.asctime([tupletime])</td>
+<td>接收时间元祖并返回一个可读的形式为“Tue Dec 11 18:07:14 2020”(2020年 12月 11日 周二 18点 07分 14秒)的24个字符的字符串</td>
+</tr>
+<tr>
+<td>3</td>
+<td>time.clock()</td>
+<td>用于浮点数计算的秒数返回当前的CPU时间。用于衡量不同程序的耗时，比time.time()更有用</td>
+</tr>
+<tr>
+<td>4</td>
+<td>time.ctime([secs])</td>
+<td>作用相当于asctime(localtime(secs)),未提供参数相当于asctime()</td>
+</tr>
+<tr>
+<td>5</td>
+<td>time.gmtime([secs])</td>
+<td>将一个时间戳转换为UTC时区（0时区）的struct_time，可选的参数sec表示从1970-1-1以来的秒数。其默认值为time.time()，函数返回time.struct_time类型的对象。注：t.tm_isdst始终为0</td>
+</tr>
+<tr>
+<td>6</td>
+<td>time.localtime([secs])</td>
+<td>类似gmtime()，作用是格式化时间戳为本地的时间。 如果sec参数未输入，则以当前时间为转换标准。 DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时。</td>
+</tr>
+<tr>
+<td>7</td>
+<td>time.mktime(tupletime)</td>
+<td>执行与gmtime(), localtime()相反的操作，它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。如果输入的值不是一个合法的时间，将触发 OverflowError 或 ValueError。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>time.sleep(secs)</td>
+<td>推迟调用线程的运行，可通过参数secs指秒数，表示进程挂起的时间。</td>
+</tr>
+<tr>
+<td>9</td>
+<td>time.strftime(fmt[,tupletime])</td>
+<td>接收以时间元组，并返回以可读字符串表示的当地时间，格式由参数 format 决定。</td>
+</tr>
+<tr>
+<td>10</td>
+<td>time.strptime(str,fmt=’%a %b %d %H:%M:%S:%Y’)</td>
+<td>根据指定的格式把一个时间字符串解析为时间元组。</td>
+</tr>
+<tr>
+<td>11</td>
+<td>time.time()</td>
+<td>返回当前时间的时间戳（1970纪元后经过的浮点秒数）。</td>
+</tr>
+<tr>
+<td>12</td>
+<td>time.tzset()</td>
+<td>根据环境变量TZ重新初始化时间相关设置。标准TZ环境变量格式：std offset [dst [offset [,start[/time], end[/time]]]]</td>
+</tr>
+</tbody></table>
+<p>​        除此之外，time模块还包含了以下两个非常重要的属性具体如下表：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>time.timezone</td>
+<td>是当时时区（未启动夏令时）距离格林威治的偏移秒数（&gt;0,美洲；&lt;=0，大部分欧洲，亚洲，非洲）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>time.tzname</td>
+<td>包含一对根据情况的不同而不的字符串，分别是带夏令时的本地时区名称和不带名称的</td>
+</tr>
+</tbody></table>
+<h4 id="1-10-2、-日历函数"><a href="#1-10-2、-日历函数" class="headerlink" title="1.10.2、 日历函数"></a>1.10.2、 日历函数</h4><p>​        calendar模块中提供了非常多的方法来处理年历和月历。例如2020年12月份的日历具体代码实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import calendar</span><br><span class="line"></span><br><span class="line">calendar_march &#x3D; calendar.month(2020,12)</span><br><span class="line">print(&quot;以下时2020年12月份的日历：&quot;)</span><br><span class="line">print(calendar_march)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">以下时2020年12月份的日历：</span><br><span class="line">   December 2020</span><br><span class="line">Mo Tu We Th Fr Sa Su</span><br><span class="line">    1  2  3  4  5  6</span><br><span class="line"> 7  8  9 10 11 12 13</span><br><span class="line">14 15 16 17 18 19 20</span><br><span class="line">21 22 23 24 25 26 27</span><br><span class="line">28 29 30 31</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        除此之外， calendar模块还提供了很多内置函数，具体如下表：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>calendar.calendar(year,w=2,I=1,c=6,m=3)</td>
+<td>以多行字符串形式返回一年的日历，<code>w</code>每个单元格宽度，默认2，内部已做处理，最小宽度为2，<code>l</code>每列换l行，默认为1，内部已做处理，至少换行1行，<code>c</code>表示月与月之间的间隔宽度，默认为6，内部已做处理，最小宽度为2，<code>m</code>表示将12个月分为m列</td>
+</tr>
+<tr>
+<td>2</td>
+<td>calendar.firstweekday()</td>
+<td>返回一周的第一天，0是星期一，…，6为星期日</td>
+</tr>
+<tr>
+<td>3</td>
+<td>calendar.isleap(year)</td>
+<td>判断指定是否是闰年，闰年为True，平年为False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>calendar.ieapdays(y1,y2)</td>
+<td>返回<code>y1</code>与<code>y2</code>年份之间的闰年数量，<code>y1</code>与<code>y2</code>皆为年份。包括起始年，不包括结束年：</td>
+</tr>
+<tr>
+<td>5</td>
+<td>calendar.month(year,month,w=2,I=1)</td>
+<td>返回一个月的日历的多行文本字符串。<code>year</code>指定年份，<code>month</code>指定月份，<code>w</code>每个单元格宽度，默认0，内部已做处理，最小宽度为2，<code>l</code>每列换l行，默认为0，内部已做处理，至少换行1行</td>
+</tr>
+<tr>
+<td>6</td>
+<td>calendar.monthcalendar(year,month)</td>
+<td>返回一个月中天数列表(不是当前月份的天数为0)，按周划分，为一个二维数组。包括月份开始那周的所有日期和月份结束那周的所有日期</td>
+</tr>
+<tr>
+<td>7</td>
+<td>calendar.monthrange(year, month)</td>
+<td>返回一个由一个月第一个天的星期与当前月的天数组成的元组</td>
+</tr>
+<tr>
+<td>8</td>
+<td>calendar.prcal(year,w=2,I=1,c=6,m=3)</td>
+<td>打印一年的日历，<code>w</code>每个单元格宽度，默认0，内部已做处理，最小宽度为2，<code>l</code>每列换l行，默认为0，内部已做处理，至少换行1行，<code>c</code>表示月与月之间的间隔宽度，默认为6，内部已做处理，最小宽度为2，<code>m</code>表示将12个月分为m列</td>
+</tr>
+<tr>
+<td>9</td>
+<td>calendar.prmonth(year,month,w=2,I=1)</td>
+<td>打印一个月的日历，<code>theyear</code>指定年份，<code>themonth</code>指定月份，<code>w</code>每个单元格宽度，默认0，内部已做处理，最小宽度为2，<code>l</code>每列换l行，默认为0，内部已做处理，至少换行1行</td>
+</tr>
+<tr>
+<td>10</td>
+<td>calendar.setfirstweekday(firstweekday)</td>
+<td>指定一周的第一天，0是星期一，…，6为星期日</td>
+</tr>
+<tr>
+<td>11</td>
+<td>calendar.timegm(tupletime)</td>
+<td>该函数将一个元组时间变成时间戳。</td>
+</tr>
+<tr>
+<td>12</td>
+<td>calendar.weekday(year,month, day)</td>
+<td>获取指定日期为星期几</td>
+</tr>
+</tbody></table>
+<h3 id="1-11、-随机数函数"><a href="#1-11、-随机数函数" class="headerlink" title="1.11、 随机数函数"></a>1.11、 随机数函数</h3><p>​        Python中的random模块用于生成随机数，它提供了很多函数。接下来，针对常见的随机数函数进行讲解，具体如下：</p>
+<h4 id="1-11-1、-random-random"><a href="#1-11-1、-random-random" class="headerlink" title="1.11.1、 random.random()"></a>1.11.1、 random.random()</h4><p>​        返回0-1之间的浮点数N，范围为0&lt;= N &lt;=1.0。</p>
+<p>​        接下来，通过一个示例来演示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"># 生成第一个随机数</span><br><span class="line">print(&#39;random():&#39;, random.random())</span><br><span class="line"># 生成第二个随机数</span><br><span class="line">print(&#39;random():&#39;, random.random())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">random(): 0.9414705808484405</span><br><span class="line">random(): 0.5730106704826693</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-11-2、-random-uniform-a-b"><a href="#1-11-2、-random-uniform-a-b" class="headerlink" title="1.11.2、 random.uniform(a,b)"></a>1.11.2、 random.uniform(a,b)</h4><p>​        返回a与b之间的随机浮点数N，范围为[a,b]。 如果a的值小于b的值，则生成的随机浮点数N的取值范围为：a&lt;=  N  &lt;=b; 如果a的值大于b的值，则生成的随机浮点数N的取值范围为：b&lt;= N &lt;=a。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">print(&#39;random():&#39;, random.uniform(50,100))</span><br><span class="line">print(&#39;random():&#39;, random.uniform(100,50))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">random(): 94.65991375247847</span><br><span class="line">random(): 60.57936076593128</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-11-3、-random-randint-a-b"><a href="#1-11-3、-random-randint-a-b" class="headerlink" title="1.11.3、 random.randint(a,b)"></a>1.11.3、 random.randint(a,b)</h4><p>​    返回一个随机整数N，N的取值范围为：a&lt;= N &lt;=b。 需要注意的是，a和b的取值必须是整数，并且a的值一定要小于b的值， 示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"># 生成随机数的范围为[12,20]</span><br><span class="line">print(&#39;random.randint:&#39;, random.randint(12,20))</span><br><span class="line"># 生成随机数的范围为[20,20], 结果永远为20</span><br><span class="line">print(&#39;random.randint:&#39;, random.randint(12,20))</span><br><span class="line"></span><br><span class="line">#print(&#39;random.randint:&#39;, random.randint(20,12))# 该语句是错误的，a的值必须小于b</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">random.randint: 16</span><br><span class="line">random.randint: 19</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-11-4、-random-randrange-start-stop-step"><a href="#1-11-4、-random-randrange-start-stop-step" class="headerlink" title="1.11.4、 random.randrange([start], stop[,step])"></a>1.11.4、 random.randrange([start], stop[,step])</h4><p>​        返回指定递增基数集合中的一个随机数，基数默认值为1。其中，<code>start</code>参数用于指定范围内的开始值，其包含在范围内；<code>end</code>参数用于指定范围内的结束值，其不包含在范围内；<code>step</code>表示递增的基数。</p>
+<p>​        上述这些参数必须为整数。例如：random.randrange(10, 100, 2)相当于从[10,12,14……96,98]中获取一个随机数。</p>
+<h4 id="1-11-5、-random-choice-sequence"><a href="#1-11-5、-random-choice-sequence" class="headerlink" title="1.11.5、 random.choice(sequence)"></a>1.11.5、 random.choice(sequence)</h4><p>​        从sequence中返回一个随机的元素。其中，sequence参数可以是列表、元祖或者字符串。示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">print(&#39;random.choice&#39;, random.choice(&#39;洋群满满&#39;))</span><br><span class="line">print(&#39;random.choice&#39;, random.choice([&#39;洋&#39;,&#39;群满&#39;,&#39;满&#39;]))</span><br><span class="line">print(&#39;random.choice&#39;, random.choice((&#39;洋群&#39;, &#39;满满&#39;)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">random.choice: 满</span><br><span class="line">random.choice: 洋</span><br><span class="line">random.choice: 洋群</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-11-6、-random-shuffle-x-random"><a href="#1-11-6、-random-shuffle-x-random" class="headerlink" title="1.11.6、 random.shuffle(x,[,random])"></a>1.11.6、 random.shuffle(x,[,random])</h4><p>​        用于将列表中的元素打乱顺序，俗称为<code>洗牌</code>。示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">demo_list &#x3D; [&#39;python&#39;,&#39;洋群满满&#39;, &#39;java&#39;,&#39;C&#39;, &#39;javascript&#39;]</span><br><span class="line">random.shuffle(demo_list)</span><br><span class="line">print(demo_list)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">[&#39;python&#39;, &#39;C&#39;, &#39;洋群满满&#39;, &#39;java&#39;, &#39;javascript&#39;]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-11-7、-random-sample-sequence-k"><a href="#1-11-7、-random-sample-sequence-k" class="headerlink" title="1.11.7、 random.sample(sequence, k)"></a>1.11.7、 random.sample(sequence, k)</h4><p>​        从指定序列中随机获取K个元素作为一个片段返回，sample函数不会修改原有序列。示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">num_list &#x3D; [1,2,3,4,5,6,7,8,9,10]</span><br><span class="line">slice &#x3D; random.sample(num_list,5) # 从num_list中随机获取5个元素，作为一个片段返回</span><br><span class="line">print(slice)</span><br><span class="line">print(num_list) # 原有的序列顺序未改变</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:&#x2F;Desktop&#x2F;test&#x2F;demo.py</span><br><span class="line">[6, 3, 1, 5, 9]</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+	
+	  <div>
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>洋群满满
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yangyangmm.cn/2021/01/06/Python%E5%87%BD%E6%95%B0/" title="Python函数">https://yangyangmm.cn/2021/01/06/Python函数/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/04/Hexo-GitHub/" rel="prev" title="Hexo+GitHub">
+      <i class="fa fa-chevron-left"></i> Hexo+GitHub
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">Python函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%E3%80%81"><span class="nav-number">1.0.1.</span> <span class="nav-text">前言、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.1、什么是函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E3%80%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%B0%83%E7%94%A8"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.2、函数的定义和调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1%E3%80%81%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">1.2.1、定义函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2%E3%80%81%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">1.2.2、调用函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E3%80%81-%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.3、 函数的参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1%E3%80%81-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E4%BC%A0%E9%80%92"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">1.3.1、 函数参数的传递</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2%E3%80%81-%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">1.3.2、 默认参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3%E3%80%81-%E4%B8%8D%E5%AE%9A%E9%95%BF%E5%8F%82%E6%95%B0"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">1.3.3、 不定长参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E3%80%81-%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.4、 函数的返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5%E3%80%81-%E5%87%BD%E6%95%B0%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.6.</span> <span class="nav-text">1.5、 函数的四种类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1%E3%80%81-%E5%87%BD%E6%95%B0%E6%97%A0%E5%8F%82%E6%95%B0%EF%BC%8C%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">1.5.1、 函数无参数，无返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2%E3%80%81-%E5%87%BD%E6%95%B0%E6%97%A0%E5%8F%82%E6%95%B0%EF%BC%8C%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">1.5.2、 函数无参数，有返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-3%E3%80%81-%E5%87%BD%E6%95%B0%E6%9C%89%E5%8F%82%E6%95%B0%EF%BC%8C%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">1.5.3、 函数有参数，无返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-4%E3%80%81-%E5%87%BD%E6%95%B0%E6%9C%89%E5%8F%82%E6%95%B0%EF%BC%8C%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.0.6.4.</span> <span class="nav-text">1.5.4、 函数有参数，有返回值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6%E3%80%81-%E5%87%BD%E6%95%B0%E6%A1%88%E4%BE%8B%E2%80%94%E2%80%94-%E5%90%8D%E7%89%87%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">1.0.7.</span> <span class="nav-text">1.6、 函数案例——-名片管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-1%E3%80%81-%E8%BE%93%E5%87%BA%E5%90%8D%E7%89%87%E7%AE%A1%E7%90%86%E5%99%A8%E7%9A%84%E8%8F%9C%E5%8D%95"><span class="nav-number">1.0.7.1.</span> <span class="nav-text">1.6.1、 输出名片管理器的菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-2%E3%80%81%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">1.0.7.2.</span> <span class="nav-text">1.6.2、获取用户输入的信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7%E3%80%81-%E5%87%BD%E6%95%B0%E7%9A%84%E5%B5%8C%E5%A5%97%E8%B0%83%E7%94%A8"><span class="nav-number">1.0.8.</span> <span class="nav-text">1.7、 函数的嵌套调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8%E3%80%81-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.0.9.</span> <span class="nav-text">1.8、 变量作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-1%E3%80%81-LEGB%E5%8E%9F%E5%88%99"><span class="nav-number">1.0.9.1.</span> <span class="nav-text">1.8.1、 LEGB原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-2%E3%80%81-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.9.2.</span> <span class="nav-text">1.8.2、 全局变量与局部变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-3%E3%80%81-global-%E5%92%8C-nonlocal%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.0.9.3.</span> <span class="nav-text">1.8.3、 global 和 nonlocal关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%81%EF%BC%81%EF%BC%81%E6%B3%A8%E6%84%8F%EF%BC%81%EF%BC%81%EF%BC%81"><span class="nav-number">1.0.9.4.</span> <span class="nav-text">！！！注意！！！</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-%E3%80%81-%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.10.</span> <span class="nav-text">1.9 、 递归函数与匿名函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-1%E3%80%81-%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.10.1.</span> <span class="nav-text">1.9.1、 递归函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-2%E3%80%81-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.10.2.</span> <span class="nav-text">1.9.2、 匿名函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%81%EF%BC%81%EF%BC%81%E6%B3%A8%E6%84%8F%EF%BC%81%EF%BC%81%EF%BC%81-1"><span class="nav-number">1.0.10.3.</span> <span class="nav-text">！！！注意！！！</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10%E3%80%81-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.11.</span> <span class="nav-text">1.10、 日期时间函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-10-1%E3%80%81-%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.11.1.</span> <span class="nav-text">1.10.1、 日期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-1-1%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3"><span class="nav-number">1.0.11.1.1.</span> <span class="nav-text">1.10.1.1、时间戳</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-1-2%E3%80%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.0.11.1.2.</span> <span class="nav-text">1.10.1.2、格式化的时间字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-1-3%E3%80%81-%E6%97%B6%E9%97%B4%E5%85%83%E7%A5%96%EF%BC%88struct-time%EF%BC%89"><span class="nav-number">1.0.11.1.3.</span> <span class="nav-text">1.10.1.3、 时间元祖（struct_time）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-10-2%E3%80%81-%E6%97%A5%E5%8E%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.11.2.</span> <span class="nav-text">1.10.2、 日历函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-11%E3%80%81-%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.12.</span> <span class="nav-text">1.11、 随机数函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-1%E3%80%81-random-random"><span class="nav-number">1.0.12.1.</span> <span class="nav-text">1.11.1、 random.random()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-2%E3%80%81-random-uniform-a-b"><span class="nav-number">1.0.12.2.</span> <span class="nav-text">1.11.2、 random.uniform(a,b)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-3%E3%80%81-random-randint-a-b"><span class="nav-number">1.0.12.3.</span> <span class="nav-text">1.11.3、 random.randint(a,b)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-4%E3%80%81-random-randrange-start-stop-step"><span class="nav-number">1.0.12.4.</span> <span class="nav-text">1.11.4、 random.randrange([start], stop[,step])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-5%E3%80%81-random-choice-sequence"><span class="nav-number">1.0.12.5.</span> <span class="nav-text">1.11.5、 random.choice(sequence)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-6%E3%80%81-random-shuffle-x-random"><span class="nav-number">1.0.12.6.</span> <span class="nav-text">1.11.6、 random.shuffle(x,[,random])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11-7%E3%80%81-random-sample-sequence-k"><span class="nav-number">1.0.12.7.</span> <span class="nav-text">1.11.7、 random.sample(sequence, k)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="洋群满满"
+      src="/images/title.jpg">
+  <p class="site-author-name" itemprop="name">洋群满满</p>
+  <div class="site-description" itemprop="description">这里是属于羊群满满的乐园！ 		   欢迎你们的到来~~~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yangyang1-0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yangyang1-0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_45278644" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_45278644" rel="noopener" target="_blank"><i class="fab fa-codiepie fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 2020-12 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洋群满满</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">47k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">43 分钟</span>
+</div>
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '5aRex5dipFu5xw6Ae8R1PYI2-gzGzoHsz',
+      appKey     : 'k42hTn3SntmDkBgtOrJ1NeR4',
+      placeholder: "来啊,快活啊！O(∩_∩)O",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":300,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
