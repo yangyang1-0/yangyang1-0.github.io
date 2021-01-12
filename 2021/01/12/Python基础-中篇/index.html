@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/resizeApi32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/resizeApi16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-corner-indicator.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yangyangmm.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这是对Python基础的中期讲解！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础------中篇">
+<meta property="og:url" content="https://yangyangmm.cn/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E4%B8%AD%E7%AF%87/index.html">
+<meta property="og:site_name" content="洋群满满">
+<meta property="og:description" content="这是对Python基础的中期讲解！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/98083ad42addae13b1abfc3595262333.png">
+<meta property="article:published_time" content="2021-01-12T09:12:04.000Z">
+<meta property="article:modified_time" content="2021-01-12T09:14:17.510Z">
+<meta property="article:author" content="洋群满满">
+<meta property="article:tag" content="Python | Python基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/98083ad42addae13b1abfc3595262333.png">
+
+<link rel="canonical" href="https://yangyangmm.cn/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E4%B8%AD%E7%AF%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python基础------中篇 | 洋群满满</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="洋群满满" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/yangyang1-0" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">洋群满满</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yangyangmm.cn/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E4%B8%AD%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/title.jpg">
+      <meta itemprop="name" content="洋群满满">
+      <meta itemprop="description" content="这里是属于羊群满满的乐园！ 		   欢迎你们的到来~~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="洋群满满">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python基础------中篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-12 17:12:04 / 修改时间：17:14:17" itemprop="dateCreated datePublished" datetime="2021-01-12T17:12:04+08:00">2021-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-Python%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Python | Python基础</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E4%B8%AD%E7%AF%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E4%B8%AD%E7%AF%87/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+            <div class="post-description">这是对Python基础的中期讲解！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a> 
+
+
+
+
+
+<h1 id="Python——中篇"><a href="#Python——中篇" class="headerlink" title="Python——中篇"></a>Python——中篇</h1><h3 id="1、-字符串的常用方法"><a href="#1、-字符串的常用方法" class="headerlink" title="1、 字符串的常用方法"></a>1、 字符串的常用方法</h3><h4 id="1-1、-拼接"><a href="#1-1、-拼接" class="headerlink" title="1.1、  拼接"></a>1.1、  拼接</h4><h5 id="1-1-1、-示例1-常用-："><a href="#1-1-1、-示例1-常用-：" class="headerlink" title="1.1.1、 示例1(常用)："></a>1.1.1、 示例1(常用)：</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">b = <span class="string">&quot;爱python&quot;</span></span><br><span class="line">c = a + b</span><br><span class="line">print(c)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满爱python</span><br></pre></td></tr></table></figure>
+
+<p>​        注意：如果是str和number则需要对number转换，通过str(number)转换。</p>
+<h5 id="1-1-2、-示例2-极少使用-："><a href="#1-1-2、-示例2-极少使用-：" class="headerlink" title="1.1.2、 示例2(极少使用)："></a>1.1.2、 示例2(极少使用)：</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span> <span class="string">&quot;爱python&quot;</span></span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满爱python</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2、-切片-截取"><a href="#1-2、-切片-截取" class="headerlink" title="1.2、  切片(截取)"></a>1.2、  切片(截取)</h4><p>​        用法灵活，需要对上一篇的索引已有深刻的理解。</p>
+<h5 id="1-2-1、-语法"><a href="#1-2-1、-语法" class="headerlink" title="1.2.1、 语法"></a>1.2.1、 语法</h5><blockquote>
+<p>string[start : end : step]<br>注意：<strong>左开右闭</strong></p>
+</blockquote>
+<h5 id="1-2-2、-示例1：截取python"><a href="#1-2-2、-示例1：截取python" class="headerlink" title="1.2.2、 示例1：截取python"></a>1.2.2、 示例1：截取python</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满4爱python&quot;</span></span><br><span class="line">b = a[<span class="number">3</span>:]</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; python</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-3、-示例2-截取洋满真爱"><a href="#1-2-3、-示例2-截取洋满真爱" class="headerlink" title="1.2.3、 示例2: 截取洋满真爱"></a>1.2.3、 示例2: 截取洋满真爱</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满真可爱&quot;</span></span><br><span class="line">b = a[::<span class="number">2</span>] <span class="comment"># 或者 b = a[0::2]</span></span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋满真爱</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3、-获取字符串长度"><a href="#1-3、-获取字符串长度" class="headerlink" title="1.3、  获取字符串长度"></a>1.3、  获取字符串长度</h4><p>​        获取字符串长度由于比较少用，洋群满满就不写了，需要了解的可以私聊。</p>
+<h5 id="1-3-1、-语法"><a href="#1-3-1、-语法" class="headerlink" title="1.3.1、 语法"></a>1.3.1、 语法</h5><blockquote>
+<p>len(string)</p>
+</blockquote>
+<h5 id="1-3-2、-示例—len-string"><a href="#1-3-2、-示例—len-string" class="headerlink" title="1.3.2、 示例—len(string)"></a>1.3.2、 示例—len(string)</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满爱python&quot;</span></span><br><span class="line">b = <span class="built_in">len</span>(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 11</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4、-分割字符串"><a href="#1-4、-分割字符串" class="headerlink" title="1.4、  分割字符串"></a>1.4、  分割字符串</h4><p>​        通过split分割字符串,常用于将字符串转换成列表。</p>
+<h5 id="1-4-1、-语法"><a href="#1-4-1、-语法" class="headerlink" title="1.4.1、 语法"></a>1.4.1、 语法</h5><blockquote>
+<p>str.split(sep,maxsplit)<br>str.rsplit(sep,maxsplit)<br>- sep：分割符，默认为None。<br>- maxsplit：最大分割数，默认无限制。<br>- split：从左往右分割。<br>- rsplit：从右往左分割 。</p>
+</blockquote>
+<h5 id="1-4-2、-示例1—split"><a href="#1-4-2、-示例1—split" class="headerlink" title="1.4.2、 示例1—split"></a>1.4.2、 示例1—split</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满,爱,python&quot;</span></span><br><span class="line">b = a.split(<span class="string">&quot;,&quot;</span>,<span class="number">1</span>)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [&#x27;洋群满满&#x27;, &#x27;爱,python&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-4-3、-示例2—rsplit"><a href="#1-4-3、-示例2—rsplit" class="headerlink" title="1.4.3、 示例2—rsplit"></a>1.4.3、 示例2—rsplit</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满,爱,python&quot;</span></span><br><span class="line">b = a.rsplit(<span class="string">&quot;,&quot;</span>,<span class="number">1</span>)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [&#x27;洋群满满,爱&#x27;, &#x27;python&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-5、-合并字符串"><a href="#1-5、-合并字符串" class="headerlink" title="1.5、  合并字符串"></a>1.5、  合并字符串</h4><p>​        可以将<strong>可迭代对象</strong>通过<strong>join()**方法</strong>合并成字符串<strong>。（可迭代对象：后续洋群满满会在高级部分进行讲解，并自定义我们想要的可迭代对象）在这里大家可以通俗的理解为可迭代对象就是</strong>str,dict,list,tuple**。</p>
+<h5 id="1-5-1、-语法"><a href="#1-5-1、-语法" class="headerlink" title="1.5.1、 语法"></a>1.5.1、 语法</h5><blockquote>
+<p>str.join(iterable)</p>
+</blockquote>
+<h5 id="1-5-2、-示例1-join"><a href="#1-5-2、-示例1-join" class="headerlink" title="1.5.2、 示例1(join)"></a>1.5.2、 示例1(join)</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;爱&quot;</span>, <span class="string">&quot;python&quot;</span>]</span><br><span class="line">b = <span class="string">&quot;&quot;</span>.join(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满爱python</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-5-3、-示例2-不常用"><a href="#1-5-3、-示例2-不常用" class="headerlink" title="1.5.3、 示例2(不常用)"></a>1.5.3、 示例2(不常用)</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;洋洋爱&quot;</span>: <span class="string">&quot;当然&quot;</span>, <span class="string">&quot;群群&quot;</span>: <span class="string">&quot;是的&quot;</span>&#125;</span><br><span class="line">b = <span class="string">&quot;&quot;</span>.join(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋洋爱群群</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-6、-检测子字符串在字符串的索引"><a href="#1-6、-检测子字符串在字符串的索引" class="headerlink" title="1.6、  检测子字符串在字符串的索引"></a>1.6、  检测子字符串在字符串的索引</h4><p>​        <strong>ps</strong>：当子字符串不存在时，会报错！可以利用这个特性来<strong>判断子字符串是否存在</strong>。</p>
+<h5 id="1-6-1、-语法"><a href="#1-6-1、-语法" class="headerlink" title="1.6.1、 语法"></a>1.6.1、 语法</h5><blockquote>
+<p>str.index(sub[, start[, end]]) -&gt; int<br>- sub：要检测的子字符串。<br>- start：检测的开始位置索引，默认从头开始。<br>- end：检测的结束位置索引，默认到最后。<br>可灵活使用！</p>
+</blockquote>
+<h5 id="1-6-2、-示例1"><a href="#1-6-2、-示例1" class="headerlink" title="1.6.2、 示例1"></a>1.6.2、 示例1</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋洋是群群的呀&quot;</span></span><br><span class="line">b = a.index(<span class="string">&quot;洋洋&quot;</span>)</span><br><span class="line"><span class="comment"># b = a.index(&quot;洋洋&quot;, 0, -1)</span></span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-6-3、-示例2"><a href="#1-6-3、-示例2" class="headerlink" title="1.6.3、 示例2"></a>1.6.3、 示例2</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋洋是群群的呀&quot;</span></span><br><span class="line">b = a.index(<span class="string">&quot;洋群&quot;</span>)</span><br><span class="line"><span class="comment"># b = a.index(&quot;洋群&quot;, 0, -1)</span></span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">抛出异常 ValueError</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-7、-指定字符串开头或者结尾"><a href="#1-7、-指定字符串开头或者结尾" class="headerlink" title="1.7、  指定字符串开头或者结尾"></a>1.7、  指定字符串开头或者结尾</h4><p><strong>startswith()**指定</strong>某个字符串开头<strong>。如果</strong>是<strong>，返回</strong>True<strong>，</strong>反之<strong>返回</strong>False<strong>。<br>**endswith()**指定</strong>某个字符串结尾<strong>。如果</strong>是<strong>，返回</strong>True<strong>，</strong>反之<strong>返回</strong>False**。</p>
+<h5 id="1-7-1、语法"><a href="#1-7-1、语法" class="headerlink" title="1.7.1、语法"></a>1.7.1、语法</h5><blockquote>
+<p>str.startswith(prefix[, start[, end]]) -&gt; bool<br>str.endswith(suffix[, start[, end]]) -&gt; bool<br>- prefix/suffix: 要检测的子字符串。<br>- start: 检测的开始位置索引, 默认从头开始。<br>- end: 检测的结束位置索引, 默认到最后。</p>
+</blockquote>
+<h5 id="1-7-2、-示例1"><a href="#1-7-2、-示例1" class="headerlink" title="1.7.2、 示例1"></a>1.7.2、 示例1</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋洋是群群的呀&quot;</span></span><br><span class="line">b = a.startswith(<span class="string">&quot;洋洋&quot;</span>)</span><br><span class="line"><span class="comment"># b = a.startswith(&quot;洋洋&quot;,0,-1)</span></span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-7-3、-示例2"><a href="#1-7-3、-示例2" class="headerlink" title="1.7.3、 示例2"></a>1.7.3、 示例2</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋洋是群群呀&quot;</span></span><br><span class="line">b = a.endswith(<span class="string">&quot;群群&quot;</span>)</span><br><span class="line"><span class="comment"># b = a.endswith(&quot;群群&quot;,0,-1)  输出Ture</span></span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; False</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        思考一下为什么b=a.endswith(“洋群满满”,0,-1)的时候输出True, 洋洋会在下篇进行解释</p>
+<h4 id="1-8、-字符串转全部大写"><a href="#1-8、-字符串转全部大写" class="headerlink" title="1.8、  字符串转全部大写"></a>1.8、  字符串转全部大写</h4><h5 id="1-8-1、-语法"><a href="#1-8-1、-语法" class="headerlink" title="1.8.1、 语法"></a>1.8.1、 语法</h5><blockquote>
+<p>str.upper()</p>
+</blockquote>
+<h5 id="1-8-2、-示例—upper"><a href="#1-8-2、-示例—upper" class="headerlink" title="1.8.2、 示例—upper"></a>1.8.2、 示例—upper</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;abc&quot;</span></span><br><span class="line">b = a.upper()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; ABC</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-9、-字符串转全部小写"><a href="#1-9、-字符串转全部小写" class="headerlink" title="1.9、  字符串转全部小写"></a>1.9、  字符串转全部小写</h4><h5 id="1-9-1、-语法"><a href="#1-9-1、-语法" class="headerlink" title="1.9.1、 语法"></a>1.9.1、 语法</h5><blockquote>
+<p>str.lower()</p>
+</blockquote>
+<h5 id="1-9-2、-示例—lower"><a href="#1-9-2、-示例—lower" class="headerlink" title="1.9.2、 示例—lower"></a>1.9.2、 示例—lower</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;ABC&quot;</span></span><br><span class="line">b = a.lower()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; abc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-10、-字符串格式化"><a href="#1-10、-字符串格式化" class="headerlink" title="1.10、  字符串格式化"></a>1.10、  字符串格式化</h4><h5 id="1-10-1、-语法"><a href="#1-10-1、-语法" class="headerlink" title="1.10.1、 语法"></a>1.10.1、 语法</h5><blockquote>
+<p>① %<br>② format()<br>③ f-string<br>注意：第一种方式官方并不太建议, 详细请看<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">官方文档</a><br><img src="https://img-blog.csdnimg.cn/img_convert/98083ad42addae13b1abfc3595262333.png" alt="img"><br>第三种f-string格式化方式需要python3.7以上的版本!!!</p>
+</blockquote>
+<h5 id="1-10-2、-示例—"><a href="#1-10-2、-示例—" class="headerlink" title="1.10.2、 示例—%"></a>1.10.2、 示例—%</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">b = <span class="string">&quot;hello %s&quot;</span> % a</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; hello 洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-10-3、-示例—-format"><a href="#1-10-3、-示例—-format" class="headerlink" title="1.10.3、 示例— format()"></a>1.10.3、 示例— format()</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">b = <span class="string">&quot;hello &#123;&#125;&quot;</span>.<span class="built_in">format</span>(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; hello 洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-10-4、-示例—-f-string"><a href="#1-10-4、-示例—-f-string" class="headerlink" title="1.10.4、 示例— f-string"></a>1.10.4、 示例— f-string</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">b = <span class="string">f&quot;hello <span class="subst">&#123;a&#125;</span>&quot;</span></span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; hello 洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-11、-编解码"><a href="#1-11、-编解码" class="headerlink" title="1.11、  编解码"></a>1.11、  编解码</h4><h5 id="1-11-1、-概念"><a href="#1-11-1、-概念" class="headerlink" title="1.11.1、 概念"></a>1.11.1、 概念</h5><blockquote>
+<p>编码: 将字符串编码成字节。<br>解码: 将字节解码成字符串。</p>
+</blockquote>
+<h5 id="1-11-2、-语法"><a href="#1-11-2、-语法" class="headerlink" title="1.11.2、 语法"></a>1.11.2、 语法</h5><blockquote>
+<p>编码: str.encode(encoding,errors)<br>解码: str.decode(encoding,errors)<br>- encoding: 需要编码或者解码的格式, 一般为utf-8, 或者gbk。<br>- errors: 错误的处理方式, 默认是strict, 遇到非法字符抛出异常, 默认即可。<br>后续洋群满满会专门加一篇ASCII和Unicode和UTF-8和gbk的文章。</p>
+</blockquote>
+<h5 id="1-11-3、-示例—encode"><a href="#1-11-3、-示例—encode" class="headerlink" title="1.11.3、 示例—encode"></a>1.11.3、 示例—encode</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">b = a.encode()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; b&#x27;\xe6\xb4\x8b\xe7\xbe\xa4\xe6\xbb\xa1\xe6\xbb\xa1&#x27;</span><br><span class="line">注：输出的是以<span class="number">16</span>进制形式的字符编码值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-11-4、-示例—decode"><a href="#1-11-4、-示例—decode" class="headerlink" title="1.11.4、 示例—decode"></a>1.11.4、 示例—decode</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">b&#x27;\xe6\xb4\x8b\xe7\xbe\xa4\xe6\xbb\xa1\xe6\xbb\xa1&#x27;</span></span><br><span class="line">b = a.decode()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、-数字型常用方法"><a href="#2、-数字型常用方法" class="headerlink" title="2、 数字型常用方法"></a>2、 数字型常用方法</h3><h4 id="2-1、-浮点型转整型"><a href="#2-1、-浮点型转整型" class="headerlink" title="2.1、  浮点型转整型"></a>2.1、  浮点型转整型</h4><h5 id="2-1-1、-语法"><a href="#2-1-1、-语法" class="headerlink" title="2.1.1、 语法"></a>2.1.1、 语法</h5><blockquote>
+<p>int()</p>
+</blockquote>
+<h5 id="2-1-2、-示例—int"><a href="#2-1-2、-示例—int" class="headerlink" title="2.1.2、 示例—int"></a>2.1.2、 示例—int</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1.1</span></span><br><span class="line">b = <span class="built_in">int</span>(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2、-保留小数位并四舍五入"><a href="#2-2、-保留小数位并四舍五入" class="headerlink" title="2.2、  保留小数位并四舍五入"></a>2.2、  保留小数位并四舍五入</h4><h5 id="2-2-1、-语法"><a href="#2-2-1、-语法" class="headerlink" title="2.2.1、 语法"></a>2.2.1、 语法</h5><blockquote>
+<p>round(number, digits)<br>- digits: 四舍五入时要使用的小数位数，默认为0。</p>
+</blockquote>
+<h5 id="2-2-2、-示例—round"><a href="#2-2-2、-示例—round" class="headerlink" title="2.2.2、 示例—round"></a>2.2.2、 示例—round</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3.1415</span></span><br><span class="line">b = <span class="built_in">round</span>(a, <span class="number">3</span>)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 3.142</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、-列表常用方法"><a href="#3、-列表常用方法" class="headerlink" title="3、 列表常用方法"></a>3、 列表常用方法</h3><p>​        <strong>注意: 想要熟悉掌握列表常用方法, 必须熟悉上一篇的索引, 以及可变类型。</strong></p>
+<h4 id="3-1、-将其他类型转换成列表"><a href="#3-1、-将其他类型转换成列表" class="headerlink" title="3.1、  将其他类型转换成列表"></a>3.1、  将其他类型转换成列表</h4><h5 id="3-1-1、-语法"><a href="#3-1-1、-语法" class="headerlink" title="3.1.1、 语法"></a>3.1.1、 语法</h5><blockquote>
+<p>list(iterable)<br>可迭代对象iterable字符串部分已经备注, 这里洋群满满就不备注了。</p>
+</blockquote>
+<h5 id="3-1-2、-示例—list"><a href="#3-1-2、-示例—list" class="headerlink" title="3.1.2、 示例—list"></a>3.1.2、 示例—list</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">b = <span class="built_in">list</span>(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 2, 3]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2、-指定位置插入数据"><a href="#3-2、-指定位置插入数据" class="headerlink" title="3.2、  指定位置插入数据"></a>3.2、  指定位置插入数据</h4><h5 id="3-2-1、-语法"><a href="#3-2-1、-语法" class="headerlink" title="3.2.1、 语法"></a>3.2.1、 语法</h5><blockquote>
+<p>list.insert(index,obj)</p>
+</blockquote>
+<h5 id="3-2-2、-示例—insert"><a href="#3-2-2、-示例—insert" class="headerlink" title="3.2.2、 示例—insert"></a>3.2.2、 示例—insert</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a.insert(<span class="number">1</span>, <span class="string">&quot;洋群满满&quot;</span>)</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, &#x27;洋群满满&#x27;, 2, 3]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3、-在列表末尾添加数据"><a href="#3-3、-在列表末尾添加数据" class="headerlink" title="3.3、  在列表末尾添加数据"></a>3.3、  在列表末尾添加数据</h4><h5 id="3-3-1、-语法"><a href="#3-3-1、-语法" class="headerlink" title="3.3.1、 语法"></a>3.3.1、 语法</h5><blockquote>
+<p>list.append(obj)</p>
+</blockquote>
+<h5 id="3-3-2、-示例—append"><a href="#3-3-2、-示例—append" class="headerlink" title="3.3.2、 示例—append"></a>3.3.2、 示例—append</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a.append(<span class="string">&quot;洋群满满&quot;</span>)</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 2, 3, &#x27;洋群满满&#x27;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4、-将其他可迭代对象追加到列表中"><a href="#3-4、-将其他可迭代对象追加到列表中" class="headerlink" title="3.4、  将其他可迭代对象追加到列表中"></a>3.4、  将其他可迭代对象追加到列表中</h4><h5 id="3-4-1、-语法"><a href="#3-4-1、-语法" class="headerlink" title="3.4.1、 语法"></a>3.4.1、 语法</h5><blockquote>
+<p>list.extend(iterable)</p>
+</blockquote>
+<h5 id="3-4-2、-示例—extend"><a href="#3-4-2、-示例—extend" class="headerlink" title="3.4.2、 示例—extend"></a>3.4.2、 示例—extend</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a.extend((<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>))</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 2, 3, 4, 5, 6]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-5、-修改指定索引的数据"><a href="#3-5、-修改指定索引的数据" class="headerlink" title="3.5、  修改指定索引的数据"></a>3.5、  修改指定索引的数据</h4><h5 id="3-5-1、-语法"><a href="#3-5-1、-语法" class="headerlink" title="3.5.1、 语法"></a>3.5.1、 语法</h5><blockquote>
+<p>list[index] = obj</p>
+</blockquote>
+<h5 id="3-5-2、-示例—index"><a href="#3-5-2、-示例—index" class="headerlink" title="3.5.2、 示例—index"></a>3.5.2、 示例—index</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a[<span class="number">0</span>] = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [&#x27;洋群满满&#x27;, 2, 3]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-6、-删除指定索引的数据"><a href="#3-6、-删除指定索引的数据" class="headerlink" title="3.6、  删除指定索引的数据"></a>3.6、  删除指定索引的数据</h4><h5 id="3-6-1、-语法"><a href="#3-6-1、-语法" class="headerlink" title="3.6.1、 语法"></a>3.6.1、 语法</h5><blockquote>
+<p>① del list[index]<br>② list.pop(index)</p>
+</blockquote>
+<h5 id="3-6-2、-示例—del"><a href="#3-6-2、-示例—del" class="headerlink" title="3.6.2、 示例—del"></a>3.6.2、 示例—del</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">del</span> a[<span class="number">2</span>]</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 2]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-6-3、-示例—pop"><a href="#3-6-3、-示例—pop" class="headerlink" title="3.6.3、 示例—pop"></a>3.6.3、 示例—pop</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a.pop(<span class="number">2</span>)</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 2]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-7、-删除第一个出现的指定数据"><a href="#3-7、-删除第一个出现的指定数据" class="headerlink" title="3.7、  删除第一个出现的指定数据"></a>3.7、  删除第一个出现的指定数据</h4><h5 id="3-7-1、-语法"><a href="#3-7-1、-语法" class="headerlink" title="3.7.1、 语法"></a>3.7.1、 语法</h5><blockquote>
+<p>list.remove(value)</p>
+</blockquote>
+<h5 id="3-7-2、-示例—remove"><a href="#3-7-2、-示例—remove" class="headerlink" title="3.7.2、 示例—remove"></a>3.7.2、 示例—remove</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line">a.remove(<span class="number">2</span>)</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 3, 2]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-8、-清空列表"><a href="#3-8、-清空列表" class="headerlink" title="3.8、  清空列表"></a>3.8、  清空列表</h4><h5 id="3-8-1、-语法"><a href="#3-8-1、-语法" class="headerlink" title="3.8.1、 语法"></a>3.8.1、 语法</h5><blockquote>
+<p>list.clear()</p>
+</blockquote>
+<h5 id="3-8-2、-示例—clear"><a href="#3-8-2、-示例—clear" class="headerlink" title="3.8.2、 示例—clear"></a>3.8.2、 示例—clear</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">a.clear()</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; []</span><br><span class="line"><span class="number">12345</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-9、-统计列表长度"><a href="#3-9、-统计列表长度" class="headerlink" title="3.9、  统计列表长度"></a>3.9、  统计列表长度</h4><h5 id="3-9-1、-语法"><a href="#3-9-1、-语法" class="headerlink" title="3.9.1、 语法"></a>3.9.1、 语法</h5><blockquote>
+<p>len(list)</p>
+</blockquote>
+<h5 id="3-9-2、-示例—len"><a href="#3-9-2、-示例—len" class="headerlink" title="3.9.2、 示例—len"></a>3.9.2、 示例—len</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">b = <span class="built_in">len</span>(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-10、-统计数据在列表中出现的次数"><a href="#3-10、-统计数据在列表中出现的次数" class="headerlink" title="3.10、  统计数据在列表中出现的次数"></a>3.10、  统计数据在列表中出现的次数</h4><h5 id="3-10-1、-语法"><a href="#3-10-1、-语法" class="headerlink" title="3.10.1、 语法"></a>3.10.1、 语法</h5><blockquote>
+<p>list.count(value)</p>
+</blockquote>
+<h5 id="3-10-2、-示例—count"><a href="#3-10-2、-示例—count" class="headerlink" title="3.10.2、 示例—count"></a>3.10.2、 示例—count</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line">b = a.count(<span class="number">2</span>)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-11、-列表排序"><a href="#3-11、-列表排序" class="headerlink" title="3.11、  列表排序"></a>3.11、  列表排序</h4><h5 id="3-11-1、-语法"><a href="#3-11-1、-语法" class="headerlink" title="3.11.1、 语法"></a>3.11.1、 语法</h5><blockquote>
+<p>list.sort(key,reverse)<br>- key: 指定排序方式的函数。<br>- reverse: 等于True降序, 等于False升序, 默认False。</p>
+</blockquote>
+<h5 id="3-11-2、-示例—sort"><a href="#3-11-2、-示例—sort" class="headerlink" title="3.11.2、 示例—sort"></a>3.11.2、 示例—sort</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line">a.sort()</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [1, 2, 2, 3]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-11-3、-示例—根据字典的-key-洋群满满-进行升序排序"><a href="#3-11-3、-示例—根据字典的-key-洋群满满-进行升序排序" class="headerlink" title="3.11.3、 示例—根据字典的 key=洋群满满 进行升序排序"></a>3.11.3、 示例—根据字典的 key=洋群满满 进行升序排序</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_list</span>(<span class="params">e</span>):</span></span><br><span class="line">    <span class="keyword">return</span> e[<span class="string">&quot;洋群满满&quot;</span>]</span><br><span class="line"></span><br><span class="line">a = [&#123;<span class="string">&quot;洋群满满&quot;</span>: <span class="number">18</span>&#125;, &#123;<span class="string">&quot;洋群满满&quot;</span>: <span class="number">26</span>&#125;, &#123;<span class="string">&quot;洋群满满&quot;</span>: <span class="number">20</span>&#125;]</span><br><span class="line">a.sort(key=hello_list)</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [&#123;&#x27;洋群满满&#x27;: 18&#125;, &#123;&#x27;洋群满满&#x27;: 20&#125;, &#123;&#x27;洋群满满&#x27;: 26&#125;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>备注：<a href="https://yangyangmm.cn/2021/01/06/Python%E5%87%BD%E6%95%B0/">函数</a>在前面已经详细讲解, 上述示例只是演示key的作用。</strong></p>
+<h4 id="3-12、-列表反转"><a href="#3-12、-列表反转" class="headerlink" title="3.12、  列表反转"></a>3.12、  列表反转</h4><h5 id="3-12-1、-语法"><a href="#3-12-1、-语法" class="headerlink" title="3.12.1、 语法"></a>3.12.1、 语法</h5><blockquote>
+<p>list.reverse()</p>
+</blockquote>
+<h5 id="3-12-2、-示例—reverse"><a href="#3-12-2、-示例—reverse" class="headerlink" title="3.12.2、 示例—reverse"></a>3.12.2、 示例—reverse</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">a.reverse()</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [4, 3, 2, 1]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4、-元组的常用方法"><a href="#4、-元组的常用方法" class="headerlink" title="4、 元组的常用方法"></a>4、 元组的常用方法</h3><h4 id="4-1、-创建空元组"><a href="#4-1、-创建空元组" class="headerlink" title="4.1、  创建空元组"></a>4.1、  创建空元组</h4><h5 id="4-1-1、-语法"><a href="#4-1-1、-语法" class="headerlink" title="4.1.1、 语法"></a>4.1.1、 语法</h5><blockquote>
+<p>① tuple()<br>② ()</p>
+</blockquote>
+<h5 id="4-1-2、-示例—tuple"><a href="#4-1-2、-示例—tuple" class="headerlink" title="4.1.2、 示例—tuple()"></a>4.1.2、 示例—tuple()</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">tuple</span>()</span><br><span class="line"><span class="comment"># a = ()</span></span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; ()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2、-通过索引访问元组的值"><a href="#4-2、-通过索引访问元组的值" class="headerlink" title="4.2、  通过索引访问元组的值"></a>4.2、  通过索引访问元组的值</h4><h5 id="4-2-1、-语法"><a href="#4-2-1、-语法" class="headerlink" title="4.2.1、 语法"></a>4.2.1、 语法</h5><blockquote>
+<p>tuple[index]</p>
+</blockquote>
+<h5 id="4-2-2、-示例—tuple-index"><a href="#4-2-2、-示例—tuple-index" class="headerlink" title="4.2.2、 示例—tuple[index]"></a>4.2.2、 示例—tuple[index]</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">b = a[<span class="number">0</span>]</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3、-删除元组"><a href="#4-3、-删除元组" class="headerlink" title="4.3、  删除元组"></a>4.3、  删除元组</h4><h5 id="4-3-1、-语法"><a href="#4-3-1、-语法" class="headerlink" title="4.3.1、 语法"></a>4.3.1、 语法</h5><blockquote>
+<p>del tuple</p>
+</blockquote>
+<h5 id="4-3-2、示例—del-tuple"><a href="#4-3-2、示例—del-tuple" class="headerlink" title="4.3.2、示例—del tuple"></a>4.3.2、示例—del tuple</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">print(a)</span><br><span class="line"><span class="keyword">del</span> a</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">第一行输出 ---&gt; (1,2,3,4)</span><br><span class="line">第二行抛出 NameError</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>注意: 上篇已经明确表示元组是不可变类型, 所以对于元组来说不存在修改和切片。因为当你修改元组时, 实际情况是会在内存中开辟新的内存地址用来存放新的元组。</strong></p>
+<p>​        下面用代码给大家演示一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">print(<span class="string">f&quot;原元组的值是<span class="subst">&#123;a&#125;</span>&quot;</span>)</span><br><span class="line">print(<span class="string">f&quot;原元组的内存地址是<span class="subst">&#123;<span class="built_in">id</span>(a)&#125;</span>&quot;</span>)</span><br><span class="line">b = a[:<span class="number">2</span>]</span><br><span class="line">print(<span class="string">f&quot;修改后元组的值是<span class="subst">&#123;b&#125;</span>&quot;</span>)</span><br><span class="line">print(<span class="string">f&quot;修改后元组的内存地址是<span class="subst">&#123;<span class="built_in">id</span>(b)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>备注: python通过内置函数id()来访问值的内存地址</strong></p>
+<p>​        输出结果如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\Python\python.exe D:/Desktop/test/demo.py</span><br><span class="line">原元组的值是(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">原元组的内存地址是<span class="number">2745085044200</span></span><br><span class="line">修改后元组的值是(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">修改后元组的内存地址是<span class="number">2745085729928</span></span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="5、-字典的常用方法"><a href="#5、-字典的常用方法" class="headerlink" title="5、 字典的常用方法"></a>5、 字典的常用方法</h3><p>​        想要熟练掌握字典的常用方法，需要对上一篇字典的key-value(键值对)的格式比较熟悉，字典的key必须是不可变类型，value可以是任何类型。</p>
+<h4 id="5-1、-创建空字典"><a href="#5-1、-创建空字典" class="headerlink" title="5.1、  创建空字典"></a>5.1、  创建空字典</h4><h5 id="5-1-1、-语法"><a href="#5-1-1、-语法" class="headerlink" title="5.1.1、 语法"></a>5.1.1、 语法</h5><blockquote>
+<p>① dict()<br>② {}</p>
+</blockquote>
+<h5 id="5-1-2、-示例—dict"><a href="#5-1-2、-示例—dict" class="headerlink" title="5.1.2、 示例—dict"></a>5.1.2、 示例—dict</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;&#125;</span><br><span class="line"><span class="comment">#a = dict()</span></span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; &#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2、-获取字典的值"><a href="#5-2、-获取字典的值" class="headerlink" title="5.2、  获取字典的值"></a>5.2、  获取字典的值</h4><h5 id="5-2-1、-语法"><a href="#5-2-1、-语法" class="headerlink" title="5.2.1、 语法"></a>5.2.1、 语法</h5><blockquote>
+<p>① dict[key]<br>② dict.get(key, default=None)</p>
+</blockquote>
+<h5 id="5-2-2、-示例1—dict-key"><a href="#5-2-2、-示例1—dict-key" class="headerlink" title="5.2.2、 示例1—dict[key]"></a>5.2.2、 示例1—dict[key]</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">print(a[<span class="string">&quot;name&quot;</span>])</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="5-2-3、-示例2—dict-get"><a href="#5-2-3、-示例2—dict-get" class="headerlink" title="5.2.3、 示例2—dict.get"></a>5.2.3、 示例2—dict.get</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="string">&quot;23&quot;</span>&#125;</span><br><span class="line">b = a.get(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>注意: 在第一种方式中, 如果key不存在, 会抛出异常；第二种方式如果key不存在, 则返回默认值。</strong></p>
+<h4 id="5-3、-修改字典的值"><a href="#5-3、-修改字典的值" class="headerlink" title="5.3、  修改字典的值"></a>5.3、  修改字典的值</h4><h5 id="5-3-1、-语法"><a href="#5-3-1、-语法" class="headerlink" title="5.3.1、 语法"></a>5.3.1、 语法</h5><blockquote>
+<p>① dict[key] = value<br>② dict.update(new_dict)</p>
+</blockquote>
+<h5 id="5-3-2、-示例1—dict-key-value"><a href="#5-3-2、-示例1—dict-key-value" class="headerlink" title="5.3.2、 示例1—dict[key] = value"></a>5.3.2、 示例1—dict[key] = value</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋洋&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">a[<span class="string">&quot;name&quot;</span>] = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; &#123;&#x27;name&#x27;: &#x27;洋群满满&#x27;, &#x27;age&#x27;: 23&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="5-3-4、-示例2—dict-update-new-dict"><a href="#5-3-4、-示例2—dict-update-new-dict" class="headerlink" title="5.3.4、 示例2—dict.update(new_dict)"></a>5.3.4、 示例2—dict.update(new_dict)</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">a.update(&#123;<span class="string">&quot;python&quot;</span>: <span class="string">&quot;hello&quot;</span>&#125;)</span><br><span class="line">print(a)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; &#123;&#x27;name&#x27;: &#x27;洋群满满&#x27;, &#x27;age&#x27;: 23, &#x27;python&#x27;: &#x27;hello&#x27;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​        <strong>注意: 如果指定的key在字典中不存在, 那么就是增加一个键值对。</strong></p>
+<h4 id="5-4、-计算字典元素个数"><a href="#5-4、-计算字典元素个数" class="headerlink" title="5.4、  计算字典元素个数"></a>5.4、  计算字典元素个数</h4><h5 id="5-4-1、-语法"><a href="#5-4-1、-语法" class="headerlink" title="5.4.1、 语法"></a>5.4.1、 语法</h5><blockquote>
+<p>len(dict)</p>
+</blockquote>
+<h5 id="5-4-2、-示例—len-dict"><a href="#5-4-2、-示例—len-dict" class="headerlink" title="5.4.2、 示例—len(dict)"></a>5.4.2、 示例—len(dict)</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">b = <span class="built_in">len</span>(a)</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-5、-获取字典所有的key"><a href="#5-5、-获取字典所有的key" class="headerlink" title="5.5、  获取字典所有的key"></a>5.5、  获取字典所有的key</h4><h5 id="5-5-1、-语法"><a href="#5-5-1、-语法" class="headerlink" title="5.5.1、 语法"></a>5.5.1、 语法</h5><blockquote>
+<p>dict.keys()</p>
+</blockquote>
+<h5 id="5-5-2、-示例—dict-keys"><a href="#5-5-2、-示例—dict-keys" class="headerlink" title="5.5.2、 示例—dict.keys()"></a>5.5.2、 示例—dict.keys()</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">b = a.keys()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [&quot;name&quot;,&quot;age&quot;]</span><br><span class="line"><span class="number">12345</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-6、-获取字典所有的value"><a href="#5-6、-获取字典所有的value" class="headerlink" title="5.6、 获取字典所有的value"></a>5.6、 获取字典所有的value</h4><h5 id="5-6-1、-语法"><a href="#5-6-1、-语法" class="headerlink" title="5.6.1、 语法"></a>5.6.1、 语法</h5><blockquote>
+<p>dict.values()</p>
+</blockquote>
+<h5 id="5-6-2、-示例—dict-values"><a href="#5-6-2、-示例—dict-values" class="headerlink" title="5.6.2、 示例—dict.values()"></a>5.6.2、 示例—dict.values()</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">b = a.values()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [&#x27;洋群满满&#x27;, &#x27;23&#x27;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-7、-获取字典的key-value"><a href="#5-7、-获取字典的key-value" class="headerlink" title="5.7、  获取字典的key-value"></a>5.7、  获取字典的key-value</h4><h5 id="5-7-1、-语法"><a href="#5-7-1、-语法" class="headerlink" title="5.7.1、 语法"></a>5.7.1、 语法</h5><blockquote>
+<p>dict.items()</p>
+</blockquote>
+<h5 id="5-7-2、-示例—dict-items"><a href="#5-7-2、-示例—dict-items" class="headerlink" title="5.7.2、 示例—dict.items()"></a>5.7.2、 示例—dict.items()</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;洋群满满&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="string">&quot;23&quot;</span>&#125;</span><br><span class="line">b = a.items()</span><br><span class="line">print(b)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; [(&#x27;name&#x27;, &#x27;洋群满满&#x27;), (&#x27;age&#x27;, &#x27;23&#x27;)]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="6、-条件语句"><a href="#6、-条件语句" class="headerlink" title="6、 条件语句"></a>6、 条件语句</h3><p>​        在python中条件语句就是三个关键字 if elif else 。</p>
+<h4 id="6-1、-语法"><a href="#6-1、-语法" class="headerlink" title="6.1、 语法"></a>6.1、 语法</h4><blockquote>
+<p>if 判断条件:<br>　执行代码<br>elif 判断条件:<br>　执行代码<br>else:<br>　执行代码<br>说明: 在上述的条件判断中是互斥的, 也就是说要么执行if的代码, 要么执行elif的代码, 要么执行else的代码, 并且只要其中一个符合条件, 那么程序便不会判断后面的条件了。这部分可以优化代码。</p>
+</blockquote>
+<h5 id="6-1-1、-示例1—if-elif…-else"><a href="#6-1-1、-示例1—if-elif…-else" class="headerlink" title="6.1.1、 示例1—if/elif…/else"></a>6.1.1、 示例1—if/elif…/else</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line"><span class="keyword">if</span> a == <span class="string">&quot;洋群满满&quot;</span>:</span><br><span class="line">    print(<span class="string">&quot;洋群满满1&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> a == <span class="string">&quot;洋群满满&quot;</span>:</span><br><span class="line">    print(<span class="string">&quot;洋群满满2&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&quot;什么都不是&quot;</span>)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="6-1-2、-示例2—if-if-if…"><a href="#6-1-2、-示例2—if-if-if…" class="headerlink" title="6.1.2、 示例2—if/if/if…"></a>6.1.2、 示例2—if/if/if…</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;洋群满满&quot;</span></span><br><span class="line"><span class="keyword">if</span> a == <span class="string">&quot;洋群满满&quot;</span>:</span><br><span class="line">    print(<span class="string">&quot;洋群满满1&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> a == <span class="string">&quot;洋群满满&quot;</span>:</span><br><span class="line">    print(<span class="string">&quot;洋群满满2&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> a == <span class="string">&quot;洋群满满&quot;</span>:</span><br><span class="line">    print(<span class="string">&quot;洋群满满3&quot;</span>)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 洋群满满1</span><br><span class="line">输出 ---&gt; 洋群满满2</span><br><span class="line">输出 ---&gt; 洋群满满3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、-循环语句"><a href="#7、-循环语句" class="headerlink" title="7、 循环语句"></a>7、 循环语句</h3><p>​        python中循环包括while循环和for循环。</p>
+<ul>
+<li>while循环：表示给定一个判断条件为True时, 进入循环体, 为False跳出循环体；</li>
+<li>for循环：表示会重复的执行语句；</li>
+<li>死循环：表示程序一直在循环体当中跳不出来。一定要避免死循环!!!</li>
+</ul>
+<h4 id="7-1、-while循环"><a href="#7-1、-while循环" class="headerlink" title="7.1、  while循环"></a>7.1、  while循环</h4><h5 id="7-1-1、-语法"><a href="#7-1-1、-语法" class="headerlink" title="7.1.1、 语法"></a>7.1.1、 语法</h5><blockquote>
+<p>while 判断条件:<br>　执行代码</p>
+</blockquote>
+<h5 id="7-1-2、-示例—while"><a href="#7-1-2、-示例—while" class="headerlink" title="7.1.2、 示例—while"></a>7.1.2、 示例—while</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> a &lt; <span class="number">10</span>:</span><br><span class="line">    print(a)</span><br><span class="line">    a += <span class="number">1</span></span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 0-9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-2、-for循环"><a href="#7-2、-for循环" class="headerlink" title="7.2、  for循环"></a>7.2、  for循环</h4><h5 id="7-2-1、-语法"><a href="#7-2-1、-语法" class="headerlink" title="7.2.1、 语法"></a>7.2.1、 语法</h5><blockquote>
+<p>① for iterating_var in iterable:<br>　　　执行代码<br>② for iterating_var in range(start,stop,step)<br>　　　执行代码<br>- start是开始数据<br>- stop是结束数据<br>- step是步长</p>
+</blockquote>
+<h5 id="7-2-3、-示例1—in"><a href="#7-2-3、-示例1—in" class="headerlink" title="7.2.3、 示例1—in"></a>7.2.3、 示例1—in</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]:</span><br><span class="line">    print(i)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 1~3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="7-2-4、-示例２—in-range"><a href="#7-2-4、-示例２—in-range" class="headerlink" title="7.2.4、 示例２—in range"></a>7.2.4、 示例２—in range</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>):</span><br><span class="line">    print(i)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 1 3 5 7 9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-3、-循环控制语句"><a href="#7-3、-循环控制语句" class="headerlink" title="7.3、  循环控制语句"></a>7.3、  循环控制语句</h4><h5 id="7-3-1、-语法"><a href="#7-3-1、-语法" class="headerlink" title="7.3.1、 语法"></a>7.3.1、 语法</h5><blockquote>
+<p>① break<br>② continue<br>说明:<br>- break会终止循环体，程序不再往下循环；<br>- continue结束本次循环，程序继续下一次的循环。<br>注意: 如果是嵌套循环, 那么break终止的是当前所在的循环体, 而不是整个循环嵌套体。</p>
+</blockquote>
+<h5 id="7-3-2、-示例1—break"><a href="#7-3-2、-示例1—break" class="headerlink" title="7.3.2、 示例1—break"></a>7.3.2、 示例1—break</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]:</span><br><span class="line">        <span class="keyword">if</span> j == <span class="number">5</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(j)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 4 4 4</span><br><span class="line">解释一下: 在程序中是一个循环嵌套, 当j==<span class="number">5</span>时, 内层循环会终止进入外层循环的下一次循环。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="7-3-4、-示例2—continue"><a href="#7-3-4、-示例2—continue" class="headerlink" title="7.3.4、 示例2—continue"></a>7.3.4、 示例2—continue</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]:</span><br><span class="line">        <span class="keyword">if</span> j == <span class="number">5</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        print(j)</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">输出 ---&gt; 4 6 4 6 4 6</span><br><span class="line">解释一下: 在程序中是一个循环嵌套, 当j==<span class="number">5</span>时, 内层循环会跳出本次循环, 进入内层循环的下一次循环。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>到此我们在本篇中学习了<strong>python数据类型的常用方法，条件语句和循环语句</strong>。各位coder在学习过程中可在底下评论区发表你们的想法。看到了都会回复的。</p>
+<p>那么下一篇洋群满满将和大家看一下<strong>python当中的异常处理，函数和模块</strong>。</p>
+
+    </div>
+
+    
+    
+    
+
+	
+	  <div>
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  </div>
+	
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>洋群满满
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yangyangmm.cn/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E4%B8%AD%E7%AF%87/" title="Python基础------中篇">https://yangyangmm.cn/2021/01/12/Python基础-中篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python-Python%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i># Python | Python基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/12/Python%E5%9F%BA%E7%A1%80-%E5%88%9D%E7%AF%87/" rel="prev" title="Python基础------初篇">
+      <i class="fa fa-chevron-left"></i> Python基础------初篇
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python%E2%80%94%E2%80%94%E4%B8%AD%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">Python——中篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、 字符串的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1%E3%80%81-%E6%8B%BC%E6%8E%A5"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1.1、  拼接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1%E3%80%81-%E7%A4%BA%E4%BE%8B1-%E5%B8%B8%E7%94%A8-%EF%BC%9A"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">1.1.1、 示例1(常用)：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B2-%E6%9E%81%E5%B0%91%E4%BD%BF%E7%94%A8-%EF%BC%9A"><span class="nav-number">1.0.1.1.2.</span> <span class="nav-text">1.1.2、 示例2(极少使用)：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2%E3%80%81-%E5%88%87%E7%89%87-%E6%88%AA%E5%8F%96"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">1.2、  切片(截取)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">1.2.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-2%E3%80%81-%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E6%88%AA%E5%8F%96python"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">1.2.2、 示例1：截取python</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-3%E3%80%81-%E7%A4%BA%E4%BE%8B2-%E6%88%AA%E5%8F%96%E6%B4%8B%E6%BB%A1%E7%9C%9F%E7%88%B1"><span class="nav-number">1.0.1.2.3.</span> <span class="nav-text">1.2.3、 示例2: 截取洋满真爱</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3%E3%80%81-%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">1.3、  获取字符串长度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.3.1.</span> <span class="nav-text">1.3.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94len-string"><span class="nav-number">1.0.1.3.2.</span> <span class="nav-text">1.3.2、 示例—len(string)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4%E3%80%81-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">1.4、  分割字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.4.1.</span> <span class="nav-text">1.4.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-2%E3%80%81-%E7%A4%BA%E4%BE%8B1%E2%80%94split"><span class="nav-number">1.0.1.4.2.</span> <span class="nav-text">1.4.2、 示例1—split</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-3%E3%80%81-%E7%A4%BA%E4%BE%8B2%E2%80%94rsplit"><span class="nav-number">1.0.1.4.3.</span> <span class="nav-text">1.4.3、 示例2—rsplit</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5%E3%80%81-%E5%90%88%E5%B9%B6%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">1.5、  合并字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.5.1.</span> <span class="nav-text">1.5.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-2%E3%80%81-%E7%A4%BA%E4%BE%8B1-join"><span class="nav-number">1.0.1.5.2.</span> <span class="nav-text">1.5.2、 示例1(join)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-3%E3%80%81-%E7%A4%BA%E4%BE%8B2-%E4%B8%8D%E5%B8%B8%E7%94%A8"><span class="nav-number">1.0.1.5.3.</span> <span class="nav-text">1.5.3、 示例2(不常用)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6%E3%80%81-%E6%A3%80%E6%B5%8B%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">1.0.1.6.</span> <span class="nav-text">1.6、  检测子字符串在字符串的索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.6.1.</span> <span class="nav-text">1.6.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-2%E3%80%81-%E7%A4%BA%E4%BE%8B1"><span class="nav-number">1.0.1.6.2.</span> <span class="nav-text">1.6.2、 示例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-3%E3%80%81-%E7%A4%BA%E4%BE%8B2"><span class="nav-number">1.0.1.6.3.</span> <span class="nav-text">1.6.3、 示例2</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7%E3%80%81-%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BC%80%E5%A4%B4%E6%88%96%E8%80%85%E7%BB%93%E5%B0%BE"><span class="nav-number">1.0.1.7.</span> <span class="nav-text">1.7、  指定字符串开头或者结尾</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-7-1%E3%80%81%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.7.1.</span> <span class="nav-text">1.7.1、语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-7-2%E3%80%81-%E7%A4%BA%E4%BE%8B1"><span class="nav-number">1.0.1.7.2.</span> <span class="nav-text">1.7.2、 示例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-7-3%E3%80%81-%E7%A4%BA%E4%BE%8B2"><span class="nav-number">1.0.1.7.3.</span> <span class="nav-text">1.7.3、 示例2</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8%E3%80%81-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E5%85%A8%E9%83%A8%E5%A4%A7%E5%86%99"><span class="nav-number">1.0.1.8.</span> <span class="nav-text">1.8、  字符串转全部大写</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.8.1.</span> <span class="nav-text">1.8.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94upper"><span class="nav-number">1.0.1.8.2.</span> <span class="nav-text">1.8.2、 示例—upper</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9%E3%80%81-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E5%85%A8%E9%83%A8%E5%B0%8F%E5%86%99"><span class="nav-number">1.0.1.9.</span> <span class="nav-text">1.9、  字符串转全部小写</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-9-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.9.1.</span> <span class="nav-text">1.9.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-9-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94lower"><span class="nav-number">1.0.1.9.2.</span> <span class="nav-text">1.9.2、 示例—lower</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-10%E3%80%81-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">1.0.1.10.</span> <span class="nav-text">1.10、  字符串格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.10.1.</span> <span class="nav-text">1.10.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94"><span class="nav-number">1.0.1.10.2.</span> <span class="nav-text">1.10.2、 示例—%</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-3%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94-format"><span class="nav-number">1.0.1.10.3.</span> <span class="nav-text">1.10.3、 示例— format()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-4%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94-f-string"><span class="nav-number">1.0.1.10.4.</span> <span class="nav-text">1.10.4、 示例— f-string</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-11%E3%80%81-%E7%BC%96%E8%A7%A3%E7%A0%81"><span class="nav-number">1.0.1.11.</span> <span class="nav-text">1.11、  编解码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-11-1%E3%80%81-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.1.11.1.</span> <span class="nav-text">1.11.1、 概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-11-2%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.1.11.2.</span> <span class="nav-text">1.11.2、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-11-3%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94encode"><span class="nav-number">1.0.1.11.3.</span> <span class="nav-text">1.11.3、 示例—encode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-11-4%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94decode"><span class="nav-number">1.0.1.11.4.</span> <span class="nav-text">1.11.4、 示例—decode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81-%E6%95%B0%E5%AD%97%E5%9E%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、 数字型常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1%E3%80%81-%E6%B5%AE%E7%82%B9%E5%9E%8B%E8%BD%AC%E6%95%B4%E5%9E%8B"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">2.1、  浮点型转整型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.2.1.1.</span> <span class="nav-text">2.1.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94int"><span class="nav-number">1.0.2.1.2.</span> <span class="nav-text">2.1.2、 示例—int</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2%E3%80%81-%E4%BF%9D%E7%95%99%E5%B0%8F%E6%95%B0%E4%BD%8D%E5%B9%B6%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2.2、  保留小数位并四舍五入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.2.2.1.</span> <span class="nav-text">2.2.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94round"><span class="nav-number">1.0.2.2.2.</span> <span class="nav-text">2.2.2、 示例—round</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81-%E5%88%97%E8%A1%A8%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.3.</span> <span class="nav-text">3、 列表常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1%E3%80%81-%E5%B0%86%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%88%90%E5%88%97%E8%A1%A8"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">3.1、  将其他类型转换成列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.1.1.</span> <span class="nav-text">3.1.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94list"><span class="nav-number">1.0.3.1.2.</span> <span class="nav-text">3.1.2、 示例—list</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2%E3%80%81-%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">3.2、  指定位置插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.2.1.</span> <span class="nav-text">3.2.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94insert"><span class="nav-number">1.0.3.2.2.</span> <span class="nav-text">3.2.2、 示例—insert</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3%E3%80%81-%E5%9C%A8%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">3.3、  在列表末尾添加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.3.1.</span> <span class="nav-text">3.3.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94append"><span class="nav-number">1.0.3.3.2.</span> <span class="nav-text">3.3.2、 示例—append</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4%E3%80%81-%E5%B0%86%E5%85%B6%E4%BB%96%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E8%BF%BD%E5%8A%A0%E5%88%B0%E5%88%97%E8%A1%A8%E4%B8%AD"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">3.4、  将其他可迭代对象追加到列表中</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.4.1.</span> <span class="nav-text">3.4.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94extend"><span class="nav-number">1.0.3.4.2.</span> <span class="nav-text">3.4.2、 示例—extend</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5%E3%80%81-%E4%BF%AE%E6%94%B9%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">3.5、  修改指定索引的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.5.1.</span> <span class="nav-text">3.5.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94index"><span class="nav-number">1.0.3.5.2.</span> <span class="nav-text">3.5.2、 示例—index</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6%E3%80%81-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%B4%A2%E5%BC%95%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.3.6.</span> <span class="nav-text">3.6、  删除指定索引的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.6.1.</span> <span class="nav-text">3.6.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94del"><span class="nav-number">1.0.3.6.2.</span> <span class="nav-text">3.6.2、 示例—del</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-3%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94pop"><span class="nav-number">1.0.3.6.3.</span> <span class="nav-text">3.6.3、 示例—pop</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7%E3%80%81-%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%87%BA%E7%8E%B0%E7%9A%84%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.3.7.</span> <span class="nav-text">3.7、  删除第一个出现的指定数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-7-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.7.1.</span> <span class="nav-text">3.7.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-7-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94remove"><span class="nav-number">1.0.3.7.2.</span> <span class="nav-text">3.7.2、 示例—remove</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-8%E3%80%81-%E6%B8%85%E7%A9%BA%E5%88%97%E8%A1%A8"><span class="nav-number">1.0.3.8.</span> <span class="nav-text">3.8、  清空列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-8-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.8.1.</span> <span class="nav-text">3.8.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-8-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94clear"><span class="nav-number">1.0.3.8.2.</span> <span class="nav-text">3.8.2、 示例—clear</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-9%E3%80%81-%E7%BB%9F%E8%AE%A1%E5%88%97%E8%A1%A8%E9%95%BF%E5%BA%A6"><span class="nav-number">1.0.3.9.</span> <span class="nav-text">3.9、  统计列表长度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-9-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.9.1.</span> <span class="nav-text">3.9.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-9-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94len"><span class="nav-number">1.0.3.9.2.</span> <span class="nav-text">3.9.2、 示例—len</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-10%E3%80%81-%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%88%97%E8%A1%A8%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0"><span class="nav-number">1.0.3.10.</span> <span class="nav-text">3.10、  统计数据在列表中出现的次数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-10-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.10.1.</span> <span class="nav-text">3.10.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-10-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94count"><span class="nav-number">1.0.3.10.2.</span> <span class="nav-text">3.10.2、 示例—count</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-11%E3%80%81-%E5%88%97%E8%A1%A8%E6%8E%92%E5%BA%8F"><span class="nav-number">1.0.3.11.</span> <span class="nav-text">3.11、  列表排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-11-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.11.1.</span> <span class="nav-text">3.11.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-11-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94sort"><span class="nav-number">1.0.3.11.2.</span> <span class="nav-text">3.11.2、 示例—sort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-11-3%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94%E6%A0%B9%E6%8D%AE%E5%AD%97%E5%85%B8%E7%9A%84-key-%E6%B4%8B%E7%BE%A4%E6%BB%A1%E6%BB%A1-%E8%BF%9B%E8%A1%8C%E5%8D%87%E5%BA%8F%E6%8E%92%E5%BA%8F"><span class="nav-number">1.0.3.11.3.</span> <span class="nav-text">3.11.3、 示例—根据字典的 key&#x3D;洋群满满 进行升序排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-12%E3%80%81-%E5%88%97%E8%A1%A8%E5%8F%8D%E8%BD%AC"><span class="nav-number">1.0.3.12.</span> <span class="nav-text">3.12、  列表反转</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-12-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.3.12.1.</span> <span class="nav-text">3.12.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-12-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94reverse"><span class="nav-number">1.0.3.12.2.</span> <span class="nav-text">3.12.2、 示例—reverse</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81-%E5%85%83%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.4.</span> <span class="nav-text">4、 元组的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1%E3%80%81-%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%85%83%E7%BB%84"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">4.1、  创建空元组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.4.1.1.</span> <span class="nav-text">4.1.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94tuple"><span class="nav-number">1.0.4.1.2.</span> <span class="nav-text">4.1.2、 示例—tuple()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2%E3%80%81-%E9%80%9A%E8%BF%87%E7%B4%A2%E5%BC%95%E8%AE%BF%E9%97%AE%E5%85%83%E7%BB%84%E7%9A%84%E5%80%BC"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">4.2、  通过索引访问元组的值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.4.2.1.</span> <span class="nav-text">4.2.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94tuple-index"><span class="nav-number">1.0.4.2.2.</span> <span class="nav-text">4.2.2、 示例—tuple[index]</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3%E3%80%81-%E5%88%A0%E9%99%A4%E5%85%83%E7%BB%84"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">4.3、  删除元组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.4.3.1.</span> <span class="nav-text">4.3.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-2%E3%80%81%E7%A4%BA%E4%BE%8B%E2%80%94del-tuple"><span class="nav-number">1.0.4.3.2.</span> <span class="nav-text">4.3.2、示例—del tuple</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81-%E5%AD%97%E5%85%B8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.5.</span> <span class="nav-text">5、 字典的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1%E3%80%81-%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%AD%97%E5%85%B8"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">5.1、  创建空字典</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.1.1.</span> <span class="nav-text">5.1.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94dict"><span class="nav-number">1.0.5.1.2.</span> <span class="nav-text">5.1.2、 示例—dict</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2%E3%80%81-%E8%8E%B7%E5%8F%96%E5%AD%97%E5%85%B8%E7%9A%84%E5%80%BC"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">5.2、  获取字典的值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.2.1.</span> <span class="nav-text">5.2.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-2%E3%80%81-%E7%A4%BA%E4%BE%8B1%E2%80%94dict-key"><span class="nav-number">1.0.5.2.2.</span> <span class="nav-text">5.2.2、 示例1—dict[key]</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-3%E3%80%81-%E7%A4%BA%E4%BE%8B2%E2%80%94dict-get"><span class="nav-number">1.0.5.2.3.</span> <span class="nav-text">5.2.3、 示例2—dict.get</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3%E3%80%81-%E4%BF%AE%E6%94%B9%E5%AD%97%E5%85%B8%E7%9A%84%E5%80%BC"><span class="nav-number">1.0.5.3.</span> <span class="nav-text">5.3、  修改字典的值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.3.1.</span> <span class="nav-text">5.3.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-2%E3%80%81-%E7%A4%BA%E4%BE%8B1%E2%80%94dict-key-value"><span class="nav-number">1.0.5.3.2.</span> <span class="nav-text">5.3.2、 示例1—dict[key] &#x3D; value</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-4%E3%80%81-%E7%A4%BA%E4%BE%8B2%E2%80%94dict-update-new-dict"><span class="nav-number">1.0.5.3.3.</span> <span class="nav-text">5.3.4、 示例2—dict.update(new_dict)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4%E3%80%81-%E8%AE%A1%E7%AE%97%E5%AD%97%E5%85%B8%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="nav-number">1.0.5.4.</span> <span class="nav-text">5.4、  计算字典元素个数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-4-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.4.1.</span> <span class="nav-text">5.4.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-4-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94len-dict"><span class="nav-number">1.0.5.4.2.</span> <span class="nav-text">5.4.2、 示例—len(dict)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5%E3%80%81-%E8%8E%B7%E5%8F%96%E5%AD%97%E5%85%B8%E6%89%80%E6%9C%89%E7%9A%84key"><span class="nav-number">1.0.5.5.</span> <span class="nav-text">5.5、  获取字典所有的key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-5-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.5.1.</span> <span class="nav-text">5.5.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-5-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94dict-keys"><span class="nav-number">1.0.5.5.2.</span> <span class="nav-text">5.5.2、 示例—dict.keys()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6%E3%80%81-%E8%8E%B7%E5%8F%96%E5%AD%97%E5%85%B8%E6%89%80%E6%9C%89%E7%9A%84value"><span class="nav-number">1.0.5.6.</span> <span class="nav-text">5.6、 获取字典所有的value</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.6.1.</span> <span class="nav-text">5.6.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94dict-values"><span class="nav-number">1.0.5.6.2.</span> <span class="nav-text">5.6.2、 示例—dict.values()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-7%E3%80%81-%E8%8E%B7%E5%8F%96%E5%AD%97%E5%85%B8%E7%9A%84key-value"><span class="nav-number">1.0.5.7.</span> <span class="nav-text">5.7、  获取字典的key-value</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-7-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.5.7.1.</span> <span class="nav-text">5.7.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-7-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94dict-items"><span class="nav-number">1.0.5.7.2.</span> <span class="nav-text">5.7.2、 示例—dict.items()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.6.</span> <span class="nav-text">6、 条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">6.1、 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-1%E3%80%81-%E7%A4%BA%E4%BE%8B1%E2%80%94if-elif%E2%80%A6-else"><span class="nav-number">1.0.6.1.1.</span> <span class="nav-text">6.1.1、 示例1—if&#x2F;elif…&#x2F;else</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B2%E2%80%94if-if-if%E2%80%A6"><span class="nav-number">1.0.6.1.2.</span> <span class="nav-text">6.1.2、 示例2—if&#x2F;if&#x2F;if…</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.7.</span> <span class="nav-text">7、 循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1%E3%80%81-while%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.0.7.1.</span> <span class="nav-text">7.1、  while循环</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#7-1-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.7.1.1.</span> <span class="nav-text">7.1.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-1-2%E3%80%81-%E7%A4%BA%E4%BE%8B%E2%80%94while"><span class="nav-number">1.0.7.1.2.</span> <span class="nav-text">7.1.2、 示例—while</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2%E3%80%81-for%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.0.7.2.</span> <span class="nav-text">7.2、  for循环</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#7-2-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.7.2.1.</span> <span class="nav-text">7.2.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-2-3%E3%80%81-%E7%A4%BA%E4%BE%8B1%E2%80%94in"><span class="nav-number">1.0.7.2.2.</span> <span class="nav-text">7.2.3、 示例1—in</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-2-4%E3%80%81-%E7%A4%BA%E4%BE%8B%EF%BC%92%E2%80%94in-range"><span class="nav-number">1.0.7.2.3.</span> <span class="nav-text">7.2.4、 示例２—in range</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3%E3%80%81-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.7.3.</span> <span class="nav-text">7.3、  循环控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#7-3-1%E3%80%81-%E8%AF%AD%E6%B3%95"><span class="nav-number">1.0.7.3.1.</span> <span class="nav-text">7.3.1、 语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-3-2%E3%80%81-%E7%A4%BA%E4%BE%8B1%E2%80%94break"><span class="nav-number">1.0.7.3.2.</span> <span class="nav-text">7.3.2、 示例1—break</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-3-4%E3%80%81-%E7%A4%BA%E4%BE%8B2%E2%80%94continue"><span class="nav-number">1.0.7.3.3.</span> <span class="nav-text">7.3.4、 示例2—continue</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="洋群满满"
+      src="/images/title.jpg">
+  <p class="site-author-name" itemprop="name">洋群满满</p>
+  <div class="site-description" itemprop="description">这里是属于羊群满满的乐园！ 		   欢迎你们的到来~~~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yangyang1-0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yangyang1-0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_45278644" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_45278644" rel="noopener" target="_blank"><i class="fab fa-codiepie fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 2020-12 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">洋群满满</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '5aRex5dipFu5xw6Ae8R1PYI2-gzGzoHsz',
+      appKey     : 'k42hTn3SntmDkBgtOrJ1NeR4',
+      placeholder: "来啊,快活啊！O(∩_∩)O",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":300,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
